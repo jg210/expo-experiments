@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { FlatList, Text } from "react-native";
 
-interface localAuthorities {
+interface LocalAuthorities {
   localAuthorities: LocalAuthority[];
 }
 
@@ -17,7 +17,7 @@ const getAuthorities: () => Promise<LocalAuthority[]> = async () => {
   const authorities = await fetch(
     "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
   );
-  const json = (await authorities.json()) as unknown as localAuthorities;
+  const json = (await authorities.json()) as unknown as LocalAuthorities;
   return json.localAuthorities;
 };
 
