@@ -1,3 +1,5 @@
 * eslint warnings aren't useful
   - disable or turn into errors.
   - or enable prettier?
+
+* eslint react-hooks/exhaustive-deps disabled.
