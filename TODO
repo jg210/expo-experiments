@@ -3,3 +3,5 @@
   - or enable prettier?
 
 * eslint react-hooks/exhaustive-deps disabled.
+
+* Should useRefresh hook use a counter not a boolean?
