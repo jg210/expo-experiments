@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Authorities } from "./src/Authorities";
 
@@ -12,9 +13,9 @@ export default function App() {
   return (
     <Suspense fallback={<Fallback />}>
       <QueryClientProvider client={queryClient}>
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <Authorities />
-        </View>
+        </SafeAreaView>
       </QueryClientProvider>
     </Suspense>
   );
