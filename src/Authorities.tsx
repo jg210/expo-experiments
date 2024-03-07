@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { FlatList, Text } from "react-native";
 
 interface localAuthorities {
@@ -22,13 +23,17 @@ interface ItemProps {
 }
 const Item = ({ name }: ItemProps) => <Text>{name}</Text>;
 
+const Fallback = () => <Text>loading...</Text>;
+
 export const Authorities = () => {
-  const { data } = useQuery({ queryKey, queryFn: getAuthorities });
+  const { data } = useSuspenseQuery({ queryKey, queryFn: getAuthorities });
   return (
-    <FlatList
-        data={data}
-        renderItem={({ item }) => <Item name={item.name} />}
-        keyExtractor={(item) => item.localAuthorityId.toString()}
-    />
+    <Suspense fallback={<Fallback/>}>
+        <FlatList
+            data={data}
+            renderItem={({ item }) => <Item name={item.name} />}
+            keyExtractor={(item) => item.localAuthorityId.toString()}
+        />
+    </Suspense>
   );
 };

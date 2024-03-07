@@ -1,17 +1,22 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { Authorities } from "./src/Authorities";
+import { Suspense } from "react";
 
 const queryClient = new QueryClient();
 
+const Fallback = () => <Text>global fallback</Text>;
+
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <View style={styles.container}>
-        <Authorities />
-      </View>
-    </QueryClientProvider>
+    <Suspense fallback={<Fallback/>}>
+      <QueryClientProvider client={queryClient}>
+        <View style={styles.container}>
+          <Authorities />
+        </View>
+      </QueryClientProvider>
+    </Suspense>
   );
 }
 
