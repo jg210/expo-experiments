@@ -1,5 +1,3 @@
-* https://tanstack.com/query/v5/docs/eslint/eslint-plugin-query
-
 * eslint warnings aren't useful
   - disable or turn into errors.
   - or enable prettier?
