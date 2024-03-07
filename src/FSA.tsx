@@ -13,5 +13,6 @@ export const getAuthorities: () => Promise<LocalAuthority[]> = async () => {
     "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
   );
   const json = (await authorities.json()) as unknown as LocalAuthorities;
-  return json.localAuthorities;
+  const { localAuthorities } = json;
+  return localAuthorities;
 };
