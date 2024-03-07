@@ -2,8 +2,6 @@
 
 A [react native](https://reactnative.dev/)/[Expo](https://expo.dev/) app for testing out new technologies. It shows data from the [spring-experiments](https://github.com/jg210/spring-experiments) API.
 
-Expo is setting up an adb reverse tunnel, but doesn't use it unless tell it to with this env. var.:
-
 ## Development Build Instructions
 
 Install nodenv and node-build (or use any other way to put correct version of node on PATH):
