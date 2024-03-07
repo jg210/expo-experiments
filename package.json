@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "eslint .",
-    "ci": "npm run lint"
+    "ci": "npm run lint && tsc"
   },
   "dependencies": {
     "@tanstack/react-query": "5.25.0",
