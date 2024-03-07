@@ -16,9 +16,6 @@ jobs:
       with:
         node-version-file: '.node-version'
 
-    - name: setup gradle
-      uses: gradle/actions/setup-gradle@v3
-
     - name: npm install
       run: |
         . environment
