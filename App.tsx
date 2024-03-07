@@ -11,13 +11,13 @@ const Fallback = () => <Text>global fallback</Text>;
 
 export default function App() {
   return (
-    <Suspense fallback={<Fallback />}>
-      <QueryClientProvider client={queryClient}>
-        <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Suspense fallback={<Fallback />}>
+        <QueryClientProvider client={queryClient}>
           <Authorities />
-        </SafeAreaView>
-      </QueryClientProvider>
-    </Suspense>
+        </QueryClientProvider>
+      </Suspense>
+    </SafeAreaView>
   );
 }
 
