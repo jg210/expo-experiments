@@ -28,15 +28,23 @@ const Item = ({ name }: ItemProps) => <Text>{name}</Text>;
 
 const Fallback = () => <Text>loading...</Text>;
 
-export const Authorities = () => {
+// https://react.dev/reference/react/Suspense suggests can use Suspense in same component
+// that can suspend, but that doesn't work, so need a separate component.
+const AuthoritiesImpl = () => {
   const { data } = useSuspenseQuery({ queryKey, queryFn: getAuthorities });
   return (
-    <Suspense fallback={<Fallback />}>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <Item name={item.name} />}
-        keyExtractor={(item) => item.localAuthorityId.toString()}
-      />
-    </Suspense>
+    <FlatList
+      data={data}
+      renderItem={({ item }) => <Item name={item.name} />}
+      keyExtractor={(item) => item.localAuthorityId.toString()}
+    />
   );
 };
+
+export const Authorities = () => {
+  return (
+    <Suspense fallback={<Fallback />}>
+      <AuthoritiesImpl />
+    </Suspense>
+  );
+}
