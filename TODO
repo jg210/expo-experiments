@@ -1,7 +1,3 @@
 * https://tanstack.com/query/v5/docs/eslint/eslint-plugin-query
 
 * Get Suspense and useSuspenseQuery working.
-
-* CI.
-
-* Don't render in status bar.
