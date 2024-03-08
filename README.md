@@ -9,9 +9,9 @@ Install nodenv and node-build (or use any other way to put correct version of no
 * https://github.com/nodenv/nodenv#installation
 * https://github.com/nodenv/node-build#installation
 
-To run the app (on android), (setting environment variable to avoid problem from expo not using the adb reverse tunnel it sets up):
+To run the app using USB cable on android:
 
 ```
 . environment
-REACT_NATIVE_PACKAGER_HOSTNAME=localhost npm run android --localhost
+npm run android -- --localhost
 ```
