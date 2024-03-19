@@ -33,7 +33,7 @@ describe("useRefresh", () => {
   });
 
   describe("multiple refetch() promises pending at same time", () => {
-    const multiplePendingRefetches = async () => {
+    const multiplePendingRefetches = async (fifo: boolean) => {
       // Set up a refetch() function that stores resolve function for deferred resolution, and that
       // uses jest.fn() so can track that this function is called.
       const toResolve: (() => void)[] = [];
@@ -62,6 +62,9 @@ describe("useRefresh", () => {
       expect(result.current.refreshing).toEqual(true);
 
       // Resolve all the promises...
+      if (!fifo) {
+        toResolve.reverse();
+      }
       await act(async () => {
         toResolve.forEach((resolve) => resolve());
       });
@@ -71,7 +74,10 @@ describe("useRefresh", () => {
     };
 
     it("resolved in order of creation", async () => {
-      multiplePendingRefetches();
+      multiplePendingRefetches(true);
+    });
+    it("resolved in opposite order to creation", async () => {
+      multiplePendingRefetches(false);
     });
   });
 });
