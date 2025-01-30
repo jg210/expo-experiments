@@ -8,7 +8,6 @@ interface LocalAuthority {
 }
 
 export const getAuthorities: () => Promise<LocalAuthority[]> = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const authorities = await fetch(
     "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
   );
