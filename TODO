@@ -1,5 +1,3 @@
-* Remaining upgrades.
-
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
 * eslint react-hooks/exhaustive-deps disabled.
