@@ -10,8 +10,6 @@
 
   Your project may not work correctly until you install the expected versions of the packages.
 
-* Set "newArchEnabled": true in your app.json.
-
 * eslint warnings aren't useful
   - disable or turn into errors.
   - or enable prettier?
