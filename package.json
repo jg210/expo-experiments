@@ -24,7 +24,6 @@
     "@tanstack/eslint-plugin-query": "5.65.0",
     "@testing-library/react-native": "12.4.3",
     "@types/babel__core": "7.20.5",
-    "@types/eslint": "9.6.1",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.15",
     "@types/react": "18.3.12",
