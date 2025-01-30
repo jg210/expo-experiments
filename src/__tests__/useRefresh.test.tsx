@@ -6,7 +6,7 @@ import { useRefresh } from "../useRefresh";
 describe("useRefresh", () => {
   it("refetch resolves immediately", async () => {
     const refetch = jest.fn(async () => {});
-    const { result } = renderHook(() => useRefresh(refetch));
+    const { result } = renderHook(() => useRefresh(refetch), { concurrentRoot: false });
     expect(refetch).toHaveBeenCalledTimes(0);
     expect(result.current.refreshing).toEqual(false);
     await act(async () => {
@@ -21,7 +21,7 @@ describe("useRefresh", () => {
     const refetch = jest.fn(() => {
       return new Promise<void>((resolve) => setTimeout(() => resolve(), 100));
     });
-    const { result } = renderHook(() => useRefresh(refetch));
+    const { result } = renderHook(() => useRefresh(refetch), { concurrentRoot: false });
     expect(refetch).toHaveBeenCalledTimes(0);
     expect(result.current.refreshing).toEqual(false);
     await act(async () => {
