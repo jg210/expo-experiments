@@ -1,1 +1,5 @@
 * eslint react-hooks/exhaustive-deps disabled.
+
+* Try out https://docs.expo.dev/guides/react-compiler/
+
+* Run expo-doctor on CI?
