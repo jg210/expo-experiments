@@ -12,7 +12,7 @@
     "ci": "npm run lint && tsc && npm test"
   },
   "dependencies": {
-    "@tanstack/react-query": "5.25.0",
+    "@tanstack/react-query": "5.65.1",
     "expo": "52.0.28",
     "expo-status-bar": "2.0.1",
     "react": "18.3.1",
