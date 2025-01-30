@@ -13,5 +13,6 @@ To run the app using USB cable on android:
 
 ```
 . environment
+npm i
 npm run android -- --localhost
 ```
