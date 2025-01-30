@@ -1,3 +1,7 @@
+* "eslint-config-universe": "14.0.0" won't work with eslint 9, but eslint 8 is no longer maintained.
+
+  peer eslint@">=8.10 <9" from eslint-config-universe@14.0.0
+
 * WARNING: You are currently running a version of TypeScript which is not officially supported by @typescript-eslint/typescript-estree.
 
   You may find that it works just fine, or you may not.
