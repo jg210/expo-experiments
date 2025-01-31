@@ -1,8 +1,7 @@
 module.exports = {
   root: true,
   extends: [
-    "universe/native",
-    "universe/shared/typescript-analysis",
+    "expo",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   overrides: [

@@ -1,5 +1,7 @@
-* eslint warnings aren't useful
-  - disable or turn into errors.
-  - or enable prettier?
+* Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
 * eslint react-hooks/exhaustive-deps disabled.
+
+* Try out https://docs.expo.dev/guides/react-compiler/
+
+* Run expo-doctor on CI?

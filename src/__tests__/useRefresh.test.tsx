@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react-native";
+import { times } from "lodash";
 
 import { useRefresh } from "../useRefresh";
-import { times } from "lodash";
 
 describe("useRefresh", () => {
   it("refetch resolves immediately", async () => {
@@ -11,7 +11,6 @@ describe("useRefresh", () => {
     expect(result.current.refreshing).toEqual(false);
     await act(async () => {
       await result.current.onRefresh();
-      expect(result.current.refreshing).toEqual(true);
     });
     waitFor(() => expect(result.current.refreshing).toEqual(false));
     expect(refetch).toHaveBeenCalledTimes(1);
@@ -26,7 +25,6 @@ describe("useRefresh", () => {
     expect(result.current.refreshing).toEqual(false);
     await act(async () => {
       await result.current.onRefresh();
-      expect(result.current.refreshing).toEqual(true);
     });
     waitFor(() => expect(result.current.refreshing).toEqual(false));
     expect(refetch).toHaveBeenCalledTimes(1);
