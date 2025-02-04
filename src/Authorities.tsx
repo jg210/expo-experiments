@@ -34,7 +34,9 @@ const AuthoritiesImpl = () => {
   const localAuthorityNames = data.map(localAuthority => localAuthority.name)
   // TODO with react 19 use(), could use Suspense while wait for Promise to resolve.
   useEffect(() => {
-    ExpoExperimentsModule.fingerprintAuthorities(localAuthorityNames).then(fingerprint => setFingerprint(fingerprint));
+    ExpoExperimentsModule.fingerprintAuthorities(localAuthorityNames).then(fingerprint => {
+      setFingerprint(fingerprint.substring(0,8));
+    });
   }, [localAuthorityNames]);
   return (
     <>
