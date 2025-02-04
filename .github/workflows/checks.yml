@@ -21,6 +21,11 @@ jobs:
         . environment
         npm ci
 
+    - name: prebuild
+      run: |
+        . environment
+        expo prebuild
+
     - name: npm run ci
       run: |
         . environment
