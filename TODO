@@ -1,5 +1,3 @@
-* Proper fingerprint implementation.
-
 * Test for native module.
 
 * More react native testing library tests.
@@ -7,6 +5,8 @@
 * How can app and module be imported into android studio?
 
 * Configure eas.
+
+* Nicer refresh UI?
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
