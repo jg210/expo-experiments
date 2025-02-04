@@ -9,10 +9,11 @@ Install nodenv and node-build (or use any other way to put correct version of no
 * https://github.com/nodenv/nodenv#installation
 * https://github.com/nodenv/node-build#installation
 
-To run the app using USB cable on android:
+To run the app on android:
 
 ```
 . environment
 npm i
-npm run android -- --localhost
+npm prebuild
+npm run android
 ```

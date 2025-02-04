@@ -16,13 +16,15 @@
     ],
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "uk.me.jeremygreen.expoexperiments"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "uk.me.jeremygreen.expoexperiments"
     },
     "web": {
       "favicon": "./assets/favicon.png"
