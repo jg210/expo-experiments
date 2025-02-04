@@ -9,8 +9,23 @@ import java.security.MessageDigest
 class ExpoExperimentsModule : Module() {
 
   companion object {
+
+    // Ensures e.g. fingerprint of ["a", "bc"] is different to fingerprint of ["ab", "c"].
+    private val DIGEST_SEPARATOR = byteArrayOf(0)
+
     @OptIn(ExperimentalStdlibApi::class)
-    private fun hexString(byteArray: ByteArray) : String = byteArray.toHexString()
+    fun hexString(byteArray: ByteArray) : String = byteArray.toHexString()
+
+    fun fingerprintAuthorities(authorities: List<String>): String {
+      val digest = MessageDigest.getInstance("SHA-256")
+      authorities.forEach { authority ->
+        digest.update(authority.encodeToByteArray())
+        digest.update(DIGEST_SEPARATOR)
+      }
+      val fingerprint = hexString(digest.digest())
+      return fingerprint
+    }
+
   }
 
   // See https://docs.expo.dev/modules/module-api for more details about available components.
@@ -18,15 +33,10 @@ class ExpoExperimentsModule : Module() {
     Name("ExpoExperiments")
 
     AsyncFunction("fingerprintAuthorities") { authorities: List<String>, promise: Promise ->
-      val digest = MessageDigest.getInstance("SHA-256")
-      val separator = byteArrayOf(0)
-      authorities.forEach  { authority ->
-        digest.digest(authority.encodeToByteArray())
-        digest.digest(separator)
-      }
-      val fingerprint = hexString(digest.digest())
+      val fingerprint = fingerprintAuthorities(authorities)
       promise.resolve(fingerprint)
     }
 
   }
+
 }

@@ -41,3 +41,6 @@ android {
     abortOnError false
   }
 }
+dependencies {
+  api 'junit:junit:4.13.2'
+}
