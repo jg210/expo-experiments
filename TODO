@@ -1,4 +1,8 @@
-* Test for native module.
+* Run native android tests on github actions.
+  - install android SDK etc.
+  - expo prebuild
+  - ./android/gradlew -p android test
+  - easier to use eas?
 
 * More react native testing library tests.
 

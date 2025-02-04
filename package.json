@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "lint": "eslint --max-warnings=0 .",
     "test": "jest",
-    "ci": "npm run lint && tsc && npm test && ./android/gradlew -p android test"
+    "ci": "npm run lint && tsc && npm test"
   },
   "dependencies": {
     "@tanstack/react-query": "5.65.1",
