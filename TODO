@@ -1,5 +1,7 @@
 * Configure eas.
 
+* Add a turbomodule too, to compare with the expo native module.
+
 * More react native testing library tests.
 
 * Nicer refresh UI?
