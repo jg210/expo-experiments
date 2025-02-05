@@ -35,8 +35,22 @@ jobs:
         . environment
         expo prebuild
 
-    - name: npm run ci
+    - name: npm run lint
       run: |
         . environment
-        npm run ci
+        npm run lint
 
+    - name: tsc
+      run: |
+        . environment
+        tsc
+
+    - name: npm test
+      run: |
+        . environment
+        npm test
+
+    - name: npm run android-test
+      run: |
+        . environment
+        npm run android-test
