@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9980ae3b-7d5d-4df7-9b14-31ef911db1b7"
+      }
+    },
+    "owner": "jgreen210"
   }
 }
