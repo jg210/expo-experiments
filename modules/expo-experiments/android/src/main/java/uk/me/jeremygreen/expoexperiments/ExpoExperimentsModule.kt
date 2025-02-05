@@ -13,8 +13,9 @@ class ExpoExperimentsModule : Module() {
     // Ensures e.g. fingerprint of ["a", "bc"] is different to fingerprint of ["ab", "c"].
     private val DIGEST_SEPARATOR = byteArrayOf(0)
 
+    // This wrapper only exists to add the @OptIn.
     @OptIn(ExperimentalStdlibApi::class)
-    fun hexString(byteArray: ByteArray) : String = byteArray.toHexString()
+    fun ByteArray.hexString() : String = this.toHexString()
 
     fun fingerprintAuthorities(authorities: List<String>): String {
       val digest = MessageDigest.getInstance("SHA-256")
@@ -22,7 +23,7 @@ class ExpoExperimentsModule : Module() {
         digest.update(authority.encodeToByteArray())
         digest.update(DIGEST_SEPARATOR)
       }
-      val fingerprint = hexString(digest.digest())
+      val fingerprint = digest.digest().hexString()
       return fingerprint
     }
 

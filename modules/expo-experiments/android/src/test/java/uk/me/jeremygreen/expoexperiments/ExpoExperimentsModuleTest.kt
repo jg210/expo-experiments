@@ -1,6 +1,7 @@
 import org.junit.Assert
 import org.junit.Test
 import uk.me.jeremygreen.expoexperiments.ExpoExperimentsModule
+import uk.me.jeremygreen.expoexperiments.ExpoExperimentsModule.Companion.hexString
 
 class ExpoExperimentsModuleTest {
 
@@ -8,7 +9,7 @@ class ExpoExperimentsModuleTest {
     fun hexString() {
         Assert.assertEquals(
             "000102ff",
-            ExpoExperimentsModule.hexString(byteArrayOf(0, 1, 2, 255.toByte()))
+            byteArrayOf(0, 1, 2, 255.toByte()).hexString()
         )
     }
 
@@ -16,7 +17,7 @@ class ExpoExperimentsModuleTest {
     fun `hexString empty`() {
         Assert.assertEquals(
             "",
-            ExpoExperimentsModule.hexString(byteArrayOf())
+            byteArrayOf().hexString()
         )
     }
 
