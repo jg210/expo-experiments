@@ -15,14 +15,42 @@ jobs:
     - uses: actions/setup-node@v4.0.1
       with:
         node-version-file: '.node-version'
+        cache: 'npm'
+
+    - uses: actions/setup-java@v4.7.0
+      with:
+        java-version: 21
+        distribution: temurin
+        cache: 'gradle'
+
+    - uses: amyu/setup-android@v4
 
     - name: npm install
       run: |
         . environment
         npm ci
 
-    - name: npm run ci
+    - name: prebuild
       run: |
         . environment
-        npm run ci
+        expo prebuild
 
+    - name: npm run lint
+      run: |
+        . environment
+        npm run lint
+
+    - name: tsc
+      run: |
+        . environment
+        tsc
+
+    - name: npm test
+      run: |
+        . environment
+        npm test
+
+    - name: npm run android-test
+      run: |
+        . environment
+        npm run android-test

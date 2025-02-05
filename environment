@@ -5,8 +5,10 @@
 SOURCE_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 # java
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-export PATH="${JAVA_HOME}/bin:${PATH}"
+if [ ! -v GITHUB_ACTIONS ] ; then
+    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+    export PATH="${JAVA_HOME}/bin:${PATH}"
+fi
 
 # node
 if [ -d "${HOME}/.nodenv/bin" ] ; then
@@ -18,5 +20,7 @@ fi
 PATH="${SOURCE_DIR}/node_modules/.bin:${PATH}"
 
 # Android SDK.
-export ANDROID_HOME=~/Android/Sdk
-export PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}"
+if [ ! -v GITHUB_ACTIONS ] ; then
+    export ANDROID_HOME=~/Android/Sdk
+    export PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}"
+fi
