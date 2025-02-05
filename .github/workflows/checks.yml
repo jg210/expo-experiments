@@ -16,10 +16,23 @@ jobs:
       with:
         node-version-file: '.node-version'
 
+    - uses: actions/setup-java@v4.7.0
+      with:
+        java-version: 21
+        distribution: temurin
+
+    - name: Android SDK
+      uses: amyu/setup-android@v4
+
     - name: npm install
       run: |
         . environment
         npm ci
+
+    - name: prebuild
+      run: |
+        . environment
+        expo prebuild
 
     - name: npm run ci
       run: |
