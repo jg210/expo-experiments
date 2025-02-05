@@ -1,3 +1,19 @@
+* iOS build failing (https://expo.dev/accounts/jgreen210/projects/expo-experiments/builds/116809ac-e2b8-4a79-a0a6-6e078baa5632):
+
+  No environment variables with visibility "Plain text" and "Sensitive" found for the "development" environment on EAS.
+
+  ✔ Using remote iOS credentials (Expo server)
+
+  Failed to set up credentials.
+
+  You're in non-interactive mode. EAS CLI couldn't find any credentials suitable for internal distribution. Run this command again in interactive mode.
+
+  Error: build:internal command failed.
+
+* android unit tests failing on github:
+  - need to save https://expo.dev/accounts/jgreen210/projects/expo-experiments/builds/116809ac-e2b8-4a79-a0a6-6e078baa5632
+  - not run on EAS?
+
 * Configure eas.
   - chain build environments like described here: https://docs.expo.dev/build/eas-json/#selecting-build-tool-versions
   - set build tool versions in eas.json
@@ -12,6 +28,8 @@
   - https://github.com/marketplace/actions/android-emulator-runner?
 
 * Nicer refresh UI?
+
+* dorny/test-reporter for android gradle test results.
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
