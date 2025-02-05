@@ -1,4 +1,6 @@
 * Configure eas.
+  - chain build environments like described here: https://docs.expo.dev/build/eas-json/#selecting-build-tool-versions
+  - set build tool versions in eas.json
 
 * Add a turbomodule too, to compare with the expo native module.
 
