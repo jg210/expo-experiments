@@ -1,14 +1,6 @@
-* Run native android tests on github actions.
-  - install android SDK etc.
-  - expo prebuild
-  - ./android/gradlew -p android test
-  - easier to use eas?
+* Configure eas.
 
 * More react native testing library tests.
-
-* How can app and module be imported into android studio?
-
-* Configure eas.
 
 * Nicer refresh UI?
 
