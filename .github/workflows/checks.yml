@@ -60,4 +60,4 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: android-test
-        path: build/reports/tests/testDebugUnitTest/
+        path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/
