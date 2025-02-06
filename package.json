@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "lint": "eslint --max-warnings=0 .",
     "test": "jest",
-    "android-test": "./android/gradlew -p android test",
+    "android-test": "./android/gradlew -p android app:test expo-experiments:test",
     "ci": "npm run lint && tsc && npm test && npm run android-test"
   },
   "dependencies": {
