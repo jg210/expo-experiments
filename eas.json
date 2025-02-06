@@ -4,9 +4,8 @@
     "appVersionSource": "remote"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
+    "production": {
+      "autoIncrement": true,
       "android": {
         "image": "ubuntu-22.04-jdk-17-ndk-r26b"
       },
@@ -14,17 +13,19 @@
         "image": "macos-sonoma-14.6-xcode-16.1"
       }
     },
+    "preview": {
+      "extends": "production",
+      "distribution": "internal"
+    },
+    "development": {
+      "extends": "preview",
+      "developmentClient": true
+    },
     "ios-simulator": {
       "extends": "development",
       "ios": {
         "simulator": true
       }
-    },
-    "preview": {
-      "distribution": "internal"
-    },
-    "production": {
-      "autoIncrement": true
     }
   },
   "submit": {
