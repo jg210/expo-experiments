@@ -12,6 +12,10 @@
 
 * Nicer refresh UI?
 
+* Ensure that .node-version file and eas.json agree on node version.
+  - a jest unit test that parses eas.json
+  - contribute something to eas build that lets it parse .node-version?
+
 * dorny/test-reporter for android gradle test results.
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
