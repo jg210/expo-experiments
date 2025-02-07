@@ -1,7 +1,6 @@
-package uk.me.jeremygreen.expoexperiments
+package uk.me.jeremygreen.expoexperiments.module
 
 import expo.modules.kotlin.Promise
-
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import java.security.MessageDigest
