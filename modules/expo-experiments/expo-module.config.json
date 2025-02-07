@@ -11,7 +11,7 @@
   },
   "android": {
     "modules": [
-      "uk.me.jeremygreen.expoexperiments.ExpoExperimentsModule"
+      "uk.me.jeremygreen.expoexperiments.module.ExpoExperimentsModule"
     ]
   }
 }

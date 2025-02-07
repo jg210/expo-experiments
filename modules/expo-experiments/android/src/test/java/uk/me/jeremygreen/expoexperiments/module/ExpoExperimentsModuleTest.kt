@@ -1,7 +1,8 @@
+package uk.me.jeremygreen.expoexperiments.module
+
 import org.junit.Assert
 import org.junit.Test
-import uk.me.jeremygreen.expoexperiments.ExpoExperimentsModule
-import uk.me.jeremygreen.expoexperiments.ExpoExperimentsModule.Companion.hexString
+import uk.me.jeremygreen.expoexperiments.module.ExpoExperimentsModule.Companion.hexString
 
 class ExpoExperimentsModuleTest {
 
@@ -25,14 +26,16 @@ class ExpoExperimentsModuleTest {
     fun `fingerprintAuthorities empty list`() {
         Assert.assertEquals(
             "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            ExpoExperimentsModule.fingerprintAuthorities(listOf()))
+            ExpoExperimentsModule.fingerprintAuthorities(listOf())
+        )
     }
 
     @Test
     fun `fingerprintAuthorities one element`() {
         Assert.assertEquals(
             "ffe9aaeaa2a2d5048174df0b80599ef0197ec024c4b051bc9860cff58ef7f9f3",
-            ExpoExperimentsModule.fingerprintAuthorities(listOf("a")))
+            ExpoExperimentsModule.fingerprintAuthorities(listOf("a"))
+        )
     }
 
     @Test

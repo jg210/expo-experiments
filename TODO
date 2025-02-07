@@ -1,8 +1,18 @@
-* Configure eas.
+* Add a turbomodule too, to compare with the expo native module.
 
 * More react native testing library tests.
 
+* End-to-end test
+  - https://docs.expo.dev/build-reference/e2e-tests/
+    - need to use legacy mode, so maybe not...
+  - https://github.com/marketplace/actions/android-emulator-runner?
+
 * Nicer refresh UI?
+
+* dorny/test-reporter for android gradle test results.
+
+* Run eas build on github actions too?
+  - likely faster than using eas build directly.
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
@@ -13,3 +23,5 @@
 * Run expo-doctor on CI?
 
 * iOS implementation for fingerprintAuthorities.
+
+* Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?

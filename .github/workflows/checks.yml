@@ -54,3 +54,10 @@ jobs:
       run: |
         . environment
         npm run android-test
+
+    - name: test report - android gradle test
+      uses: actions/upload-artifact@v4.3.0
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+        name: android-test
+        path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/
