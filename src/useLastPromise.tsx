@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 
+export type PromiseFunction<T> = () => Promise<T>;
+export type CommitFunction<T> = (value: T) => void;
+
 // Ensures racing promises can't be reordered.
 //
 // Based on pattern from https://react.dev/learn/synchronizing-with-effects#fetching-data
@@ -12,9 +15,9 @@ import { useEffect } from "react";
 // deps - same as for useEffect
 // commit - given the value returned by promise unless there's a newer render in progress. If it depends on any values, they'd need to go in deps too.
 export function useLastPromise<T>(
-  promise: () => Promise<T>,
+  promise: PromiseFunction<T>,
   deps: React.DependencyList,
-  commit: (value: T) => void) {
+  commit: CommitFunction<T>) {
     useEffect(
       () => {
         let ignore = false;
