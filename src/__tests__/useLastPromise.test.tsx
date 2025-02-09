@@ -33,7 +33,7 @@ describe("useLastPromise", () => {
         commit: CommitFunction<Value>
     };
     const TestHarness = ({ promise, commit }: Props) => {
-        useLastPromise(promise, [promise], commit)
+        useLastPromise(promise, [promise, commit], commit)
         return <div></div>;
     }
     let promise1Resolver: ((value: number) => void) | null = null;
