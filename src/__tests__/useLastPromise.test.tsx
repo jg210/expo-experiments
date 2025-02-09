@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from "@testing-library/react-native";
+import { render, renderHook, waitFor } from "@testing-library/react-native";
 import { CommitFunction, PromiseFunction, useLastPromise } from "../useLastPromise";
 
 import { expect, jest } from '@jest/globals';
@@ -24,6 +24,36 @@ describe("useLastPromise", () => {
     const deps = [x, y, z];
     renderHook(() => useLastPromise(promise, deps, commit));
     expect(useEffectMock).toHaveBeenCalledWith(expect.any(Function), deps);
+  });
+
+  it("ignores promise1 if not resolved until next render", async () => {
+    type Value = number;
+    type Props = {
+        promise: PromiseFunction<Value>,
+        commit: CommitFunction<Value>
+    };
+    const TestHarness = ({ promise, commit }: Props) => {
+        useLastPromise(promise, [promise], commit)
+        return <div></div>;
+    }
+    let promiseSlowResolver: ((value: number) => void) | null = null;
+    const promise1Value = 234234;
+    const promise2Value: Value = Math.random();
+    expect(promise1Value).not.toEqual(promise2Value);
+    const promise1: PromiseFunction<Value> = () => new Promise((resolve, _reject) => { promiseSlowResolver = resolve }); // slow
+    const promise2: PromiseFunction<Value> = async () => promise2Value; // fast
+    const commit1 = jest.fn<CommitFunction<Value>>()
+    const commit2 = jest.fn<CommitFunction<Value>>()
+    const {rerender } = render(
+        <TestHarness promise={promise1} commit={commit1} />
+    );
+    rerender(
+        <TestHarness promise={promise2} commit={commit2} />
+    );
+    await waitFor(() => expect(promiseSlowResolver).toBeDefined());
+    promiseSlowResolver!(promise1Value);
+    expect(commit1).toHaveBeenCalledTimes(0);
+    expect(commit2).toHaveBeenCalledWith(promise2Value);
   });
 
 });
