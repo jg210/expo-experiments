@@ -56,4 +56,27 @@ describe("useLastPromise", () => {
     expect(commit2).toHaveBeenCalledWith(promise2Value);
   });
 
+  it("ignores promise if not resolved until after unmount", async () => {
+    type Value = number;
+    type Props = {
+        promise: PromiseFunction<Value>,
+        commit: CommitFunction<Value>
+    };
+    const TestHarness = ({ promise, commit }: Props) => {
+        useLastPromise(promise, [promise, commit], commit)
+        return <div></div>;
+    }
+    let promise1Resolver: ((value: number) => void) | null = null;
+    const promise1Value = 234234;
+    const promise1: PromiseFunction<Value> = () => new Promise((resolve, _reject) => { promise1Resolver = resolve }); // slow
+    const commit1 = jest.fn<CommitFunction<Value>>()
+    const { unmount } = render(
+      <TestHarness promise={promise1} commit={commit1} />
+    );
+    unmount();
+    await waitFor(() => expect(promise1Resolver).toBeDefined());
+    promise1Resolver!(promise1Value);
+    expect(commit1).toHaveBeenCalledTimes(0);
+  });
+
 });
