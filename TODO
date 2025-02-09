@@ -1,3 +1,8 @@
+* error TS2339: Property 'version' does not exist on type 'typeof process'.
+  - in src/__tests__/nodeVersion.tsx
+  - why didn't CI fail with this?
+    - it runs tsc
+
 * Add a turbomodule too, to compare with the expo native module.
 
 * More react native testing library tests.
@@ -25,3 +30,5 @@
 * iOS implementation for fingerprintAuthorities.
 
 * Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?
+
+* Is it possible to test that react-hooks/exhaustive-deps checks useLastPromise?
