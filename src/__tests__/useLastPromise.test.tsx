@@ -36,11 +36,11 @@ describe("useLastPromise", () => {
         useLastPromise(promise, [promise], commit)
         return <div></div>;
     }
-    let promiseSlowResolver: ((value: number) => void) | null = null;
+    let promise1Resolver: ((value: number) => void) | null = null;
     const promise1Value = 234234;
     const promise2Value: Value = Math.random();
     expect(promise1Value).not.toEqual(promise2Value);
-    const promise1: PromiseFunction<Value> = () => new Promise((resolve, _reject) => { promiseSlowResolver = resolve }); // slow
+    const promise1: PromiseFunction<Value> = () => new Promise((resolve, _reject) => { promise1Resolver = resolve }); // slow
     const promise2: PromiseFunction<Value> = async () => promise2Value; // fast
     const commit1 = jest.fn<CommitFunction<Value>>()
     const commit2 = jest.fn<CommitFunction<Value>>()
@@ -50,8 +50,8 @@ describe("useLastPromise", () => {
     rerender(
         <TestHarness promise={promise2} commit={commit2} />
     );
-    await waitFor(() => expect(promiseSlowResolver).toBeDefined());
-    promiseSlowResolver!(promise1Value);
+    await waitFor(() => expect(promise1Resolver).toBeDefined());
+    promise1Resolver!(promise1Value);
     expect(commit1).toHaveBeenCalledTimes(0);
     expect(commit2).toHaveBeenCalledWith(promise2Value);
   });
