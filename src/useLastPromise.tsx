@@ -6,7 +6,7 @@ import { useEffect } from "react";
 //
 // react-hooks/exhaustive-deps is configured with additionalHooks to check the deps.
 // It expects first and second args to look like useEffect's args, so promise and deps must be
-// first and second argument.
+// first and second argument. It won't check commit function for missing deps.
 //
 // promise - returns Promise that depends on just deps
 // deps - same as for useEffect
