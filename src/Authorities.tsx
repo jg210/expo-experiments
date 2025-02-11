@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { FlatList, Text } from "react-native";
 
 import { getAuthorities } from "./FSA";
@@ -8,6 +8,7 @@ import { useRefresh } from "./useRefresh";
 import React from 'react';
 
 import ExpoExperimentsModule from "../modules/expo-experiments/src/ExpoExperimentsModule";
+import { useLastPromise } from "./useLastPromise";
 
 const queryKey = ["authorities"];
 
@@ -33,11 +34,11 @@ const AuthoritiesImpl = () => {
   const { refreshing, onRefresh } = useRefresh(refetch);
   const localAuthorityNames = data.map(localAuthority => localAuthority.name)
   // TODO with react 19 use(), could use Suspense while wait for Promise to resolve.
-  useEffect(() => {
-    ExpoExperimentsModule.fingerprintAuthorities(localAuthorityNames).then(fingerprint => {
-      setFingerprint(fingerprint.substring(0,8));
-    });
-  }, [localAuthorityNames]);
+  useLastPromise(
+    () => ExpoExperimentsModule.fingerprintAuthorities(localAuthorityNames),
+    [localAuthorityNames],
+    (fingerprint) => setFingerprint(fingerprint.substring(0, 8))
+  );
   return (
     <>
       <Text>{refreshing ? refreshingText : fingerprint}</Text>
