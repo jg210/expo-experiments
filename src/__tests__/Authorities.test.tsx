@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react-native";
 import { Authorities } from "../Authorities";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { LocalAuthority } from '../FSA';
@@ -30,5 +30,14 @@ describe("Authorities", () => {
 
         // The test.
         render(<Authorities/>);
+
+        // Need to wait for the fingerprintAuthorities promise to resolve (not directly, but by waiting
+        // for UI to update) otherwise the promise triggers a UI refresh after the test ends, which
+        // means get:
+        // 
+        // Warning: An update to AuthoritiesImpl inside a test was not wrapped in act(...).
+        //
+        // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
+        await waitForElementToBeRemoved(() => screen.queryByText("..."))
     });
 });
