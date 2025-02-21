@@ -19,14 +19,15 @@ describe("Authorities", () => {
     it("renders", async () => {
         // Mock react-query
         const data: LocalAuthority[] = [
-            { localAuthorityId: 1, name: "Wessex" }
+            { localAuthorityId: 1, name: "Wessex" },
+            { localAuthorityId: 2, name: "Southmoltonshire" }
         ];
         const refetch = jest.fn();
         (useSuspenseQuery as jest.Mock).mockImplementation(() => ({ data, refetch })); //mockReturnValue();
 
         // Mock ExpoExperimentsModule.
-        //
-        (ExpoExperimentsModule.fingerprintAuthorities as jest.Mock).mockResolvedValue("123456");
+        const mockFingerprint = "324902423923abef";
+        (ExpoExperimentsModule.fingerprintAuthorities as jest.Mock).mockResolvedValue(mockFingerprint);
 
         // The test.
         render(<Authorities/>);
@@ -39,6 +40,12 @@ describe("Authorities", () => {
         //
         // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
         await waitForElementToBeRemoved(() => screen.queryByText("..."))
-        // TODO assert UI as expected.
+
+        // Assert that expected values appear in UI.
+        screen.getByText(mockFingerprint.slice(0, 8));
+        data.forEach(localAuthority => {
+            screen.getByText(localAuthority.name);
+        });
+
     });
 });
