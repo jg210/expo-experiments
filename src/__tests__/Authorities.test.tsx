@@ -29,7 +29,7 @@ describe("Authorities", () => {
         const mockFingerprint = "324902423923abef";
         (ExpoExperimentsModule.fingerprintAuthorities as jest.Mock).mockResolvedValue(mockFingerprint);
 
-        // The test.
+        // The tested component.
         render(<Authorities/>);
 
         // Need to wait for the fingerprintAuthorities promise to resolve (not directly, but by waiting
@@ -39,6 +39,8 @@ describe("Authorities", () => {
         // Warning: An update to AuthoritiesImpl inside a test was not wrapped in act(...).
         //
         // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
+        //
+        // (Alternatively, could just wait for the final UI values to appear.)
         await waitForElementToBeRemoved(() => screen.queryByText("..."))
 
         // Assert that expected values appear in UI.
