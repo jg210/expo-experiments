@@ -49,5 +49,7 @@ describe("Authorities", () => {
             screen.getByText(localAuthority.name);
         });
 
+        expect(refetch).toHaveBeenCalledTimes(0);
+
     });
 });
