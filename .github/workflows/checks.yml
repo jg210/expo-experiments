@@ -1,6 +1,6 @@
 name: checks
 
-on: push
+on: pull_request
 
 jobs:
   build:
