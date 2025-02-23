@@ -48,7 +48,12 @@ jobs:
     - name: npm test
       run: |
         . environment
-        npm test
+        npm test -- --collect-coverage
+
+    - name: jest coverage
+      uses: ArtiomTr/jest-coverage-report-action@v2.3.1
+      with:
+        coverage-file: ./coverage/coverage-final.json
 
     - name: npm run android-test
       run: |
