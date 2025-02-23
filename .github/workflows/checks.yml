@@ -1,6 +1,6 @@
 name: checks
 
-on: pull_request
+on: push
 
 jobs:
   build:
@@ -8,7 +8,6 @@ jobs:
     permissions:
       contents: read
       checks: write
-      pull-requests: write
 
     steps:
     - uses: actions/checkout@v4.1.1
@@ -50,9 +49,6 @@ jobs:
       run: |
         . environment
         npm test
-
-    - name: jest coverage
-      uses: MishaKav/jest-coverage-comment@v1
 
     - name: npm run android-test
       run: |
