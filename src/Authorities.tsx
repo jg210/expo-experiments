@@ -48,6 +48,7 @@ const AuthoritiesImpl = () => {
         keyExtractor={(item) => item.localAuthorityId.toString()}
         onRefresh={onRefresh}
         refreshing={refreshing}
+        testID="authoritiesList"
       />
     </>
   );
