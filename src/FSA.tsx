@@ -2,7 +2,7 @@ interface LocalAuthorities {
   localAuthorities: LocalAuthority[];
 }
 
-interface LocalAuthority {
+export interface LocalAuthority {
   localAuthorityId: number;
   name: string;
 }
