@@ -49,8 +49,8 @@ describe("Authorities", () => {
 
         // Assert that expected values appear in UI.
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(mockFingerprint.slice(0, 8));
-        const flatList = screen.getByTestId("authoritiesList");
-        const authorityListItems = within(flatList).getAllByTestId("authorityListItem");
+        const authoritiesList = screen.getByTestId("authoritiesList");
+        const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
         authorityListItems.forEach((authorityListItem, i) => {
             const authorityNameExpected = data[i].name;
             expect(authorityListItem).toHaveTextContent(authorityNameExpected);
@@ -62,7 +62,7 @@ describe("Authorities", () => {
         //
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
         act(() => {
-            flatList.props.refreshControl.props.onRefresh();
+            authoritiesList.props.refreshControl.props.onRefresh();
         })
         expect(refetch).toHaveBeenCalledTimes(1);
 
