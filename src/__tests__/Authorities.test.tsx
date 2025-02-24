@@ -1,4 +1,4 @@
-import { act, render, screen, waitForElementToBeRemoved } from "@testing-library/react-native";
+import { act, render, screen, waitForElementToBeRemoved, within } from "@testing-library/react-native";
 import { Authorities } from "../Authorities";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { LocalAuthority } from '../FSA';
@@ -48,10 +48,12 @@ describe("Authorities", () => {
         await waitForLoadingToComplete();
 
         // Assert that expected values appear in UI.
-        // TODO assert appears in right order.
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(mockFingerprint.slice(0, 8));
-        data.forEach(localAuthority => {
-            screen.getByText(localAuthority.name);
+        const flatList = screen.getByTestId("authoritiesList");
+        const authorityListItems = within(flatList).getAllByTestId("authorityListItem");
+        authorityListItems.forEach((authorityListItem, i) => {
+            const authorityNameExpected = data[i].name;
+            expect(authorityListItem).toHaveTextContent(authorityNameExpected);
         });
 
         expect(refetch).toHaveBeenCalledTimes(0);
@@ -59,7 +61,6 @@ describe("Authorities", () => {
         // Drag to refresh.
         //
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
-        const flatList = screen.getByTestId("authoritiesList");
         act(() => {
             flatList.props.refreshControl.props.onRefresh();
         })

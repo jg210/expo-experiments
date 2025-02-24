@@ -15,7 +15,7 @@ const queryKey = ["authorities"];
 interface ItemProps {
   name: string;
 }
-const Item = ({ name }: ItemProps) => <Text>{name}</Text>;
+const Item = ({ name }: ItemProps) => <Text testID="authorityListItem">{name}</Text>;
 
 const Fallback = () => <Text>loading...</Text>;
 
