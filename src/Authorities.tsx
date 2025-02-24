@@ -41,7 +41,7 @@ const AuthoritiesImpl = () => {
   );
   return (
     <>
-      <Text>{refreshing ? refreshingText : fingerprint}</Text>
+      <Text testID="fingerprint">{refreshing ? refreshingText : fingerprint}</Text>
       <FlatList
         data={data}
         renderItem={({ item }) => <Item name={item.name} />}

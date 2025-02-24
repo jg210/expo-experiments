@@ -49,7 +49,7 @@ describe("Authorities", () => {
 
         // Assert that expected values appear in UI.
         // TODO assert appears in right order.
-        screen.getByText(mockFingerprint.slice(0, 8));
+        expect(screen.getByTestId("fingerprint")).toHaveTextContent(mockFingerprint.slice(0, 8));
         data.forEach(localAuthority => {
             screen.getByText(localAuthority.name);
         });
