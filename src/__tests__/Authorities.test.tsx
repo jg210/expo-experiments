@@ -41,7 +41,9 @@ describe("Authorities", () => {
 
         // Mock ExpoExperimentsModule.
         const mockFingerprint = "324902423923abef";
-        (ExpoExperimentsModule.fingerprintAuthorities as jest.Mock).mockResolvedValue(mockFingerprint);
+        const { fingerprintAuthorities } = ExpoExperimentsModule;
+        const fingerprintAuthoritiesMock = fingerprintAuthorities as jest.MockedFunction<typeof fingerprintAuthorities>;
+        fingerprintAuthoritiesMock.mockResolvedValue(mockFingerprint);
 
         // The tested component.
         render(<Authorities/>);
