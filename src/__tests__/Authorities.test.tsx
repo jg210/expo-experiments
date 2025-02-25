@@ -63,15 +63,19 @@ describe("Authorities", () => {
 
         // Drag to refresh.
         //
+        // This explains how fresh is best triggered here:
+        //
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
+        //
+        // The refetch function here is just a mock, so there is no real data reloading.
+        //
+        // TODO use Mock Service Worker (https://mswjs.io/)? Could then run react-query in test and test refetch works.
         act(() => {
             authoritiesList.props.refreshControl.props.onRefresh();
         })
         expect(refetch).toHaveBeenCalledTimes(1);
 
         await waitForLoadingToComplete();
-
-        // TODO provide new set of mocked data and assert it's rendered.
 
     });
 });
