@@ -15,7 +15,7 @@ const queryKey = ["authorities"];
 interface ItemProps {
   name: string;
 }
-const Item = ({ name }: ItemProps) => <Text>{name}</Text>;
+const Item = ({ name }: ItemProps) => <Text testID="authorityListItem">{name}</Text>;
 
 const Fallback = () => <Text>loading...</Text>;
 
@@ -41,13 +41,14 @@ const AuthoritiesImpl = () => {
   );
   return (
     <>
-      <Text>{refreshing ? refreshingText : fingerprint}</Text>
+      <Text testID="fingerprint">{refreshing ? refreshingText : fingerprint}</Text>
       <FlatList
         data={data}
         renderItem={({ item }) => <Item name={item.name} />}
         keyExtractor={(item) => item.localAuthorityId.toString()}
         onRefresh={onRefresh}
         refreshing={refreshing}
+        testID="authoritiesList"
       />
     </>
   );
