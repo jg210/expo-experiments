@@ -63,7 +63,7 @@ describe("Authorities", () => {
 
         // Drag to refresh.
         //
-        // This explains how fresh is best triggered here:
+        // This explains why refresh is triggered like this:
         //
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
         //
