@@ -36,7 +36,8 @@ describe("Authorities", () => {
             { localAuthorityId: 2, name: "Southmoltonshire" }
         ];
         const refetch = jest.fn();
-        (useSuspenseQuery as jest.Mock).mockImplementation(() => ({ data, refetch }));
+        const useSuspenseQueryMock = useSuspenseQuery as jest.Mock;
+        useSuspenseQueryMock.mockImplementation((options, queryClient) => ({ data, refetch }));
 
         // Mock ExpoExperimentsModule.
         const mockFingerprint = "324902423923abef";
