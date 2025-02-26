@@ -4,7 +4,7 @@ import { LocalAuthority, LocalAuthorities } from '../FSA';
 import ExpoExperimentsModule from "../../modules/expo-experiments/src/ExpoExperimentsModule";
 
 import { setupServer } from 'msw/node';
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, RequestHandlerOptions } from 'msw';
 import { AppQueryClientProvider } from "../AppQueryClientProvider";
 
 type LocalAuthoritiesParams = Record<string,never>;
@@ -20,34 +20,71 @@ jest.mock("../../modules/expo-experiments/src/ExpoExperimentsModule", () => ({
   })
 );
 
+// Mock native ExpoExperimentsModule. Using a real fingerprint algorithm is simplest since don't need
+// to ensure that return appropriate values if test evolves to pass different values to the
+// function.
+async function SHA256(strings: string[]) {
+    const combinedString = strings.join('\x00') + '\x00';    
+    const bytes: Uint8Array = new TextEncoder().encode(combinedString);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+    const hashByteArray = new Uint8Array(hashBuffer);
+    const hashArray = Array.from(hashByteArray);
+    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');    
+    return hashHex;
+}
+const { fingerprintAuthorities } = ExpoExperimentsModule;
+const fingerprintAuthoritiesMock = fingerprintAuthorities as jest.MockedFunction<typeof fingerprintAuthorities>;
+fingerprintAuthoritiesMock.mockImplementation((localAuthorities => SHA256(localAuthorities)));
+
 const localAuthorities: LocalAuthority[] = [
     { localAuthorityId: 1, name: "Wessex" },
     { localAuthorityId: 2, name: "Southmoltonshire" }
 ];
 
-const handlers = [
-    http.get<LocalAuthoritiesParams, LocalAuthoritiesRequestBody, LocalAuthoritiesResponseBody>(
+function localAuthoritiesHandler(localAuthorities: LocalAuthority[], options?: RequestHandlerOptions) {
+    return http.get<LocalAuthoritiesParams, LocalAuthoritiesRequestBody, LocalAuthoritiesResponseBody>(
         "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
-        () => HttpResponse.json({ localAuthorities })
-      ),
+        () => HttpResponse.json({ localAuthorities }),
+        options
+    );
+}
+
+const handlers = [
+    localAuthoritiesHandler(localAuthorities)
 ];
 
 const server = setupServer(...handlers);
-server.events.on('request:start', ({ request, requestId }) => {
-    console.log('request:start:', requestId, request.method, request.url);
-});
-server.events.on('request:match', ({ request, requestId }) => {
-    console.log("request:match:", requestId, request.method, request.url);
-});
-server.events.on('response:mocked', ({ request, response }) => {
-    console.log(
-    'response:mocked: %s %s %s %s',
-    request.method,
-    request.url,
-    response.status,
-    response.statusText
-    );
-});
+// server.events.on('request:start', ({ request, requestId }) => {
+//     console.log('request:start:', requestId, request.method, request.url);
+// });
+// server.events.on('request:match', ({ request, requestId }) => {
+//     console.log("request:match:", requestId, request.method, request.url);
+// });
+// server.events.on('response:mocked', ({ request, response }) => {
+//     console.log(
+//     'response:mocked: %s %s %s %s',
+//     request.method,
+//     request.url,
+//     response.status,
+//     response.statusText
+//     );
+// });
+
+async function assertUICorrect(
+    fingerprint: string,
+    localAuthorities: LocalAuthority[]
+) {
+    await waitFor(() => {
+        expect(screen.getByTestId("fingerprint")).toHaveTextContent(fingerprint.slice(0, 8));
+    });
+    const authoritiesList = screen.getByTestId("authoritiesList");
+    const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
+    authorityListItems.forEach((authorityListItem, i) => {
+        const authorityNameExpected = localAuthorities[i].name;
+        expect(authorityListItem).toHaveTextContent(authorityNameExpected);
+    });
+    return authoritiesList;
+}
 
 describe("Authorities", () => {
 
@@ -57,26 +94,19 @@ describe("Authorities", () => {
 
     it("renders", async () => {
 
-        // Mock ExpoExperimentsModule.
-        const mockFingerprint = "324902423923abef";
-        const { fingerprintAuthorities } = ExpoExperimentsModule;
-        const fingerprintAuthoritiesMock = fingerprintAuthorities as jest.MockedFunction<typeof fingerprintAuthorities>;
-        fingerprintAuthoritiesMock.mockResolvedValue(mockFingerprint);
+        // To test drag to refresh works, return different data for first and second requests.
+        const localAuthorities1 = localAuthorities.slice(0, 1);
+        const localAuthorities2 = localAuthorities;
+        server.use(localAuthoritiesHandler(localAuthorities1, { once: true }));
+        const fingerprint1 = "b6557162";
+        const fingerprint2 = "deb3b6d4";
 
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
 
         // Assert that expected values appear in UI. The app loads the data then calculates the fingerprint.
         // Waiting for the fingerprint first here means don't have to wait for data to load too.
-        await waitFor(() => {
-            expect(screen.getByTestId("fingerprint")).toHaveTextContent(mockFingerprint.slice(0, 8));
-        });
-        const authoritiesList = screen.getByTestId("authoritiesList");
-        const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
-        authorityListItems.forEach((authorityListItem, i) => {
-            const authorityNameExpected = localAuthorities[i].name;
-            expect(authorityListItem).toHaveTextContent(authorityNameExpected);
-        });
+        const authoritiesList = await assertUICorrect(fingerprint1, localAuthorities1);
 
         // Drag to refresh.
         //
@@ -89,13 +119,7 @@ describe("Authorities", () => {
             authoritiesList.props.refreshControl.props.onRefresh();
         })
 
-        // TODO supply different date for refresh request and check UI.
-        // ...removing following waitFor too.
-        await waitFor(() => {
-            expect(screen.getByTestId("fingerprint")).toHaveTextContent(mockFingerprint.slice(0, 8));
-        });
-
-
+        await assertUICorrect(fingerprint2, localAuthorities2);
     });
 
     // TODO test data loading state by mocking a slow network.
