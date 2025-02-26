@@ -3,9 +3,6 @@
   - why didn't CI fail with this?
     - it runs tsc
 
-* Test pull to refresh works in Authorities.test.tsx using https://mswjs.io/?
-  - like https://github.com/jg210/spring-experiments/blob/master/src/frontend/src/__tests__/App.test.tsx
-
 * Add a turbomodule too, to compare with the expo native module.
 
 * More react native testing library tests.
