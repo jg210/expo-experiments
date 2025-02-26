@@ -79,6 +79,7 @@ async function assertUICorrect(
     });
     const authoritiesList = screen.getByTestId("authoritiesList");
     const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
+    expect(authorityListItems.length).toBe(localAuthorities.length);
     authorityListItems.forEach((authorityListItem, i) => {
         const authorityNameExpected = localAuthorities[i].name;
         expect(authorityListItem).toHaveTextContent(authorityNameExpected);
