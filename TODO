@@ -1,3 +1,5 @@
+* expect(authorityListItems.length).toBe(data.length);
+
 * error TS2339: Property 'version' does not exist on type 'typeof process'.
   - in src/__tests__/nodeVersion.tsx
   - why didn't CI fail with this?
