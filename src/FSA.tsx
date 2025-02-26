@@ -1,4 +1,4 @@
-interface LocalAuthorities {
+export interface LocalAuthorities {
   localAuthorities: LocalAuthority[];
 }
 
