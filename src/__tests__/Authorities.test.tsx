@@ -125,5 +125,6 @@ describe("Authorities", () => {
 
     // TODO test data loading state by mocking a slow network.
     // TODO test fingerprint loading state by mocking promise that doesn't resolve.
+    // TODO test no local authorities.
 
 });
