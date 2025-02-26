@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react-native";
+import { act, render, screen, waitFor, within } from "@testing-library/react-native";
 import { Authorities } from "../Authorities";
 import { LocalAuthority, LocalAuthorities } from '../FSA';
 import ExpoExperimentsModule from "../../modules/expo-experiments/src/ExpoExperimentsModule";
