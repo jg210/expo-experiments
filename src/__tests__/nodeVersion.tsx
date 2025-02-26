@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 describe("node version running this test is...", () => {
-    const nodeVersion = process.version.replace(/^v/, '');
+    const nodeVersion = (process as NodeJS.Process).version.replace(/^v/, '');
     it("same as in eas.json (for EAS Build)", () => {
         const easJson = require('../../eas.json');
         expect(easJson.build.production.node).toEqual(nodeVersion);
