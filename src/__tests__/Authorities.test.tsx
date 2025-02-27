@@ -40,6 +40,7 @@ const localAuthorities: LocalAuthority[] = [
     { localAuthorityId: 2, name: "Southmoltonshire" }
 ];
 
+// Create a Mock Service Worker handler.
 function localAuthoritiesHandler(response: () => HttpResponse | Promise<HttpResponse>) {
     return http.get<LocalAuthoritiesParams, LocalAuthoritiesRequestBody, LocalAuthoritiesResponseBody>(
         "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
@@ -47,6 +48,7 @@ function localAuthoritiesHandler(response: () => HttpResponse | Promise<HttpResp
     );
 }
 
+// Create a Mock Service Worker handler that returns the provided data.
 function localAuthoritiesHandlerFor(localAuthorities: LocalAuthority[]) {
     return localAuthoritiesHandler(
         () => HttpResponse.json({ localAuthorities })
@@ -74,6 +76,8 @@ async function assertUICorrect(
     fingerprint: string,
     localAuthorities: LocalAuthority[]
 ) {
+    // The fingerprint depends on the data, so waiting for this first means
+    // don't need to wait for data too.
     await waitFor(() => {
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(fingerprint.slice(0, 8));
     });
@@ -87,7 +91,7 @@ async function assertUICorrect(
     return authoritiesList;
 }
 
-// A Promise that never resolves.
+// A Promise<T> that never resolves.
 function waitForever<T>() {
     return new Promise<T>((_resolve, _reject) => {});
 }
@@ -102,7 +106,9 @@ describe("Authorities", () => {
         server.resetHandlers()
         fingerprintAuthoritiesMock.mockReset();
     });
-    afterAll(() => server.close());
+    afterAll(() => {
+        server.close();
+    });
 
     it("renders and refreshes", async () => {
 
@@ -116,17 +122,13 @@ describe("Authorities", () => {
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
 
-        // Assert that expected values appear in UI. The app loads the data then calculates the fingerprint.
-        // Waiting for the fingerprint first here means don't have to wait for data to load too.
         const authoritiesList = await assertUICorrect(fingerprint1, localAuthorities1);
 
-        // Drag to refresh.
+        // Drag to refresh with different data.
         //
         // This explains why refresh is triggered like this:
         //
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
-        //
-        // The refetch function here is just a mock, so there is no real data reloading.
         server.use(localAuthoritiesHandlerFor(localAuthorities2));
         act(() => {
             authoritiesList.props.refreshControl.props.onRefresh();
