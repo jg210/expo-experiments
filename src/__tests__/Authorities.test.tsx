@@ -54,31 +54,29 @@ const handlers = [
 ];
 
 const server = setupServer(...handlers);
-server.events.on('request:start', ({ request, requestId }) => {
-    console.log('request:start:', requestId, request.method, request.url);
-});
-server.events.on('request:match', ({ request, requestId }) => {
-    console.log("request:match:", requestId, request.method, request.url);
-});
-server.events.on('response:mocked', ({ request, response }) => {
-    console.log(
-    'response:mocked: %s %s %s %s',
-    request.method,
-    request.url,
-    response.status,
-    response.statusText
-    );
-});
+// server.events.on('request:start', ({ request, requestId }) => {
+//     console.log('request:start:', requestId, request.method, request.url);
+// });
+// server.events.on('request:match', ({ request, requestId }) => {
+//     console.log("request:match:", requestId, request.method, request.url);
+// });
+// server.events.on('response:mocked', ({ request, response }) => {
+//     console.log(
+//     'response:mocked: %s %s %s %s',
+//     request.method,
+//     request.url,
+//     response.status,
+//     response.statusText
+//     );
+// });
 
 async function assertUICorrect(
     fingerprint: string,
     localAuthorities: LocalAuthority[]
 ) {
-    console.log("waiting for fingerprint: " + fingerprint);
     await waitFor(() => {
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(fingerprint.slice(0, 8));
     });
-    console.log("fingerprint found: " + fingerprint);
     const authoritiesList = screen.getByTestId("authoritiesList");
     const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
     expect(authorityListItems.length).toBe(localAuthorities.length);
