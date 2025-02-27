@@ -34,7 +34,6 @@ async function SHA256(strings: string[]) {
 }
 const { fingerprintAuthorities } = ExpoExperimentsModule;
 const fingerprintAuthoritiesMock = fingerprintAuthorities as jest.MockedFunction<typeof fingerprintAuthorities>;
-fingerprintAuthoritiesMock.mockImplementation((localAuthorities => SHA256(localAuthorities)));
 
 const localAuthorities: LocalAuthority[] = [
     { localAuthorityId: 1, name: "Wessex" },
@@ -79,7 +78,7 @@ async function assertUICorrect(
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(fingerprint.slice(0, 8));
     });
     const authoritiesList = screen.getByTestId("authoritiesList");
-    const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
+    const authorityListItems = within(authoritiesList).queryAllByTestId("authorityListItem");
     expect(authorityListItems.length).toBe(localAuthorities.length);
     authorityListItems.forEach((authorityListItem, i) => {
         const authorityNameExpected = localAuthorities[i].name;
@@ -95,8 +94,14 @@ function waitForever<T>() {
 
 describe("Authorities", () => {
 
-    beforeEach(() => server.listen());
-    afterEach(() => server.resetHandlers());
+    beforeEach(() => {
+        server.listen();
+        fingerprintAuthoritiesMock.mockImplementation((localAuthorities => SHA256(localAuthorities)));
+    });
+    afterEach(() => {
+        server.resetHandlers()
+        fingerprintAuthoritiesMock.mockReset();
+    });
     afterAll(() => server.close());
 
     it("renders and refreshes", async () => {
@@ -155,7 +160,7 @@ describe("Authorities", () => {
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
         const fingerprint = await SHA256([]);
         expect(fingerprint).toBe("6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d");
-        waitFor(async () => await assertUICorrect(fingerprint, []));
+        await assertUICorrect(fingerprint, []);
     });
 
 });
