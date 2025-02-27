@@ -93,7 +93,7 @@ describe("Authorities", () => {
     afterEach(() => server.resetHandlers());
     afterAll(() => server.close());
 
-    it("renders", async () => {
+    it("renders and refreshes", async () => {
 
         // Return different data before and after the later drag to refresh.
         const localAuthorities1 = localAuthorities.slice(0, 1);
