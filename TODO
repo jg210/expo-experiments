@@ -1,3 +1,10 @@
+* End to end tests
+  - detox, maestro, appium?
+  - add test
+  - run on github actions for android
+    - https://github.com/marketplace/actions/android-emulator-runner?
+  - run on github actions for iOS
+
 * Add a turbomodule too, to compare with the expo native module.
 
 * End-to-end test
