@@ -88,6 +88,11 @@ async function assertUICorrect(
     return authoritiesList;
 }
 
+// A Promise that never resolves.
+function waitForever<T>() {
+    return new Promise<T>((_resolve, _reject) => {});
+}
+
 describe("Authorities", () => {
 
     beforeEach(() => server.listen());
@@ -136,7 +141,14 @@ describe("Authorities", () => {
         expect(screen.root).toHaveTextContent("loading...");
     });
 
-    // TODO test fingerprint loading state by mocking promise that doesn't resolve.
+    it("shows loading state just for fingerprint", async () => {
+        server.use(localAuthoritiesHandlerFor(localAuthorities));
+        fingerprintAuthoritiesMock.mockImplementation((_localAuthorities) => waitForever<string>());
+        // The tested component.
+        render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
+        await assertUICorrect("...", localAuthorities);
+    });
+
     // TODO test no local authorities.
 
 });
