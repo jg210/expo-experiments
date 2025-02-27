@@ -4,7 +4,7 @@ import { LocalAuthority, LocalAuthorities } from '../FSA';
 import ExpoExperimentsModule from "../../modules/expo-experiments/src/ExpoExperimentsModule";
 
 import { setupServer } from 'msw/node';
-import { http, HttpResponse, RequestHandlerOptions } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import { AppQueryClientProvider } from "../AppQueryClientProvider";
 
 type LocalAuthoritiesParams = Record<string,never>;
@@ -41,11 +41,16 @@ const localAuthorities: LocalAuthority[] = [
     { localAuthorityId: 2, name: "Southmoltonshire" }
 ];
 
-function localAuthoritiesHandler(localAuthorities: LocalAuthority[], options?: RequestHandlerOptions) {
+function localAuthoritiesHandler(response: () => HttpResponse | Promise<HttpResponse>) {
     return http.get<LocalAuthoritiesParams, LocalAuthoritiesRequestBody, LocalAuthoritiesResponseBody>(
         "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
-        () => HttpResponse.json({ localAuthorities }),
-        options
+        response
+    );
+}
+
+function localAuthoritiesHandlerFor(localAuthorities: LocalAuthority[]) {
+    return localAuthoritiesHandler(
+        () => HttpResponse.json({ localAuthorities })
     );
 }
 
@@ -96,7 +101,7 @@ describe("Authorities", () => {
         const localAuthorities2 = localAuthorities;
         const fingerprint1 = "b6557162";
         const fingerprint2 = "deb3b6d4";
-        server.use(localAuthoritiesHandler(localAuthorities1));
+        server.use(localAuthoritiesHandlerFor(localAuthorities1));
 
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
@@ -112,7 +117,7 @@ describe("Authorities", () => {
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
         //
         // The refetch function here is just a mock, so there is no real data reloading.
-        server.use(localAuthoritiesHandler(localAuthorities2));
+        server.use(localAuthoritiesHandlerFor(localAuthorities2));
         act(() => {
             authoritiesList.props.refreshControl.props.onRefresh();
         })
@@ -120,7 +125,17 @@ describe("Authorities", () => {
         await assertUICorrect(fingerprint2, localAuthorities2);
     });
 
-    // TODO test data loading state by mocking a slow network.
+    it("shows loading state if network slow", () => {
+        server.use(localAuthoritiesHandler(async () => {
+            await delay('infinite');
+            return new HttpResponse()
+          })
+        );
+        // The tested component.
+        render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
+        expect(screen.root).toHaveTextContent("loading...");
+    });
+
     // TODO test fingerprint loading state by mocking promise that doesn't resolve.
     // TODO test no local authorities.
 
