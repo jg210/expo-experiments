@@ -74,9 +74,11 @@ async function assertUICorrect(
     fingerprint: string,
     localAuthorities: LocalAuthority[]
 ) {
+    console.log("waiting for fingerprint: " + fingerprint);
     await waitFor(() => {
         expect(screen.getByTestId("fingerprint")).toHaveTextContent(fingerprint.slice(0, 8));
     });
+    console.log("fingerprint found: " + fingerprint);
     const authoritiesList = screen.getByTestId("authoritiesList");
     const authorityListItems = within(authoritiesList).getAllByTestId("authorityListItem");
     expect(authorityListItems.length).toBe(localAuthorities.length);
