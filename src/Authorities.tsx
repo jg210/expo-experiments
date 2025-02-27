@@ -39,6 +39,7 @@ const AuthoritiesImpl = () => {
     [localAuthorityNames],
     (fingerprint) => setFingerprint(fingerprint.substring(0, 8))
   );
+  console.log("Authority: " + JSON.stringify(data) + " " + fingerprint);
   return (
     <>
       <Text testID="fingerprint">{refreshing ? refreshingText : fingerprint}</Text>
