@@ -122,7 +122,7 @@ describe("Authorities", () => {
         })
 
         await assertUICorrect(fingerprint2, localAuthorities2);
-    }, 15000);
+    });
 
     // TODO test data loading state by mocking a slow network.
     // TODO test fingerprint loading state by mocking promise that doesn't resolve.
