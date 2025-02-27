@@ -49,11 +49,7 @@ function localAuthoritiesHandler(localAuthorities: LocalAuthority[], options?: R
     );
 }
 
-const handlers = [
-    localAuthoritiesHandler(localAuthorities)
-];
-
-const server = setupServer(...handlers);
+const server = setupServer();
 // server.events.on('request:start', ({ request, requestId }) => {
 //     console.log('request:start:', requestId, request.method, request.url);
 // });
