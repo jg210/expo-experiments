@@ -149,6 +149,13 @@ describe("Authorities", () => {
         await assertUICorrect("...", localAuthorities);
     });
 
-    // TODO test no local authorities.
+    it("no local authorities", async () => {
+        server.use(localAuthoritiesHandlerFor([]));
+        // The tested component.
+        render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
+        const fingerprint = await SHA256([]);
+        expect(fingerprint).toBe("6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d");
+        waitFor(async () => await assertUICorrect(fingerprint, []));
+    });
 
 });
