@@ -54,21 +54,21 @@ const handlers = [
 ];
 
 const server = setupServer(...handlers);
-// server.events.on('request:start', ({ request, requestId }) => {
-//     console.log('request:start:', requestId, request.method, request.url);
-// });
-// server.events.on('request:match', ({ request, requestId }) => {
-//     console.log("request:match:", requestId, request.method, request.url);
-// });
-// server.events.on('response:mocked', ({ request, response }) => {
-//     console.log(
-//     'response:mocked: %s %s %s %s',
-//     request.method,
-//     request.url,
-//     response.status,
-//     response.statusText
-//     );
-// });
+server.events.on('request:start', ({ request, requestId }) => {
+    console.log('request:start:', requestId, request.method, request.url);
+});
+server.events.on('request:match', ({ request, requestId }) => {
+    console.log("request:match:", requestId, request.method, request.url);
+});
+server.events.on('response:mocked', ({ request, response }) => {
+    console.log(
+    'response:mocked: %s %s %s %s',
+    request.method,
+    request.url,
+    response.status,
+    response.statusText
+    );
+});
 
 async function assertUICorrect(
     fingerprint: string,
