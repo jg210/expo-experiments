@@ -97,12 +97,12 @@ describe("Authorities", () => {
 
     it("renders", async () => {
 
-        // To test drag to refresh works, return different data for first and second requests.
+        // Return different data before and after the later drag to refresh.
         const localAuthorities1 = localAuthorities.slice(0, 1);
         const localAuthorities2 = localAuthorities;
-        server.use(localAuthoritiesHandler(localAuthorities1, { once: true }));
         const fingerprint1 = "b6557162";
         const fingerprint2 = "deb3b6d4";
+        server.use(localAuthoritiesHandler(localAuthorities1));
 
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
@@ -118,6 +118,7 @@ describe("Authorities", () => {
         // https://github.com/callstack/react-native-testing-library/issues/809#issuecomment-1144703296
         //
         // The refetch function here is just a mock, so there is no real data reloading.
+        server.use(localAuthoritiesHandler(localAuthorities2));
         act(() => {
             authoritiesList.props.refreshControl.props.onRefresh();
         })
