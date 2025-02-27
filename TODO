@@ -1,27 +1,4 @@
-* error TS2339: Property 'version' does not exist on type 'typeof process'.
-  - in src/__tests__/nodeVersion.tsx
-  - why didn't CI fail with this?
-    - it runs tsc
-
-* Add Authorities.test.tsx
-  - expo module mocking not working...
-  - describe("Authorities", () => {
-        it("renders", async () => {
-            // Mock react-query
-            jest.mock("@tanstack/react-query");
-            const data: LocalAuthority[] = [
-                { localAuthorityId: 1, name: "Wessex" }
-            ];
-            const refetch = jest.fn();
-            (useSuspenseQuery as jest.Mock).mockImplementation(() => ({ data, refetch }));
-            // TODO Mock expo module: https://docs.expo.dev/modules/mocking/
-            render(<Authorities/>);
-        });
-    });
-
 * Add a turbomodule too, to compare with the expo native module.
-
-* More react native testing library tests.
 
 * End-to-end test
   - https://docs.expo.dev/build-reference/e2e-tests/
