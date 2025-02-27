@@ -155,12 +155,14 @@ describe("Authorities", () => {
     });
 
     it("no local authorities", async () => {
-        server.use(localAuthoritiesHandlerFor([]));
+        const localAuthorities: LocalAuthority[] = [];
+        const localAuthorityNames = localAuthorities.map((localAuthority) => localAuthority.name);
+        const fingerprint = await SHA256(localAuthorityNames);
+        expect(fingerprint).toBe("6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d");
+        server.use(localAuthoritiesHandlerFor(localAuthorities));
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        const fingerprint = await SHA256([]);
-        expect(fingerprint).toBe("6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d");
-        await assertUICorrect(fingerprint, []);
+        await assertUICorrect(fingerprint, localAuthorities);
     });
 
 });
