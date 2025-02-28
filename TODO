@@ -5,6 +5,8 @@
     - https://github.com/marketplace/actions/android-emulator-runner?
   - run on github actions for iOS
 
+* Upgrade from ubuntu 20.04.
+
 * Warning: No files were found with the provided path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/. No artifacts will be uploaded.
 
 * Add a turbomodule too, to compare with the expo native module.
