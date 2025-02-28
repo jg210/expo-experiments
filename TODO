@@ -5,6 +5,8 @@
     - https://github.com/marketplace/actions/android-emulator-runner?
   - run on github actions for iOS
 
+* Warning: No files were found with the provided path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/. No artifacts will be uploaded.
+
 * Add a turbomodule too, to compare with the expo native module.
 
 * End-to-end test
