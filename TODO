@@ -1,6 +1,8 @@
 * End to end tests
-  - detox, maestro, appium?
+  X detox, maestro, appium?
   - add test
+  - add a scripts/setup that runs scripts/install_maestro
+  - document how to install maestro
   - run on github actions for android
     - https://github.com/marketplace/actions/android-emulator-runner?
   - run on github actions for iOS
