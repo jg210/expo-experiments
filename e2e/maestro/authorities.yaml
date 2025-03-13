@@ -1,0 +1,5 @@
+appId: uk.me.jeremygreen.expoexperiments
+---
+- launchApp
+- assertVisible: "Barnet"
+- assertVisible: "[0-9a-z]{8}"
