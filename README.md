@@ -20,6 +20,6 @@ To run the app on android:
 ```
 . environment
 npm i
-npm prebuild
+expo prebuild
 npm run android
 ```
