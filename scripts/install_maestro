@@ -32,7 +32,7 @@ mkdir -p "${SYMLINKS_DIR}"
 rm -fR "${CACHED_VERSION}"
 mkdir -p "${CACHED_VERSION}"
 # The standard unzip won't work in a shell pipe, so use the busybox version instead.
-curl -L "${GITHUB_URL}" | busybox unzip - -d "${CACHED_VERSION}"
+curl -L --silent --show-error "${GITHUB_URL}" | busybox unzip - -d "${CACHED_VERSION}"
 chmod +x "${CACHED_VERSION}/maestro/bin/maestro"
 
 # A renamed symlink is atomic (unlike a rename of a directory).
