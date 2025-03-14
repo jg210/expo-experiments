@@ -1,14 +1,8 @@
-* End to end tests
-  X detox, maestro, appium?
-  X add test
-  - add a scripts/setup that runs scripts/install_maestro
-  X document how to install maestro
-  - run on github actions for android
-    - https://github.com/marketplace/actions/android-emulator-runner?
-    - cache maestro installation files
-    - AVD caching
-      - https://github.com/marketplace/actions/android-emulator-runner#usage--examples
-  - run on github actions for iOS
+* End to end tests (android)
+  - AVD caching
+    - https://github.com/marketplace/actions/android-emulator-runner#usage--examples
+
+* Run maestro tests on github actions for iOS.
 
 * Store apks as GitHub Actions releases.
 
@@ -41,3 +35,6 @@
 * Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?
 
 * Is it possible to test that react-hooks/exhaustive-deps checks useLastPromise?
+
+* cache maestro installation files on GitHub Actions?
+  - little point, since downloaded from GitHub release, so as fast as caching files.
