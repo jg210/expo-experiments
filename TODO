@@ -1,11 +1,13 @@
 * End to end tests
   X detox, maestro, appium?
-  - add test
+  X add test
   - add a scripts/setup that runs scripts/install_maestro
   - document how to install maestro
   - run on github actions for android
     - https://github.com/marketplace/actions/android-emulator-runner?
   - run on github actions for iOS
+
+* Store apks as GitHub Actions releases.
 
 * Upgrade from ubuntu 20.04.
 
