@@ -38,3 +38,5 @@
 * Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?
 
 * Is it possible to test that react-hooks/exhaustive-deps checks useLastPromise?
+
+* android-test job doesn't really need to use node or npm i to run maestro.

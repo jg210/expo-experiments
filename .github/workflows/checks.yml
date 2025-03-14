@@ -88,3 +88,45 @@ jobs:
       with:
         name: app-release.apk
         path: android/app/build/outputs/apk/release/app-release.apk
+
+  android-test:
+    runs-on: ubuntu-24.04
+    needs: android # for the apk
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - uses: actions/setup-node@v4.0.1
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - uses: actions/setup-java@v4.7.0
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: 'gradle'
+
+      - uses: amyu/setup-android@v4
+
+      - name: download release apk
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release.apk
+
+      - name: npm install
+        run: |
+          . environment
+          npm ci
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: maestro
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: adb install app-release.apk && npm run maestro
