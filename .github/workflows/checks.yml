@@ -74,7 +74,7 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: android-test
-        path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/
+        path: android/build/reports/tests/testDebugUnitTest/
 
     - name: release apk build
       run: |
@@ -85,4 +85,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: app-release.apk
-        path: node_modules/expo-dev-launcher/android/app/build/outputs/apk/release/app-release.apk
+        path: android/app/build/outputs/apk/release/app-release.apk
