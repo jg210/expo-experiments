@@ -30,5 +30,5 @@ if [ ! -v GITHUB_ACTIONS ] ; then
 fi
 
 # maestro
-export PATH="~/.install_maestro/maestro/$(cat "${SOURCE_DIR}/.maestro-version")/maestro/bin:${PATH}"
+export PATH=~/".install_maestro/maestro/$(cat "${SOURCE_DIR}/.maestro-version")/maestro/bin:${PATH}"
 export MAESTRO_CLI_NO_ANALYTICS=1
