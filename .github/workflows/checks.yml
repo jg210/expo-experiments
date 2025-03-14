@@ -101,19 +101,6 @@ jobs:
           node-version-file: '.node-version'
           cache: 'npm'
 
-      - uses: actions/setup-java@v4.7.0
-        with:
-          java-version: 21
-          distribution: temurin
-          cache: 'gradle'
-
-      - uses: amyu/setup-android@v4
-
-      - name: download release apk
-        uses: actions/download-artifact@v4
-        with:
-          name: app-release.apk
-
       - name: npm install
         run: |
           . environment
