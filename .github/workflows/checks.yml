@@ -3,7 +3,36 @@ name: checks
 on: push
 
 jobs:
-  build:
+  
+  js:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      checks: write
+    steps:
+    - uses: actions/checkout@v4.1.1        
+    - uses: actions/setup-node@v4.0.1
+      with:
+        node-version-file: '.node-version'
+        cache: 'npm'
+    - name: npm install
+      run: |
+        . environment
+        npm ci
+    - name: npm run lint
+      run: |
+        . environment
+        npm run lint
+    - name: tsc
+      run: |
+        . environment
+        tsc
+    - name: npm test
+      run: |
+        . environment
+        npm test
+
+  android:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -35,21 +64,6 @@ jobs:
         . environment
         expo prebuild
 
-    - name: npm run lint
-      run: |
-        . environment
-        npm run lint
-
-    - name: tsc
-      run: |
-        . environment
-        tsc
-
-    - name: npm test
-      run: |
-        . environment
-        npm test
-
     - name: npm run android-test
       run: |
         . environment
@@ -61,3 +75,4 @@ jobs:
       with:
         name: android-test
         path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/
+    
