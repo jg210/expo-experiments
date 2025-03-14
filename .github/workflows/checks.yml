@@ -74,7 +74,9 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: android-test
-        path: android/build/reports/tests/testDebugUnitTest/
+        path: |
+          android/app/build/reports/tests
+          modules/expo-experiments/android/build/reports/tests
 
     - name: release apk build
       run: |
