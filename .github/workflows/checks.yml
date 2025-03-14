@@ -116,4 +116,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: adb install app-release.apk && npm run maestro
+          script: |
+            . environment
+            adb install app-release.apk
+            npm run maestro
