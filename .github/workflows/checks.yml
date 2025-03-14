@@ -120,3 +120,10 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           script: bash -c "adb install app-release.apk && scripts/run_maestro"
+
+      - name: maestro logs
+        uses: actions/upload-artifact@v4
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: maestro logs - API ${{ matrix.api-level }}
+          path: ~/.maestro/tests/2025-03-14_161601/**/
