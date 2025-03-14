@@ -96,16 +96,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: actions/setup-node@v4.0.1
-        with:
-          node-version-file: '.node-version'
-          cache: 'npm'
-
-      - name: npm install
-        run: |
-          . environment
-          npm ci
-
       - name: Enable KVM group perms
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
