@@ -34,3 +34,5 @@
 
 * cache maestro installation files on GitHub Actions?
   - little point, since downloaded from GitHub release, so as fast as caching files.
+
+* reactivecircus/android-emulator-runner@v2 doesn't version emulator tool or AVD base image
