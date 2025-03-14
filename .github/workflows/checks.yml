@@ -112,11 +112,11 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: install maestro
+        run: scripts/install_maestro
+
       - name: maestro
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: |
-            . environment
-            adb install app-release.apk
-            npm run maestro
+          script: bash -c "adb install app-release.apk && scripts/run_maestro"

@@ -2,9 +2,12 @@
   X detox, maestro, appium?
   X add test
   - add a scripts/setup that runs scripts/install_maestro
-  - document how to install maestro
+  X document how to install maestro
   - run on github actions for android
     - https://github.com/marketplace/actions/android-emulator-runner?
+    - cache maestro installation files
+    - AVD caching
+      - https://github.com/marketplace/actions/android-emulator-runner#usage--examples
   - run on github actions for iOS
 
 * Store apks as GitHub Actions releases.
