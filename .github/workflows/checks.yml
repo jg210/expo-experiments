@@ -75,4 +75,14 @@ jobs:
       with:
         name: android-test
         path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/
-    
+
+    - name: release apk build
+      run: |
+        . environment
+        npm run android-release-apk
+
+    - name: upload release apk
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release.apk
+        path: node_modules/expo-dev-launcher/android/app/build/outputs/apk/release/app-release.apk
