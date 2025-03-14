@@ -1,7 +1,3 @@
-* End to end tests (android)
-  - AVD caching
-    - https://github.com/marketplace/actions/android-emulator-runner#usage--examples
-
 * Run maestro tests on github actions for iOS.
 
 * Store apks as GitHub Actions releases.
