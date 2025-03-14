@@ -10,6 +10,9 @@
     "lint": "eslint --max-warnings=0 .",
     "test": "jest --collectCoverage --coverageReporters=text --coverageReporters=json --coverageReporters=json-summary --coverageReporters=lcov",
     "android-test": "./android/gradlew -p android app:test expo-experiments:test",
+    "android-release-apk": "./android/gradlew -p android app:assembleRelease",
+    "android-release-apk-install": "adb install android/app/build/outputs/apk/release/app-release.apk",
+    "maestro": "maestro test e2e/maestro/authorities.yaml",
     "ci": "npm run lint && tsc && npm test && npm run android-test"
   },
   "dependencies": {

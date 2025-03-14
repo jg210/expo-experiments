@@ -28,3 +28,16 @@ npm i
 expo prebuild
 npm run android
 ```
+
+## Running maestro locally
+
+Android:
+
+```
+. environment
+npm i
+expo prebuild
+npm run android-release-apk
+npm run android-release-apk-install
+npm run maestro
+```
