@@ -12,7 +12,6 @@
     "android-test": "./android/gradlew -p android app:test expo-experiments:test",
     "android-release-apk": "./android/gradlew -p android app:assembleRelease",
     "android-release-apk-install": "adb install android/app/build/outputs/apk/release/app-release.apk",
-    "ios-release-ipa": "expo build:ios --configuration Release",
     "maestro": "scripts/run_maestro",
     "ci": "npm run lint && tsc && npm test && npm run android-test"
   },
