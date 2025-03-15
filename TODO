@@ -1,14 +1,16 @@
 * Run maestro tests on github actions for iOS.
-  - upload the app
-  - add job that runs maestro on simulator
-    - https://docs.maestro.dev/getting-started/run-a-sample-flow
   - cache cocoapod files
     - https://samwize.com/2023/05/24/speed-up-pods-and-gem-install-in-github-action/
     - need Podfile.lock, so after expo prebuild
       - but it does pod install, so that's too late.
-  - xcpretty
-    - storing raw logs too
   - is it possible to use "-destination generic/platform=iOS" when building for simulator?  
+  - xcpretty
+    - xcbeautify is maybe better than xcpretty?
+      - https://docs.fastlane.tools/best-practices/xcodebuild-formatters/
+    - is xcpretty available?
+      - would a GemFile be required?
+      - already have https://www.npmjs.com/package/@expo/xcpretty
+        - use this?
 
 * Do GitHub Actions jobs need so many permissions?
 
