@@ -17,7 +17,7 @@ trap 'backtrace' ERR
 
 log() {
     printf "[%s %s] %s\n" \
-           "$(date '+%Y-%m-%d %H:%M:%S' --utc)" \
+           "$(date -u '+%Y-%m-%d %H:%M:%S')" \
            "$(basename -- "$0")" \
            "$*"
 }
