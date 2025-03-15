@@ -170,11 +170,11 @@ jobs:
           -configuration Release \
           -derivedDataPath build \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
-        ls -lR build
 
-    # - name: upload release ipa
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: something.ipa
-    #     path: blah/something.ipa
+    - name: upload release
+      uses: actions/upload-artifact@v4
+      with:
+        name: expoexperiments.app
+        path: build
+        if-no-files-found: error
 
