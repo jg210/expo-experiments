@@ -1,11 +1,13 @@
 * Run maestro tests on github actions for iOS.
+  - upload the app
+  - add job that runs maestro on simulator
   - cache cocoapod files
     - https://samwize.com/2023/05/24/speed-up-pods-and-gem-install-in-github-action/
     - need Podfile.lock, so after expo prebuild
       - but it does pod install, so that's too late.
   - xcpretty
     - storing raw logs too
-  - is it possible to use "-destination generic/platform=iOS" when building for simulator?
+  - is it possible to use "-destination generic/platform=iOS" when building for simulator?  
 
 * Do GitHub Actions jobs need so many permissions?
 
