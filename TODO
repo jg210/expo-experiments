@@ -13,6 +13,12 @@
 * Run eas build on github actions too?
   - likely faster than using eas build directly.
 
+* Mock data in e2e tests
+  - currently rely on FSA data remaining stable
+    - not too risky currently, and does ensure it really works
+  - could allow app to be started with fake data
+    - not allowing arbitrary URL to be substituted in production builds (security risk).
+
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
 * Try out https://docs.expo.dev/guides/react-compiler/
