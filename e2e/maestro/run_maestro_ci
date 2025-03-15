@@ -25,11 +25,13 @@ ios() {
     exec scripts/run_maestro
 }
 
-case "${platform}" in ;
+case "${platform}" in
     android)
-        android ;;
+        android
+        ;;
     ios)
-        ios ;;
+        ios
+        ;;
     *)
         log "unknown platform: ${platform}"
         exit 1
