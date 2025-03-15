@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# usage:
+#
+# with_logcat <logcat_file> <command> [<args>...]
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+. "${SOURCE_DIR}/.common.sh"
+. "${SOURCE_DIR}/environment"
+
+stopLogcat() {
+    local pid=$1
+    shift
+    log "stopping logcat PID: ${pid}"
+    kill "${pid}"
+    wait "${pid}" || true
+    log "logcat stopped."
+}
+
+logcatFile=$1
+shift
+
+log "starting logcat"
+adb logcat -v threadtime > "${logcatFile}" &
+logcatPid=$!
+trap "stopLogcat ${logcatPid}" EXIT
+log "logcat PID: ${logcatPid}"
+
+log "starting wrapped command..."
+"$@" || exit $?
