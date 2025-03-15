@@ -164,8 +164,6 @@ jobs:
     - name: build
       run: |
         . environment
-        #ls -lR ios
-        #cat ios expoexperiments.xcodeproj/project.pbxproj
         cd ios
         xcodebuild -workspace expoexperiments.xcworkspace -scheme expoexperiments -configuration Release -derivedDataPath build -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
 
