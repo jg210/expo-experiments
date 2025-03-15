@@ -93,6 +93,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: android # for the apk
     strategy:
+      fail-fast: false
       matrix:
         api-level: [21, 35]
 
