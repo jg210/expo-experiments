@@ -164,7 +164,9 @@ jobs:
     - name: build
       run: |
         . environment
-        npm run ios-release-ipa
+        cd ios
+        ls -lR
+        #npm run ios-release-ipa
 
     # - name: upload release ipa
     #   uses: actions/upload-artifact@v4
