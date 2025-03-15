@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/../..)"
+. "${SOURCE_DIR}/.common.sh"
+. "${SOURCE_DIR}/environment"
+
+apk=app-release.apk
+log "installing: ${apk}"
+adb install "${apk}"
+log "running maestro."
+scripts/run_maestro
+log "done.
