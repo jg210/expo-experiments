@@ -21,7 +21,7 @@ android() {
 
 ios() {
     app=Build/Products/Release-iphonesimulator/expoexperiments.app
-    simulator=iPhone 16
+    simulator="iPhone 16"
     log "starting simulator: ${simulator}"
     xcrun simctl boot "${simulator}"
     log "installing app from: ${app}"
