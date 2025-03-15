@@ -164,10 +164,10 @@ jobs:
     - name: build
       run: |
         . environment
+        #ls -lR ios
+        #cat ios expoexperiments.xcodeproj/project.pbxproj
         cd ios
-        ls -lR
-        cat expoexperiments.xcodeproj/project.pbxproj
-        #xcodebuild -workspace expoexperiments.xcworkspace -
+        xcodebuild -workspace expoexperiments.xcworkspace -scheme expoexperiments -configuration Release -derivedDataPath build
 
     # - name: upload release ipa
     #   uses: actions/upload-artifact@v4
