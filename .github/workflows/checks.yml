@@ -166,7 +166,8 @@ jobs:
         . environment
         cd ios
         ls -lR
-        #npm run ios-release-ipa
+        cat expoexperiments.xcodeproj/project.pbxproj
+        #xcodebuild -workspace expoexperiments.xcworkspace -
 
     # - name: upload release ipa
     #   uses: actions/upload-artifact@v4
