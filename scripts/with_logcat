@@ -1,5 +1,9 @@
 #!/bin/bash
 #
+# Runs a command while recording logcat to a file.
+#
+# It assumes that there's only one android device/emulator.
+#
 # usage:
 #
 # with_logcat <logcat_file> <command> [<args>...]
@@ -24,7 +28,7 @@ stopLogcat() {
 logcatFile=$1
 shift
 
-log "starting logcat"
+log "recording logcat to: ${logcatFile}"
 adb logcat -v threadtime > "${logcatFile}" &
 logcatPid=$!
 trap "stopLogcat ${logcatPid}" EXIT
