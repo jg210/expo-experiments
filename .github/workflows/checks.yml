@@ -120,6 +120,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
+          arch: x86_64
           script: e2e/maestro/run_maestro_ci
 
       - name: maestro logs
