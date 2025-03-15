@@ -8,8 +8,30 @@ SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/../..)"
 . "${SOURCE_DIR}/.common.sh"
 . "${SOURCE_DIR}/environment"
 
-apk=app-release.apk
-log "installing: ${apk}"
-adb install "${apk}"
-log "running maestro."
-exec with_logcat logcat.txt scripts/run_maestro
+platform=$1
+shift
+
+android() {
+    apk=app-release.apk
+    log "installing: ${apk}"
+    adb install "${apk}"
+    log "running maestro."
+    exec with_logcat logcat.txt scripts/run_maestro
+}
+
+ios() {
+    app=build/Build/Products/Release-iphonesimulator/expoexperiments.app
+    xcrun simctl install "iPhone 16" "${app}"
+    exec scripts/run_maestro
+}
+
+case "${platform}" in ;
+    android)
+        android ;;
+    ios)
+        ios ;;
+    *)
+        log "unknown platform: ${platform}"
+        exit 1
+        ;;
+esac
