@@ -170,6 +170,7 @@ jobs:
           -configuration Release \
           -derivedDataPath build \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
+        ls -lR build
 
     # - name: upload release ipa
     #   uses: actions/upload-artifact@v4
