@@ -4,6 +4,15 @@
 #
 # * doesn't allow multiple versions to be used at same time in home directory.
 # * modifies you shell startup script(s).
+#
+# This script allows multiple versions to be installed at same time. It's robust against
+# cancellation (since uses atomic symlink rename to indicate completion).
+#
+# It's not  robust against concurrently running of multiple instances of the script. Could
+# make it robust by using per-invocation UUID or similar in CACHED_VERSION and SYMLINK_TMP.
+# Although, this would instead increase chance of creating a leak of large sets of files.
+#
+# TODO remove old versions if they've not beed used recently (e.g. touch the symlink mtime when use).
 
 set -o errexit
 set -o nounset
