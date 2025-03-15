@@ -4,7 +4,8 @@
     - need Podfile.lock, so after expo prebuild
       - but it does pod install, so that's too late.
   - xcpretty
-    - and raw logs
+    - storing raw logs too
+  - is it possible to use "-destination generic/platform=iOS" when building for simulator?
 
 * Do GitHub Actions jobs need so many permissions?
 
