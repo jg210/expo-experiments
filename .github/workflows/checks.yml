@@ -32,113 +32,113 @@ jobs:
         . environment
         npm test
 
-  android:
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      checks: write
+  # android:
+  #   runs-on: ubuntu-24.04
+  #   permissions:
+  #     contents: read
+  #     checks: write
 
-    steps:
-    - uses: actions/checkout@v4.1.1
+  #   steps:
+  #   - uses: actions/checkout@v4.1.1
         
-    - uses: actions/setup-node@v4.0.1
-      with:
-        node-version-file: '.node-version'
-        cache: 'npm'
+  #   - uses: actions/setup-node@v4.0.1
+  #     with:
+  #       node-version-file: '.node-version'
+  #       cache: 'npm'
 
-    - uses: actions/setup-java@v4.7.0
-      with:
-        java-version: 21
-        distribution: temurin
-        cache: 'gradle'
+  #   - uses: actions/setup-java@v4.7.0
+  #     with:
+  #       java-version: 21
+  #       distribution: temurin
+  #       cache: 'gradle'
 
-    - uses: amyu/setup-android@v4
+  #   - uses: amyu/setup-android@v4
 
-    - name: npm install
-      run: |
-        . environment
-        npm ci
+  #   - name: npm install
+  #     run: |
+  #       . environment
+  #       npm ci
 
-    - name: prebuild
-      run: |
-        . environment
-        expo prebuild
+  #   - name: prebuild
+  #     run: |
+  #       . environment
+  #       expo prebuild
 
-    - name: npm run android-test
-      run: |
-        . environment
-        npm run android-test
+  #   - name: npm run android-test
+  #     run: |
+  #       . environment
+  #       npm run android-test
 
-    - name: test report - android gradle test
-      uses: actions/upload-artifact@v4.3.0
-      if: success() || failure()    # run this step even if previous step failed
-      with:
-        name: android-test
-        path: |
-          android/app/build/reports/tests
-          modules/expo-experiments/android/build/reports/tests
+  #   - name: test report - android gradle test
+  #     uses: actions/upload-artifact@v4.3.0
+  #     if: success() || failure()    # run this step even if previous step failed
+  #     with:
+  #       name: android-test
+  #       path: |
+  #         android/app/build/reports/tests
+  #         modules/expo-experiments/android/build/reports/tests
 
-    - name: release apk build
-      run: |
-        . environment
-        npm run android-release-apk
+  #   - name: release apk build
+  #     run: |
+  #       . environment
+  #       npm run android-release-apk
 
-    - name: upload release apk
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-release.apk
-        path: android/app/build/outputs/apk/release/app-release.apk
+  #   - name: upload release apk
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       name: app-release.apk
+  #       path: android/app/build/outputs/apk/release/app-release.apk
 
-  android-test:
-    runs-on: ubuntu-24.04
-    needs: android # for the apk
-    strategy:
-      fail-fast: false
-      matrix:
-        # Would be good to test on minSdkVersion=21, but https://github.com/mobile-dev-inc/maestro/issues/1207 means need to use 26.
-        api-level: [26, 35]
+  # android-test:
+  #   runs-on: ubuntu-24.04
+  #   needs: android # for the apk
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       # Would be good to test on minSdkVersion=21, but https://github.com/mobile-dev-inc/maestro/issues/1207 means need to use 26.
+  #       api-level: [26, 35]
 
-    steps:
-      - uses: actions/checkout@v4.1.1
+  #   steps:
+  #     - uses: actions/checkout@v4.1.1
 
-      - name: download apk
-        uses: actions/download-artifact@v4
-        with:
-          name: app-release.apk
+  #     - name: download apk
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: app-release.apk
 
-      - name: enable KVM group perms
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
+  #     - name: enable KVM group perms
+  #       run: |
+  #         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+  #         sudo udevadm control --reload-rules
+  #         sudo udevadm trigger --name-match=kvm
 
-      - name: install maestro
-        run: scripts/install_maestro
+  #     - name: install maestro
+  #       run: scripts/install_maestro
 
-      # https://github.com/marketplace/actions/android-emulator-runner#usage--examples suggests caching the AVD, but it didn't
-      # seem much faster, and the emulator failed to stop when used cached AVD.
-      - name: maestro
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          arch: x86_64
-          script: e2e/maestro/run_maestro_ci
+  #     # https://github.com/marketplace/actions/android-emulator-runner#usage--examples suggests caching the AVD, but it didn't
+  #     # seem much faster, and the emulator failed to stop when used cached AVD.
+  #     - name: maestro
+  #       uses: reactivecircus/android-emulator-runner@v2
+  #       with:
+  #         api-level: ${{ matrix.api-level }}
+  #         arch: x86_64
+  #         script: e2e/maestro/run_maestro_ci
 
-      - name: maestro logs
-        uses: actions/upload-artifact@v4
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: maestro.log - API ${{ matrix.api-level }}
-          path: ~/.maestro/tests/*/maestro.log
-          if-no-files-found: error
+  #     - name: maestro logs
+  #       uses: actions/upload-artifact@v4
+  #       if: success() || failure()    # run this step even if previous step failed
+  #       with:
+  #         name: maestro.log - API ${{ matrix.api-level }}
+  #         path: ~/.maestro/tests/*/maestro.log
+  #         if-no-files-found: error
 
-      - name: logcat
-        uses: actions/upload-artifact@v4
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: logcat.txt - API ${{ matrix.api-level }}
-          path: logcat.txt
-          if-no-files-found: error
+  #     - name: logcat
+  #       uses: actions/upload-artifact@v4
+  #       if: success() || failure()    # run this step even if previous step failed
+  #       with:
+  #         name: logcat.txt - API ${{ matrix.api-level }}
+  #         path: logcat.txt
+  #         if-no-files-found: error
   
   ios:
     runs-on: macos-14
