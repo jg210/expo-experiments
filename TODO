@@ -21,6 +21,8 @@
 
 * Nicer refresh UI?
 
+* Avoid duplication between GitHub Actions jobs. 
+
 * dorny/test-reporter for android gradle test results.
 
 * Run eas build on github actions too?
