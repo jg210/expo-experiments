@@ -17,7 +17,12 @@
   - currently rely on FSA data remaining stable
     - not too risky currently, and does ensure it really works
   - could allow app to be started with fake data
+    - Intent extra / iOS command-line argument
     - not allowing arbitrary URL to be substituted in production builds (security risk).
+    - a build variant just for tests
+      - variants cost lots in terms of build times etc.
+      - not what would ship
+    - allow fake data in production, but it's fixed and baked into the app?
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
 
