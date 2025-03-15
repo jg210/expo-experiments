@@ -95,7 +95,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [21, 35]
+        # Would be good to test on minSdkVersion=21, but https://github.com/mobile-dev-inc/maestro/issues/1207 means need to use 26.
+        api-level: [26, 35]
 
     steps:
       - uses: actions/checkout@v4.1.1
