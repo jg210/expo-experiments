@@ -12,7 +12,7 @@
 # make it robust by using per-invocation UUID or similar in CACHED_VERSION and SYMLINK_TMP.
 # Although, this would instead increase chance of creating a leak of large sets of files.
 #
-# TODO remove old versions if they've not beed used recently (e.g. touch the symlink mtime when use).
+# TODO remove old versions if they've not been used recently (e.g. touch the symlink mtime when use).
 
 set -o errexit
 set -o nounset
@@ -42,9 +42,12 @@ fi
 mkdir -p "${SYMLINKS_DIR}"
 rm -fR "${CACHED_VERSION}"
 mkdir -p "${CACHED_VERSION}"
-log "installing from: ${GITHUB_URL}"
-# The standard unzip won't work in a shell pipe, so use the busybox version instead.
-curl -L --silent --show-error "${GITHUB_URL}" | busybox unzip - -d "${CACHED_VERSION}"
+log "downloading from: ${GITHUB_URL}"
+TEMP_ZIP="$(mktemp)"
+trap "rm -f ${TEMP_ZIP}" EXIT
+curl -L --silent --show-error "${GITHUB_URL}" > "${TEMP_ZIP}"
+log "unzipping into: ${CACHED_VERSION}"
+unzip "${TEMP_ZIP}" -d "${CACHED_VERSION}"
 EXECUTABLE="${CACHED_VERSION}/maestro/bin/maestro"
 log "chmod +x ${EXECUTABLE}"
 chmod +x "${EXECUTABLE}"
