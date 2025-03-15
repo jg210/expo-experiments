@@ -1,15 +1,10 @@
 * Run maestro tests on github actions for iOS.
 
-* Store apks as GitHub Actions releases.
-
-* Warning: No files were found with the provided path: node_modules/expo-dev-launcher/android/build/reports/tests/testDebugUnitTest/. No artifacts will be uploaded.
+* Store master-branch apks as GitHub Actions releases.
 
 * Add a turbomodule too, to compare with the expo native module.
 
-* End-to-end test
-  - https://docs.expo.dev/build-reference/e2e-tests/
-    - need to use legacy mode, so maybe not...
-  - https://github.com/marketplace/actions/android-emulator-runner?
+* Use full width of device screen.
 
 * Nicer refresh UI?
 
@@ -19,8 +14,6 @@
   - likely faster than using eas build directly.
 
 * Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
-
-* eslint react-hooks/exhaustive-deps disabled.
 
 * Try out https://docs.expo.dev/guides/react-compiler/
 
