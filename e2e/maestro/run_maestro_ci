@@ -20,7 +20,7 @@ android() {
 }
 
 ios() {
-    app=build/Build/Products/Release-iphonesimulator/expoexperiments.app
+    app=Build/Products/Release-iphonesimulator/expoexperiments.app
     xcrun simctl install "iPhone 16" "${app}"
     exec scripts/run_maestro
 }
