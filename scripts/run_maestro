@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+. "${SOURCE_DIR}/.common.sh"
+. "${SOURCE_DIR}/environment"
+exec maestro test e2e/maestro/*.yaml
