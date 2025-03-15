@@ -1,5 +1,11 @@
 * Run maestro tests on github actions for iOS.
 
+* Do GitHub Actions jobs need so many permissions?
+
+* Does android build used for testing need --no-publish and 
+
+* A with_environment script for use in checks.yaml.
+
 * Store master-branch apks as GitHub Actions releases.
 
 * Add a turbomodule too, to compare with the expo native module.

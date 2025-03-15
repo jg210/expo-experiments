@@ -140,3 +140,35 @@ jobs:
           path: logcat.txt
           if-no-files-found: error
   
+  ios:
+    runs-on: macos-14
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+
+    - uses: actions/setup-node@v4.0.1
+      with:
+        node-version-file: '.node-version'
+        cache: 'npm'
+
+    - name: npm install
+      run: |
+        . environment
+        npm ci
+
+    - name: prebuild
+      run: |
+        . environment
+        expo prebuild --platform ios
+
+    - name: build
+      run: |
+        . environment
+        npm run ios-release-ipa
+
+    # - name: upload release ipa
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: something.ipa
+    #     path: blah/something.ipa
+
