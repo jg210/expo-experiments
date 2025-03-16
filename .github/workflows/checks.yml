@@ -169,7 +169,7 @@ jobs:
           -scheme expoexperiments \
           -configuration Release \
           -derivedDataPath build \
-          -destination 'generic/platform=iOS'
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
 
     - name: upload release
       uses: actions/upload-artifact@v4
