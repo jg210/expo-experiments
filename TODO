@@ -3,7 +3,6 @@
     - https://samwize.com/2023/05/24/speed-up-pods-and-gem-install-in-github-action/
     - need Podfile.lock, so after expo prebuild
       - but it does pod install, so that's too late.
-  - is it possible to use "-destination generic/platform=iOS" when building for simulator?  
   - xcpretty
     - xcbeautify is maybe better than xcpretty?
       - https://docs.fastlane.tools/best-practices/xcodebuild-formatters/
