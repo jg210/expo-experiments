@@ -13,9 +13,9 @@ public class ExpoExperimentsModule: Module {
   }
 }
 
-private static let digestSeparator: Data = Data([0])
+private let digestSeparator: Data = Data([0])
 
-private func fingerprintAuthorities(authorities: [String]) -> String {
+private func fingerprintAuthorities(_ authorities: [String]) -> String {
     var digest = SHA256()
     for authority in authorities {
         digest.update(data: authority.data(using: .utf8)!)
@@ -24,7 +24,7 @@ private func fingerprintAuthorities(authorities: [String]) -> String {
     digest.finalize().hexString
 }
 
-private extension Data {
+private extension SHA256.Digest {
     var hexString: String {
         return map { String(format: "%02x", $0) }.joined()
     }
