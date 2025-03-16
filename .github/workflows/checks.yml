@@ -128,8 +128,8 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro.log - API ${{ matrix.api-level }}
-          path: ~/.maestro/tests/*/maestro.log
+          name: maestro logs - API ${{ matrix.api-level }}
+          path: ~/.maestro/tests/
           if-no-files-found: error
 
       - name: logcat
@@ -200,6 +200,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro.log - API ${{ matrix.api-level }}
-          path: ~/.maestro/tests/*/maestro.log
+          name: maestro logs - API ${{ matrix.api-level }}
+          path: ~/.maestro/tests/
           if-no-files-found: error
