@@ -21,7 +21,7 @@ private func fingerprintAuthorities(_ authorities: [String]) -> String {
         digest.update(data: authority.data(using: .utf8)!)
         digest.update(data: digestSeparator)
     }
-    digest.finalize().hexString
+    return digest.finalize().hexString
 }
 
 private extension SHA256.Digest {
