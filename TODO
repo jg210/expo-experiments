@@ -16,7 +16,9 @@
 
 * Do GitHub Actions jobs need so many permissions?
 
-* Does android build used for testing need --no-publish and 
+* Does android build used for testing need --no-publish etc.?
+
+* iOS screen layout extends into top of screen despite use of SafeAreaView.
 
 * A with_environment script for use in checks.yaml.
 
