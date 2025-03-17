@@ -2,6 +2,7 @@ appId: uk.me.jeremygreen.expoexperiments
 ---
 - launchApp
 # - assertVisible: "Barnet"
+- assertVisible: "test:id/testing1"
 - assertVisible:
     id: "testing1"
     text: "testing1"
