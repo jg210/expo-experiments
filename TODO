@@ -13,6 +13,8 @@
       - would a GemFile be required?
       - already have https://www.npmjs.com/package/@expo/xcpretty
         - use this?
+  - nice advice on assigning testID
+    - https://wix.github.io/Detox/docs/guide/test-id/
 
 * Do GitHub Actions jobs need so many permissions?
 
