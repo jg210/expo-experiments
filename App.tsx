@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Authorities } from "./src/Authorities";
@@ -7,8 +7,12 @@ import { AppQueryClientProvider } from "./src/AppQueryClientProvider";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
+      <Text testID="testing1">testing1</Text>
       <AppQueryClientProvider>
-        <Authorities />
+        <View>
+          <Text testID="testing2">testing2</Text>
+          <Authorities />
+        </View>
       </AppQueryClientProvider>
     </SafeAreaView>
   );
