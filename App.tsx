@@ -6,7 +6,7 @@ import { AppQueryClientProvider } from "./src/AppQueryClientProvider";
 
 export default function App() {
   return (
-    <Text testID="testing1">testing1</Text>
+    <Text testID="testing1">testing 1</Text>
     // <SafeAreaView style={styles.container}>
     //   <AppQueryClientProvider>
     //     <View>
