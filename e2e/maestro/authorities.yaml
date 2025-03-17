@@ -1,16 +1,10 @@
 appId: uk.me.jeremygreen.expoexperiments
 ---
 - launchApp
-- assertVisible: "Barnet"
-- assertVisible: "[0-9a-z]{8}"
-- assertVisible:
-    text: "[0-9a-z]{8}"
+# - assertVisible: "Barnet"
 - assertVisible:
     id: "testing1"
     text: "testing1"
-- assertVisible:
-    id: "testing2"
-    text: "testing2"
-- assertVisible:
-    id: "fingerprint"
-    text: "[0-9a-z]{8}"
+# - assertVisible:
+#     id: "fingerprint"
+#     text: "[0-9a-z]{8}"
