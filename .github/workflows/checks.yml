@@ -206,5 +206,7 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: maestro logs - ${{ matrix.n }}
-          path: ~/.maestro/tests/
+          path: |
+            ~/.maestro/tests/
+            ~/Library/Logs/maestro/
           if-no-files-found: error
