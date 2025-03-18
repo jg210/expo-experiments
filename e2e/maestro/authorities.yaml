@@ -4,15 +4,12 @@ appId: uk.me.jeremygreen.expoexperiments
 # - assertVisible: "Barnet"
 - assertVisible:
     text: "testing 1"
-    optional: true
 - assertVisible:
     id: "testing1"
     text: "testing 1"
     optional: true
 - assertVisible:
     id: "testing1"
-    optional: true
-
 
 # - assertVisible:
 #     id: "fingerprint"
