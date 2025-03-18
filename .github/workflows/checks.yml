@@ -182,11 +182,6 @@ jobs:
     runs-on: macos-14
     needs: ios # for the app
 
-    strategy:
-      fail-fast: false
-      matrix:
-        n: [1, 2, 3]
-
     steps:
       - uses: actions/checkout@v4.1.1
 
@@ -205,7 +200,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro logs - ${{ matrix.n }}
+          name: maestro logs
           path: |
             ~/.maestro/tests/
             ~/Library/Logs/maestro/
