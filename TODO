@@ -18,6 +18,12 @@
 
 * Do GitHub Actions jobs need so many permissions?
 
+* Android maestro jobs are flaky
+  - emulator stops running part way through some job
+  - get eactivecircus/android-emulator-runner to retry
+    - if emulator not running at end of job
+    - configurable health commmand, so could get test script to ask for retries too
+
 * Does android build used for testing need --no-publish etc.?
 
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
