@@ -112,11 +112,11 @@ jobs:
       # seem much faster, and the emulator failed to stop when used cached AVD.
       - name: maestro
         uses: Wandalen/wretry.action@v3.8.0
-        with: |
-          action: reactivecircus/android-emulator-runner@v2
+        with:
           attempt_limit: 3
           retry_condition: false
-          with:
+          action: reactivecircus/android-emulator-runner@v2
+          with: |
             api-level: ${{ matrix.api-level }}
             arch: x86_64
             script: e2e/maestro/run_maestro_ci android
