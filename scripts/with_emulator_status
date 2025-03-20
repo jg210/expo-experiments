@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Runs another command then checks whether android emulator is running. Outputs result
+# as github step output "emulator_running".
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+. "${SOURCE_DIR}/.common.sh"
+. "${SOURCE_DIR}/environment"
+
+recordEmulatorStatus() {
+    local status=false
+    if adb shell true ; then
+        status=true
+    fi
+    log "emulator running: ${status}"
+    if [ -n "${GITHUB_OUTPUT:-}" ] ; then
+        cat <<EOF >> "${GITHUB_OUTPUT}"
+emulator_running: ${status}
+EOF
+    fi
+}
+
+trap "recordEmulatorStatus" EXIT
+"$@" || exit $?

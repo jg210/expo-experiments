@@ -16,7 +16,7 @@ android() {
     log "installing: ${apk}"
     adb install "${apk}"
     log "running maestro."
-    exec with_logcat logcat.txt scripts/run_maestro
+    exec with_emulator_status with_logcat logcat.txt scripts/run_maestro
 }
 
 ios() {
