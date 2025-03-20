@@ -7,4 +7,5 @@ set -o pipefail
 SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
 . "${SOURCE_DIR}/.common.sh"
 . "${SOURCE_DIR}/environment"
+log "starting maestro"
 exec maestro test e2e/maestro/*.yaml

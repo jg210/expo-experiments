@@ -62,7 +62,7 @@ jobs:
     - name: prebuild
       run: |
         . environment
-        expo prebuild
+        expo prebuild --platform android
 
     - name: npm run android-test
       run: |
@@ -122,14 +122,14 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          script: e2e/maestro/run_maestro_ci
+          script: e2e/maestro/run_maestro_ci android
 
       - name: maestro logs
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro.log - API ${{ matrix.api-level }}
-          path: ~/.maestro/tests/*/maestro.log
+          name: maestro logs - API ${{ matrix.api-level }}
+          path: ~/.maestro/tests/
           if-no-files-found: error
 
       - name: logcat
@@ -140,3 +140,68 @@ jobs:
           path: logcat.txt
           if-no-files-found: error
   
+  ios:
+    runs-on: macos-14
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+
+    - uses: actions/setup-node@v4.0.1
+      with:
+        node-version-file: '.node-version'
+        cache: 'npm'
+
+    - name: npm install
+      run: |
+        . environment
+        npm ci
+
+    - name: prebuild
+      run: |
+        . environment
+        expo prebuild --platform ios
+
+    - name: build
+      run: |
+        . environment
+        cd ios
+        xcodebuild -workspace expoexperiments.xcworkspace \
+          -scheme expoexperiments \
+          -configuration Release \
+          -derivedDataPath build \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
+
+    - name: upload release
+      uses: actions/upload-artifact@v4
+      with:
+        name: expoexperiments.app
+        path: ios/build/Build/Products/Release-iphonesimulator
+        if-no-files-found: error
+    
+  ios-test:
+    runs-on: macos-14
+    needs: ios # for the app
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: download app
+        uses: actions/download-artifact@v4
+        with:
+          name: expoexperiments.app
+
+      - name: install maestro
+        run: scripts/install_maestro
+
+      - name: maestro
+        run: e2e/maestro/run_maestro_ci ios
+
+      - name: maestro logs
+        uses: actions/upload-artifact@v4
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: maestro logs
+          path: |
+            ~/.maestro/tests/
+            ~/Library/Logs/maestro/
+          if-no-files-found: error

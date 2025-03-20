@@ -1,4 +1,46 @@
-* Run maestro tests on github actions for iOS.
+* cache cocoapod files
+  - https://samwize.com/2023/05/24/speed-up-pods-and-gem-install-in-github-action/
+  - just ~/.cocoapods?
+  - ~/Library/Caches/CocoaPods/Pods too?
+  - can't use Podfile.lock since prebuild creates it and runs pod install
+  - only small part of job time c.f. build...
+
+* xcpretty
+  - xcbeautify is maybe better than xcpretty?
+    - https://docs.fastlane.tools/best-practices/xcodebuild-formatters/
+  - is xcpretty available?
+    - would a GemFile be required?
+    - already have https://www.npmjs.com/package/@expo/xcpretty
+      - use this?
+
+* ios simulator logs
+  - xcrun simctl spawn booted log stream
+
+* Do GitHub Actions jobs need so many permissions?
+
+* Android maestro jobs are flaky
+  - emulator stops running part way through some job
+  - get eactivecircus/android-emulator-runner to retry?
+    - if emulator not running at end of job
+    - configurable health commmand, so could get test script to ask for retries too
+    - configurable whether retry only if script fails too
+  - rerun job?
+    - https://api.github.com/repos/OWNER/REPO/actions/jobs/JOB_ID/rerun
+    - https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#re-run-a-job-from-a-workflow-run
+    - if job can't re-run itself, a dependent job might be able to.
+    - would have to limit number of attempts
+      - https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-repository
+  - https://github.com/marketplace/actions/retry-action
+
+* Does android build used for testing need --no-publish etc.?
+
+* iOS screen layout extends into top of screen despite use of SafeAreaView.
+
+* maestro --debug-output could be used to avoid date in log path
+  => can save maestro logs on CI without zipping them?
+    - excluding from or duplicating in a zip with all the files
+
+* A with_environment script for use in checks.yaml.
 
 * Store master-branch apks as GitHub Actions releases.
 
@@ -7,6 +49,8 @@
 * Use full width of device screen.
 
 * Nicer refresh UI?
+
+* Avoid duplication between GitHub Actions jobs. 
 
 * dorny/test-reporter for android gradle test results.
 
@@ -40,6 +84,11 @@
   - little point, since downloaded from GitHub release, so as fast as caching files.
 
 * reactivecircus/android-emulator-runner@v2 doesn't version emulator tool or AVD base image
+  - it has an emulator-build parameter for versioning the tool
+    - maintainging build number to use could be awkward
 
 * Test on minSdkVersion=21
   - https://github.com/mobile-dev-inc/maestro/issues/1207 prevented this
+
+* Remove workaround for assertVisible with text and id
+  - https://github.com/mobile-dev-inc/Maestro/issues/1404

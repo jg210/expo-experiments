@@ -30,9 +30,11 @@ expo prebuild
 npm run android
 ```
 
-## Running maestro locally
+## maestro end-to-end tests
 
-Android:
+https://docs.maestro.dev/
+
+To run locally for android:
 
 ```
 . environment
@@ -42,3 +44,5 @@ npm run android-release-apk
 npm run android-release-apk-install
 npm run maestro
 ```
+
+Guidance on assigning testIDs: https://wix.github.io/Detox/docs/guide/test-id/

@@ -1,7 +1,16 @@
 appId: uk.me.jeremygreen.expoexperiments
+jsEngine: graaljs
 ---
 - launchApp
 - assertVisible: "Barnet"
+
+# workaround for https://github.com/jg210/expo-experiments/pull/7#issuecomment-2732749198 which means can't do this on iOS:
+#
+# - assertVisible:
+#     id: "fingerprint"
+#     text: "[0-9a-f]{8}"
 - assertVisible:
     id: "fingerprint"
-    text: "[0-9a-z]{8}"
+- copyTextFrom:
+    id: "fingerprint"
+- assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
