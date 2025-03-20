@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# Runs a command while recording iOS simulator logs to a file.
+#
+# usage:
+#
+# with_ios_logs <output_file> <command> [<args>...]
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+. "${SOURCE_DIR}/.common.sh"
+. "${SOURCE_DIR}/environment"
+
+stopProcess() {
+    local pid=$1
+    shift
+    log "stopping PID: ${pid}"
+    kill "${pid}"
+    wait "${pid}" || true
+    log "process stopped."
+}
+
+outputFile=$1
+shift
+
+log "recording logs to: ${outputFile}"
+xcrun simctl spawn booted log stream > "${outputFile}" &
+pid=$!
+trap "stopProcess ${pid}" EXIT
+log "PID: ${pid}"
+
+log "starting wrapped command..."
+"$@" || exit $?
