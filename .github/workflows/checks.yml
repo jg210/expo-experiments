@@ -62,7 +62,7 @@ jobs:
     - name: prebuild
       run: |
         . environment
-        expo prebuild
+        expo prebuild --platform android
 
     - name: npm run android-test
       run: |
