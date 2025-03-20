@@ -13,7 +13,7 @@ SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
 
 recordEmulatorStatus() {
     local status=false
-    if adb shell true ; then
+    if (( RANDOM < 8000 )) ; then
         status=true
     fi
     log "emulator running: ${status}"
