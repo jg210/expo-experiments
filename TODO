@@ -1,7 +1,3 @@
-* Run maestro tests on github actions for iOS.
-  - only upload Build/Products/Release-iphonesimulator/expoexperiments.app/
-    - rest of Build/ is huge
-
 * cache cocoapod files
   - https://samwize.com/2023/05/24/speed-up-pods-and-gem-install-in-github-action/
   - just ~/.cocoapods?

@@ -175,7 +175,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: expoexperiments.app
-        path: ios/build
+        path: ios/build/Build/Products/Release-iphonesimulator
         if-no-files-found: error
     
   ios-test:
