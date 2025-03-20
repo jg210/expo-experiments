@@ -118,11 +118,15 @@ jobs:
       # https://github.com/marketplace/actions/android-emulator-runner#usage--examples suggests caching the AVD, but it didn't
       # seem much faster, and the emulator failed to stop when used cached AVD.
       - name: maestro
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          arch: x86_64
-          script: e2e/maestro/run_maestro_ci android
+        uses: Wandalen/wretry.action@v3.8.0
+        with: |
+          action: reactivecircus/android-emulator-runner@v2
+          attempt_limit: 3
+          retry_condition: false
+          with:
+            api-level: ${{ matrix.api-level }}
+            arch: x86_64
+            script: e2e/maestro/run_maestro_ci android
 
       - name: maestro logs
         uses: actions/upload-artifact@v4
