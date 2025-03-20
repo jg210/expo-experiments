@@ -117,7 +117,7 @@ jobs:
         with:
           attempt_limit: 3
           # run_maestro_ci uses with_emulator_status to set emulator_running to true/false using GITHUB_OUTPUT.
-          retry_condition: "!step._this.outputs.emulator_running"
+          retry_condition: "!(step._this.outputs.emulator_running)"
           action: reactivecircus/android-emulator-runner@v2
           with: |
             api-level: ${{ matrix.api-level }}
