@@ -110,6 +110,8 @@ jobs:
 
       # https://github.com/marketplace/actions/android-emulator-runner#usage--examples suggests caching the AVD, but it didn't
       # seem much faster, and the emulator failed to stop when used cached AVD.
+      #
+      # Emulators crash relatively often, so step is retried if that happens.
       - name: maestro
         uses: Wandalen/wretry.action@v3.8.0
         with:
