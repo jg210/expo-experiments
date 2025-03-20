@@ -11,9 +11,6 @@
     - already have https://www.npmjs.com/package/@expo/xcpretty
       - use this?
 
-* ios simulator logs
-  - xcrun simctl spawn booted log stream
-
 * Do GitHub Actions jobs need so many permissions?
 
 * Android maestro jobs are flaky
