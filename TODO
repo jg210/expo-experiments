@@ -16,8 +16,6 @@
 * ios simulator logs
   - xcrun simctl spawn booted log stream
 
-* Do GitHub Actions jobs need so many permissions?
-
 * Android maestro jobs are flaky
   - emulator stops running part way through some job
   - get eactivecircus/android-emulator-runner to retry?
