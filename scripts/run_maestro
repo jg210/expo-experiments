@@ -8,11 +8,4 @@ SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
 . "${SOURCE_DIR}/.common.sh"
 . "${SOURCE_DIR}/environment"
 log "starting maestro"
-if (( RANDOM < 16000 )) then
-    log "faking pass"
-    exit 0
-else
-    log "faking fail"
-    exit 1
-fi
-#exec maestro test e2e/maestro/*.yaml
+exec maestro test e2e/maestro/*.yaml

@@ -115,7 +115,7 @@ jobs:
       - name: maestro
         uses: Wandalen/wretry.action@v3.8.0
         with:
-          attempt_limit: 13
+          attempt_limit: 3
           # run_maestro_ci uses with_emulator_status to set emulator_running to true/false using GITHUB_OUTPUT.
           retry_condition: steps._this.outputs.emulator_running == false
           action: reactivecircus/android-emulator-runner@v2
