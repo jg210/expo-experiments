@@ -6,9 +6,6 @@ jobs:
   
   js:
     runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      checks: write
     steps:
     - uses: actions/checkout@v4.1.1        
     - uses: actions/setup-node@v4.0.1
@@ -34,10 +31,6 @@ jobs:
 
   android:
     runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      checks: write
-
     steps:
     - uses: actions/checkout@v4.1.1
         

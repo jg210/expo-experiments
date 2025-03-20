@@ -11,8 +11,6 @@
     - already have https://www.npmjs.com/package/@expo/xcpretty
       - use this?
 
-* Do GitHub Actions jobs need so many permissions?
-
 * Android maestro jobs are flaky
   - emulator stops running part way through some job
   - get eactivecircus/android-emulator-runner to retry?
