@@ -19,7 +19,7 @@ recordEmulatorStatus() {
     log "emulator running: ${status}"
     if [ -n "${GITHUB_OUTPUT:-}" ] ; then
         cat <<EOF >> "${GITHUB_OUTPUT}"
-emulator_running: ${status}
+emulator_running=${status}
 EOF
     fi
 }
