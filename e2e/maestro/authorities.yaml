@@ -2,7 +2,12 @@ appId: uk.me.jeremygreen.expoexperiments
 jsEngine: graaljs
 ---
 - launchApp
-- assertVisible: "Barnet"
+# The API and iOS simulators can be very slow, especially if running tests
+# concurrently, so sometimes need wait a long time here. Longer than whatever
+# the default timeout is with assertVisible.
+- extendedWaitUntil:
+  visible: "Barnet"
+  timeout: 120000
 
 # workaround for https://github.com/jg210/expo-experiments/pull/7#issuecomment-2732749198 which means can't do this on iOS:
 #
