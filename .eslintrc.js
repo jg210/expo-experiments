@@ -16,5 +16,8 @@ module.exports = {
     "react-hooks/exhaustive-deps": ["error", {
       "additionalHooks": "(useLastPromise)"
     }]
-  }
+  },
+  ignorePatterns: [
+    "modules/expo-experiments/android/build/"
+  ],
 };
