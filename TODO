@@ -47,7 +47,9 @@
       - not what would ship
     - allow fake data in production, but it's fixed and baked into the app?
 
-* Expo prevents use of eslint 9: https://github.com/expo/expo/issues/28144. eslint 8 is no longer maintained.
+* Migrate to eslint 9
+  - need to migrate configuration file format
+    - https://eslint.org/docs/latest/use/configure/migration-guide
 
 * Try out https://docs.expo.dev/guides/react-compiler/
 
