@@ -39,6 +39,7 @@ To run locally for android:
 ```
 . environment
 npm i
+install_maestro
 expo prebuild
 npm run android-release-apk
 npm run android-release-apk-install

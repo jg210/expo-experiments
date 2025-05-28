@@ -41,7 +41,7 @@ const localAuthorities: LocalAuthority[] = [
 ];
 
 // Create a Mock Service Worker handler.
-function localAuthoritiesHandler(response: () => HttpResponse | Promise<HttpResponse>) {
+function localAuthoritiesHandler(response: () => HttpResponse<LocalAuthoritiesResponseBody> | Promise<HttpResponse<LocalAuthoritiesResponseBody>>) {
     return http.get<LocalAuthoritiesParams, LocalAuthoritiesRequestBody, LocalAuthoritiesResponseBody>(
         "https://aws.jeremygreen.me.uk/api/fsa/localAuthority",
         response
