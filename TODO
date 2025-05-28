@@ -1,4 +1,5 @@
-* iOS driver not ready in time, consider increasing timeout by configuring MAESTRO_DRIVER_STARTUP_TIMEOUT env variable
+* Wait for android emulator to become ready.
+  - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
 * cache cocoapod files
   - ~/.cocoapods and ~/Library/Caches/CocoaPods/Pods
