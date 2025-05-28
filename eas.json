@@ -5,7 +5,7 @@
   },
   "build": {
     "production": {
-      "node": "20.10.0",
+      "node": "22.16.0",
       "autoIncrement": true,
       "android": {
         "image": "ubuntu-22.04-jdk-17-ndk-r26b"
