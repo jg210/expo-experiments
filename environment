@@ -32,3 +32,6 @@ fi
 # maestro
 export PATH=~/".install_maestro/maestro/$(cat "${SOURCE_DIR}/.maestro-version")/maestro/bin:${PATH}"
 export MAESTRO_CLI_NO_ANALYTICS=1
+
+# Sometimes get timeout on CI using default timeout.
+export MAESTRO_DRIVER_STARTUP_TIMEOUT=240000
