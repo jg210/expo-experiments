@@ -13,7 +13,7 @@ For testing:
 * JavaScript unit tests use [React Native Testing Library](https://github.com/callstack/react-native-testing-library) and [Mock Service Worker](https://mswjs.io/).
 * Native android tests test the android expo module.
 * End-to-end tests use [Maestro](https://www.maestro.dev/).
-* ...run on android emulators using [emulators](https://github.com/marketplace/actions/android-emulator-runner).
+* ...run on android using [emulators](https://github.com/marketplace/actions/android-emulator-runner).
 * ...run on iOS simulators on GitHub Actions macOS runners.
 
 ## Development Build Instructions
