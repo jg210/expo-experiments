@@ -3,7 +3,7 @@
 A [react native](https://reactnative.dev/)/[Expo](https://expo.dev/) app for testing out new technologies.
 
 * It shows data from the [spring-experiments](https://github.com/jg210/spring-experiments) API.
-* It has an [Expo module](https://docs.expo.dev/modules/overview/) (only tested and fully implemented on android).
+* It has a Kotlin/Swift [Expo module](https://docs.expo.dev/modules/overview/).
 
 For testing:
 
