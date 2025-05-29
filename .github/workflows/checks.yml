@@ -90,7 +90,6 @@ jobs:
       matrix:
         # Would be good to test on minSdkVersion=21, but https://github.com/mobile-dev-inc/maestro/issues/1207 means need to use 26.
         api-level: [26, 35]
-        n: [1,2,3,4,5]
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -129,7 +128,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro logs - API ${{ matrix.api-level }} - ${{ matrix.n }}
+          name: maestro logs - API ${{ matrix.api-level }}
           path: ~/.maestro/tests/
           if-no-files-found: error
 
@@ -137,7 +136,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: logcat.txt - API ${{ matrix.api-level }} - ${{ matrix.n }}
+          name: logcat.txt - API ${{ matrix.api-level }}
           path: logcat.txt
           if-no-files-found: error
   
@@ -183,11 +182,6 @@ jobs:
     runs-on: macos-14
     needs: ios # for the app
 
-    strategy:
-      fail-fast: false
-      matrix:
-        n: [1,2,3,4,5]
-
     steps:
       - uses: actions/checkout@v4.1.1
 
@@ -206,7 +200,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: maestro logs - ${{ matrix.n }}
+          name: maestro logs
           path: |
             ~/.maestro/tests/
             ~/Library/Logs/maestro/
@@ -216,7 +210,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: simulator logs - ${{ matrix.n }}
+          name: simulator logs
           path: |
             ios_simulator_logs.txt
             ~/Library/Logs/CoreSimulator/CoreSimulator.log
