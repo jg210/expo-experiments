@@ -2,8 +2,9 @@
 
 A [react native](https://reactnative.dev/)/[Expo](https://expo.dev/) app for testing out new technologies.
 
-* It shows data from the [spring-experiments](https://github.com/jg210/spring-experiments) API.
-* It has a Kotlin/Swift [Expo module](https://docs.expo.dev/modules/overview/).
+* Shows data from the [spring-experiments](https://github.com/jg210/spring-experiments) API.
+* Has a Kotlin/Swift [Expo module](https://docs.expo.dev/modules/overview/) [here](modules/expo-experiments).
+* Uses https://tanstack.com/query/latest for network requests.
 
 For testing:
 
@@ -12,7 +13,8 @@ For testing:
 * JavaScript unit tests use [React Native Testing Library](https://github.com/callstack/react-native-testing-library) and [Mock Service Worker](https://mswjs.io/).
 * Native android tests test the android expo module.
 * End-to-end tests use [Maestro](https://www.maestro.dev/).
-* ...and are run for android on GitHub Actions using [emulators](https://github.com/marketplace/actions/android-emulator-runner).
+* ...run on android emulators using [emulators](https://github.com/marketplace/actions/android-emulator-runner).
+* ...run on iOS simulators on GitHub Actions macOS runners.
 
 ## Development Build Instructions
 
