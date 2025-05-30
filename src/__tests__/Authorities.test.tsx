@@ -91,6 +91,10 @@ async function assertUICorrect(
     return authoritiesList;
 }
 
+function assertLoadingState() {
+    expect(screen.root).toHaveTextContent("loading...");
+}
+
 // A Promise<T> that never resolves.
 function waitForever<T>() {
     return new Promise<T>((_resolve, _reject) => {});
@@ -145,15 +149,15 @@ describe("Authorities", () => {
         );
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        expect(screen.root).toHaveTextContent("loading...");
+        assertLoadingState();
     });
 
-    it("shows loading state just for fingerprint", async () => {
+    it("shows loading state for fingerprint Promise", async () => {
         server.use(localAuthoritiesHandlerFor(localAuthorities));
         fingerprintAuthoritiesMock.mockImplementation((_localAuthorities) => waitForever<string>());
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        await assertUICorrect("...", localAuthorities);
+        assertLoadingState();
     });
 
     it("no local authorities", async () => {
