@@ -171,4 +171,39 @@ describe("Authorities", () => {
         await assertUICorrect(fingerprint, localAuthorities);
     });
 
+    it("shows last render's fingerprint even if first render's Promise resolves last", async () => {
+        console.log("test case started");
+        const localAuthorities1 = localAuthorities.slice(0, 1);
+        const localAuthorities2 = localAuthorities;
+        const localAuthoritiesNames1 = localAuthorities1.map((localAuthority) => localAuthority.name);
+        const localAuthoritiesNames2 = localAuthorities2.map((localAuthority) => localAuthority.name);
+        const fingerprint1 = await SHA256(localAuthoritiesNames1);
+        const fingerprint2 = await SHA256(localAuthoritiesNames2);
+        expect(fingerprint1).not.toEqual(fingerprint2);
+        // First render: Promise's resolve stored but not called yet.
+        server.use(localAuthoritiesHandlerFor(localAuthorities1));
+        let promise1Resolver: ((fingerprint: string) => void) | null = null;
+        const mock1 = (_localAuthorities: string[]) => new Promise<string>((resolve, _reject) => {
+            promise1Resolver = resolve;
+        });
+        //expect(promise1Resolver).not.toBeNull();
+        fingerprintAuthoritiesMock.mockImplementation(mock1);
+        const { rerender } = render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
+        assertLoadingState();
+        // Second render: completes normally.
+        server.use(localAuthoritiesHandlerFor(localAuthorities2));
+        const mock2 = async (_localAuthorities: string[]) => fingerprint2;
+        fingerprintAuthoritiesMock.mockImplementation(mock2);
+        rerender(
+            <AppQueryClientProvider><Authorities/></AppQueryClientProvider>
+        );
+        // ...then resolve the Promise from the first render.
+        await waitFor(() => {
+            expect(fingerprintAuthoritiesMock).toHaveBeenCalled();
+        });
+        promise1Resolver!(fingerprint1);
+        // ...but it should be ignored by the UI.
+        await assertUICorrect(fingerprint2, localAuthorities2);
+    });
+
 });
