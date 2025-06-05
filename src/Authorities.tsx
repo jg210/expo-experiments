@@ -9,6 +9,7 @@ import React from 'react';
 
 import ExpoExperimentsModule from "../modules/expo-experiments/src/ExpoExperimentsModule";
 import { useLastPromise } from "./useLastPromise";
+import Fingerprint from "../specs/Fingerprint";
 
 const queryKey = ["authorities"];
 
@@ -30,18 +31,27 @@ const AuthoritiesImpl = () => {
   // The string initial loading state uses same string, although in this case
   // refreshing is false.
   const refreshingText = "...";
-  const [fingerprint, setFingerprint] = useState(refreshingText);
+  // The fingerprint of the local authority names, calculated using Expo native module.
+  const [fingerprintExpo, setFingerprintExpo] = useState(refreshingText);
+  // The fingerprint of the local authority names, calculated using RN turbo module.
+  const [fingerprintTurbo, setFingerprintTurbo] = useState(refreshingText);
   const { refreshing, onRefresh } = useRefresh(refetch);
   const localAuthorityNames = data.map(localAuthority => localAuthority.name)
   // TODO with react 19 use(), could use Suspense while wait for Promise to resolve.
   useLastPromise(
     () => ExpoExperimentsModule.fingerprintAuthorities(localAuthorityNames),
     [localAuthorityNames],
-    (fingerprint) => setFingerprint(fingerprint.substring(0, 8))
+    (fingerprint) => setFingerprintExpo(fingerprint.substring(0, 8))
   );
+  useLastPromise(
+    () => Fingerprint.fingerprintAuthorities(localAuthorityNames),
+    [localAuthorityNames],
+    (fingerprint) => setFingerprintTurbo(fingerprint.substring(0, 8))
+  );  
   return (
     <>
-      <Text testID="fingerprint">{refreshing ? refreshingText : fingerprint}</Text>
+      <Text testID="fingerprintExpo">{refreshing ? refreshingText : fingerprintExpo}</Text>
+      <Text testID="fingerprintTurbo">{refreshing ? refreshingText : fingerprintTurbo}</Text>
       <FlatList
         data={data}
         renderItem={({ item }) => <Item name={item.name} />}
