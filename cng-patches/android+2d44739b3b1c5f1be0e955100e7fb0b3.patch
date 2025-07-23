@@ -1,0 +1,24 @@
+diff --git a/android/app/build.gradle b/android/app/build.gradle
+index 8ac44d5..776879b 100644
+--- a/android/app/build.gradle
++++ b/android/app/build.gradle
+@@ -148,6 +148,7 @@ android {
+ }
+ 
+ dependencies {
++    api project(':fingerprint')
+     // The version of react-native is set by the React Native Gradle Plugin
+     implementation("com.facebook.react:react-android")
+ 
+diff --git a/android/settings.gradle b/android/settings.gradle
+index 1d3a2fb..af39230 100644
+--- a/android/settings.gradle
++++ b/android/settings.gradle
+@@ -37,3 +37,6 @@ expoAutolinking.useExpoVersionCatalog()
+ 
+ include ':app'
+ includeBuild(expoAutolinking.reactNativeGradlePlugin)
++
++include ':fingerprint'
++project(':fingerprint').projectDir = file('../turbo_modules/fingerprint/android')
+\ No newline at end of file

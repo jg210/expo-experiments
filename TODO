@@ -1,3 +1,12 @@
+* Implement a turbo module
+  - cng-patches for ios looks wrong
+    - makes patch based on empty file?
+  - fix build errors in the turbo module implementation.
+
+* Find a way to share compileSdkVersion and minSdkVersion etc. to turbo_modules/android/fingerprint/build.gradle.kts
+  - "by project"?
+  - version catalogues?
+
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 

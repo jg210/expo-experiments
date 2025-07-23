@@ -1,0 +1,270 @@
+diff --git a/ios/Podfile b/ios/Podfile
+index 91863c8..99b6e77 100644
+--- a/ios/Podfile
++++ b/ios/Podfile
+@@ -4,7 +4,7 @@ require File.join(File.dirname(`node --print "require.resolve('react-native/pack
+ require 'json'
+ podfile_properties = JSON.parse(File.read(File.join(__dir__, 'Podfile.properties.json'))) rescue {}
+ 
+-ENV['RCT_NEW_ARCH_ENABLED'] = '0' if podfile_properties['newArchEnabled'] == 'false'
++ENV['RCT_NEW_ARCH_ENABLED'] = podfile_properties['newArchEnabled'] == 'true' ? '1' : '0'
+ ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = podfile_properties['EX_DEV_CLIENT_NETWORK_INSPECTOR']
+ 
+ platform :ios, podfile_properties['ios.deploymentTarget'] || '15.1'
+@@ -20,8 +20,10 @@ target 'expoexperiments' do
+     config_command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"];
+   else
+     config_command = [
+-      'npx',
+-      'expo-modules-autolinking',
++      'node',
++      '--no-warnings',
++      '--eval',
++      'require(require.resolve(\'expo-modules-autolinking\', { paths: [require.resolve(\'expo/package.json\')] }))(process.argv.slice(1))',
+       'react-native-config',
+       '--json',
+       '--platform',
+diff --git a/ios/expoexperiments.xcodeproj/project.pbxproj b/ios/expoexperiments.xcodeproj/project.pbxproj
+index f734350..6b73ea2 100644
+--- a/ios/expoexperiments.xcodeproj/project.pbxproj
++++ b/ios/expoexperiments.xcodeproj/project.pbxproj
+@@ -1,26 +1,30 @@
+ // !$*UTF8*$!
+ {
+ 	archiveVersion = 1;
+-	objectVersion = 54;
++	objectVersion = 46;
+ 	classes = {
+ 	};
+ 	objects = {
+ 
+ /* Begin PBXBuildFile section */
++		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+ 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
++		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+ 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+ 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+-		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+ /* End PBXBuildFile section */
+ 
+ /* Begin PBXFileReference section */
+ 		13B07F961A680F5B00A75B9A /* expoexperiments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = expoexperiments.app; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = 4; };
++		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = expoexperiments/AppDelegate.h; sourceTree = "<group>"; includeInIndex = 0; };
++		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = expoexperiments/AppDelegate.mm; sourceTree = "<group>"; includeInIndex = 0; };
+ 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = expoexperiments/Images.xcassets; sourceTree = "<group>"; fileEncoding = 4; includeInIndex = 0; };
+ 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = expoexperiments/Info.plist; sourceTree = "<group>"; includeInIndex = 0; };
++		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = expoexperiments/main.m; sourceTree = "<group>"; includeInIndex = 0; };
++		2E511B48EC4145D282A0EF58 /* expoexperiments-Bridging-Header.h */ = {isa = PBXFileReference; name = "expoexperiments-Bridging-Header.h"; path = "expoexperiments/expoexperiments-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+ 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = expoexperiments/SplashScreen.storyboard; sourceTree = "<group>"; includeInIndex = 0; };
+ 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; includeInIndex = 0; };
+ 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; fileEncoding = 4; includeInIndex = undefined; };
+-		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = expoexperiments/AppDelegate.swift; sourceTree = "<group>"; fileEncoding = 4; includeInIndex = 0; };
+ /* End PBXFileReference section */
+ 
+ /* Begin PBXFrameworksBuildPhase section */
+@@ -37,10 +41,13 @@
+ 		13B07FAE1A68108700A75B9A /* expoexperiments */ = {
+ 			isa = PBXGroup;
+ 			children = (
+-				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
++				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
++				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+ 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+ 				13B07FB61A68108700A75B9A /* Info.plist */,
++				13B07FB71A68108700A75B9A /* main.m */,
+ 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
++				2E511B48EC4145D282A0EF58 /* expoexperiments-Bridging-Header.h */,
+ 			);
+ 			name = expoexperiments;
+ 			sourceTree = "<group>";
+@@ -67,6 +74,7 @@
+ 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+ 				83CBBA001A601CBA00E9B192 /* Products */,
+ 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
++				D65327D7A22EEC0BE12398D9 /* Pods */,
+ 			);
+ 			indentWidth = 2;
+ 			sourceTree = "<group>";
+@@ -81,6 +89,13 @@
+ 			name = Products;
+ 			sourceTree = "<group>";
+ 		};
++		D65327D7A22EEC0BE12398D9 /* Pods */ = {
++			isa = PBXGroup;
++			children = (
++			);
++			path = Pods;
++			sourceTree = "<group>";
++		};
+ /* End PBXGroup section */
+ 
+ /* Begin PBXNativeTarget section */
+@@ -173,7 +188,9 @@
+ 			isa = PBXSourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
+-				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
++				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
++				13B07FC11A68108700A75B9A /* main.m in Sources */,
++				F73DC9B646904E02A23F2748,
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 		};
+@@ -193,10 +210,7 @@
+ 				);
+ 				INFOPLIST_FILE = expoexperiments/Info.plist;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+-				LD_RUNPATH_SEARCH_PATHS = (
+-					"$(inherited)",
+-					"@executable_path/Frameworks",
+-				);
++				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+ 				MARKETING_VERSION = 1.0;
+ 				OTHER_LDFLAGS = (
+ 					"$(inherited)",
+@@ -205,11 +219,11 @@
+ 				);
+ 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.jeremygreen.expoexperiments;
+ 				PRODUCT_NAME = expoexperiments;
+-				SWIFT_OBJC_BRIDGING_HEADER = "expoexperiments/expoexperiments-Bridging-Header.h";
+ 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+ 				SWIFT_VERSION = 5.0;
+ 				VERSIONING_SYSTEM = "apple-generic";
+ 				TARGETED_DEVICE_FAMILY = "1,2";
++				SWIFT_OBJC_BRIDGING_HEADER = "expoexperiments/expoexperiments-Bridging-Header.h";
+ 				CODE_SIGN_ENTITLEMENTS = expoexperiments/expoexperiments.entitlements;
+ 			};
+ 			name = Debug;
+@@ -222,10 +236,7 @@
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				INFOPLIST_FILE = expoexperiments/Info.plist;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+-				LD_RUNPATH_SEARCH_PATHS = (
+-					"$(inherited)",
+-					"@executable_path/Frameworks",
+-				);
++				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+ 				MARKETING_VERSION = 1.0;
+ 				OTHER_LDFLAGS = (
+ 					"$(inherited)",
+@@ -234,10 +245,10 @@
+ 				);
+ 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.jeremygreen.expoexperiments;
+ 				PRODUCT_NAME = expoexperiments;
+-				SWIFT_OBJC_BRIDGING_HEADER = "expoexperiments/expoexperiments-Bridging-Header.h";
+ 				SWIFT_VERSION = 5.0;
+ 				VERSIONING_SYSTEM = "apple-generic";
+ 				TARGETED_DEVICE_FAMILY = "1,2";
++				SWIFT_OBJC_BRIDGING_HEADER = "expoexperiments/expoexperiments-Bridging-Header.h";
+ 				CODE_SIGN_ENTITLEMENTS = expoexperiments/expoexperiments.entitlements;
+ 			};
+ 			name = Release;
+@@ -290,10 +301,7 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+-				LD_RUNPATH_SEARCH_PATHS = (
+-					/usr/lib/swift,
+-					"$(inherited)",
+-				);
++				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+ 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+ 				ONLY_ACTIVE_ARCH = YES;
+@@ -342,10 +350,7 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+-				LD_RUNPATH_SEARCH_PATHS = (
+-					/usr/lib/swift,
+-					"$(inherited)",
+-				);
++				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+ 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				SDKROOT = iphoneos;
+diff --git a/ios/expoexperiments/AppDelegate.swift b/ios/expoexperiments/AppDelegate.swift
+deleted file mode 100644
+index a7887e1..0000000
+--- a/ios/expoexperiments/AppDelegate.swift
++++ /dev/null
+@@ -1,70 +0,0 @@
+-import Expo
+-import React
+-import ReactAppDependencyProvider
+-
+-@UIApplicationMain
+-public class AppDelegate: ExpoAppDelegate {
+-  var window: UIWindow?
+-
+-  var reactNativeDelegate: ExpoReactNativeFactoryDelegate?
+-  var reactNativeFactory: RCTReactNativeFactory?
+-
+-  public override func application(
+-    _ application: UIApplication,
+-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+-  ) -> Bool {
+-    let delegate = ReactNativeDelegate()
+-    let factory = ExpoReactNativeFactory(delegate: delegate)
+-    delegate.dependencyProvider = RCTAppDependencyProvider()
+-
+-    reactNativeDelegate = delegate
+-    reactNativeFactory = factory
+-    bindReactNativeFactory(factory)
+-
+-#if os(iOS) || os(tvOS)
+-    window = UIWindow(frame: UIScreen.main.bounds)
+-    factory.startReactNative(
+-      withModuleName: "main",
+-      in: window,
+-      launchOptions: launchOptions)
+-#endif
+-
+-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+-  }
+-
+-  // Linking API
+-  public override func application(
+-    _ app: UIApplication,
+-    open url: URL,
+-    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+-  ) -> Bool {
+-    return super.application(app, open: url, options: options) || RCTLinkingManager.application(app, open: url, options: options)
+-  }
+-
+-  // Universal Links
+-  public override func application(
+-    _ application: UIApplication,
+-    continue userActivity: NSUserActivity,
+-    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+-  ) -> Bool {
+-    let result = RCTLinkingManager.application(application, continue: userActivity, restorationHandler: restorationHandler)
+-    return super.application(application, continue: userActivity, restorationHandler: restorationHandler) || result
+-  }
+-}
+-
+-class ReactNativeDelegate: ExpoReactNativeFactoryDelegate {
+-  // Extension point for config-plugins
+-
+-  override func sourceURL(for bridge: RCTBridge) -> URL? {
+-    // needed to return the correct URL for expo-dev-client.
+-    bridge.bundleURL ?? bundleURL()
+-  }
+-
+-  override func bundleURL() -> URL? {
+-#if DEBUG
+-    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: ".expo/.virtual-metro-entry")
+-#else
+-    return Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+-#endif
+-  }
+-}
+diff --git a/ios/expoexperiments/expoexperiments-Bridging-Header.h b/ios/expoexperiments/expoexperiments-Bridging-Header.h
+index 8361941..e11d920 100644
+--- a/ios/expoexperiments/expoexperiments-Bridging-Header.h
++++ b/ios/expoexperiments/expoexperiments-Bridging-Header.h
+@@ -1,3 +1,3 @@
+ //
+-// Use this file to import your target's public headers that you would like to expose to Swift.
++//  Use this file to import your target's public headers that you would like to expose to Swift.
+ //
