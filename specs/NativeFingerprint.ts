@@ -1,10 +1,10 @@
 import type {TurboModule} from 'react-native';
 import {TurboModuleRegistry} from 'react-native';
 
-export interface FingerprintSpec extends TurboModule {
+export interface NativeFingerprintSpec extends TurboModule {
   fingerprintAuthorities(authorities: string[]): Promise<string>;
 }
 
-export default TurboModuleRegistry.getEnforcing<FingerprintSpec>(
-  'Fingerprint',
+export default TurboModuleRegistry.getEnforcing<NativeFingerprintSpec>(
+  'NativeFingerprint',
 );

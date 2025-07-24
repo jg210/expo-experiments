@@ -1,10 +1,12 @@
 package uk.me.jeremygreen.expoexperiments.fingerprint;
 
-public class Fingerprint extends FingerprintSpec {
+import com.facebook.react.bridge.ReactApplicationContext;
+
+public class NativeFingerprint extends NativeFingerprintSpec {
 
   public static final String NAME = "Fingerprint";
 
-  public Fingerprint(ReactApplicationContext reactContext) {
+  public NativeFingerprint(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 

@@ -9,7 +9,7 @@ import React from 'react';
 
 import ExpoExperimentsModule from "../modules/expo-experiments/src/ExpoExperimentsModule";
 import { useLastPromise } from "./useLastPromise";
-import Fingerprint from "../specs/Fingerprint";
+import NativeFingerprint from "../specs/NativeFingerprint";
 
 const queryKey = ["authorities"];
 
@@ -44,7 +44,7 @@ const AuthoritiesImpl = () => {
     (fingerprint) => setFingerprintExpo(fingerprint.substring(0, 8))
   );
   useLastPromise(
-    () => Fingerprint.fingerprintAuthorities(localAuthorityNames),
+    () => NativeFingerprint.fingerprintAuthorities(localAuthorityNames),
     [localAuthorityNames],
     (fingerprint) => setFingerprintTurbo(fingerprint.substring(0, 8))
   );  

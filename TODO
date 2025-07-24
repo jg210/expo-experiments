@@ -1,7 +1,6 @@
 * Implement a turbo module
-  - cng-patches for ios looks wrong
-    - makes patch based on empty file?
-  - fix build errors in the turbo module implementation.
+  - turbo module needs to go into a node module
+    - https://reactnative.dev/docs/the-new-architecture/using-codegen#android explains this indirectly
 
 * Find a way to share compileSdkVersion and minSdkVersion etc. to turbo_modules/android/fingerprint/build.gradle.kts
   - "by project"?
