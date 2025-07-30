@@ -1,7 +1,10 @@
 * Implement a turbo module
   - replace dummy android implementation
-  - unit tests
+  - turbo_modules/fingerprint/example/ eslint failures
+  - update/remove turbo_modules/fingerprint/example/
   - ios implementation.
+  - unit tests
+  - end to end tests
 
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
