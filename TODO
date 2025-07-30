@@ -1,7 +1,8 @@
 * Implement a turbo module
-  - turbo module needs to go into a node module
-    - https://reactnative.dev/docs/the-new-architecture/using-codegen#android explains this indirectly
-  - convert NativeFingerprint.java to kotlin.
+  - move android implementation into better java package
+  - replace dummy android implementation
+  - unit tests
+  - ios implementation.
 
 * Find a way to share compileSdkVersion and minSdkVersion etc. to turbo_modules/android/fingerprint/build.gradle.kts
   - "by project"?
