@@ -1,8 +1,10 @@
-import type { TurboModule } from 'react-native';
-import { TurboModuleRegistry } from 'react-native';
+import type {TurboModule} from 'react-native';
+import {TurboModuleRegistry} from 'react-native';
 
-export interface Spec extends TurboModule {
-  multiply(a: number, b: number): number;
+export interface NativeFingerprintSpec extends TurboModule {
+  fingerprintAuthorities(authorities: string[]): Promise<string>;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('Fingerprint');
+export default TurboModuleRegistry.getEnforcing<NativeFingerprintSpec>(
+  'NativeFingerprint',
+);
