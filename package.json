@@ -46,14 +46,6 @@
     "typescript": "5.8.3"
   },
   "private": true,
-  "codegenConfig": {
-    "name": "ExpoExperiments",
-    "type": "modules",
-    "jsSrcsDir": "specs",
-    "android": {
-      "javaPackageName": "uk.me.jeremygreen.expoexperiments"
-    }
-  },
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [

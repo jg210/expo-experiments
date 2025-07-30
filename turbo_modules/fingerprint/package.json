@@ -6,7 +6,10 @@
   "codegenConfig": {
     "name": "FingerprintSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "uk.me.jeremygreen.expoexperiments"
+    }
   },
   "author": " <> ()",
   "license": "UNLICENSED",
