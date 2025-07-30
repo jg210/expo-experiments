@@ -9,7 +9,7 @@ import React from 'react';
 
 import ExpoExperimentsModule from "../modules/expo-experiments/src/ExpoExperimentsModule";
 import { useLastPromise } from "./useLastPromise";
-import NativeFingerprint from "../specs/NativeFingerprint";
+import NativeFingerprint from "../turbo_modules/fingerprint/src/NativeFingerprint";
 
 const queryKey = ["authorities"];
 
