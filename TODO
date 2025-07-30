@@ -2,6 +2,7 @@
   - replace dummy android implementation
   - turbo_modules/fingerprint/example/ eslint failures
   - update/remove turbo_modules/fingerprint/example/
+  - if can't remove turbo_modules/fingerprint/example/, test it automatically
   - ios implementation.
   - unit tests
   - end to end tests
