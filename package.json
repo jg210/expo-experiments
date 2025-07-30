@@ -55,9 +55,7 @@
       "<rootDir>/setup-jest.ts"
     ],
     "testEnvironmentOptions": {
-      "customExportConditions": [
-        ""
-      ]
+      "customExportConditions": [""]
     }
   }
 }
