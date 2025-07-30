@@ -4,10 +4,6 @@
   - unit tests
   - ios implementation.
 
-* Find a way to share compileSdkVersion and minSdkVersion etc. to turbo_modules/android/fingerprint/build.gradle.kts
-  - "by project"?
-  - version catalogues?
-
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
