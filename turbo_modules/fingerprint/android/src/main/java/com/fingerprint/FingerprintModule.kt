@@ -1,7 +1,10 @@
 package com.fingerprint
 
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.module.annotations.ReactModule
+import uk.me.jeremygreen.expoexperiments.NativeFingerprintSpec
 
 @ReactModule(name = FingerprintModule.NAME)
 class FingerprintModule(reactContext: ReactApplicationContext) :
@@ -11,10 +14,8 @@ class FingerprintModule(reactContext: ReactApplicationContext) :
     return NAME
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  override fun multiply(a: Double, b: Double): Double {
-    return a * b
+  override fun fingerprintAuthorities(authorities: ReadableArray?, promise: Promise?) {
+    promise?.resolve("not implemented")
   }
 
   companion object {
