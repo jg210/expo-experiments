@@ -1,5 +1,4 @@
 * Implement a turbo module
-  - move android implementation into better java package
   - replace dummy android implementation
   - unit tests
   - ios implementation.

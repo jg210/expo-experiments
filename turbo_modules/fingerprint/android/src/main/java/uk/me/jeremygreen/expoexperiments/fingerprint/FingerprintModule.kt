@@ -1,10 +1,9 @@
-package com.fingerprint
+package uk.me.jeremygreen.expoexperiments.fingerprint
 
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.module.annotations.ReactModule
-import uk.me.jeremygreen.expoexperiments.NativeFingerprintSpec
 
 @ReactModule(name = FingerprintModule.NAME)
 class FingerprintModule(reactContext: ReactApplicationContext) :

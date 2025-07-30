@@ -1,4 +1,4 @@
-package com.fingerprint
+package uk.me.jeremygreen.expoexperiments.fingerprint
 
 import com.facebook.react.BaseReactPackage
 import com.facebook.react.bridge.NativeModule
