@@ -1,5 +1,4 @@
 * Implement a turbo module
-  - replace dummy android implementation
   - ios implementation.
   - end to end tests
 
