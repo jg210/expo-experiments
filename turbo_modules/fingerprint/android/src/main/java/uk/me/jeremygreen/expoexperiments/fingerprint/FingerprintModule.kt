@@ -4,6 +4,7 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.module.annotations.ReactModule
+import java.security.MessageDigest
 
 @ReactModule(name = FingerprintModule.NAME)
 class FingerprintModule(reactContext: ReactApplicationContext) :
@@ -14,10 +15,29 @@ class FingerprintModule(reactContext: ReactApplicationContext) :
   }
 
   override fun fingerprintAuthorities(authorities: ReadableArray?, promise: Promise?) {
-    promise?.resolve("not implemented")
+    val fingerprint = fingerprintAuthorities(authorities?.toArrayList() as List<String>);
+    promise?.resolve(fingerprint);
   }
 
   companion object {
     const val NAME = "Fingerprint"
+
+    // Ensures e.g. fingerprint of ["a", "bc"] is different to fingerprint of ["ab", "c"].
+    private val DIGEST_SEPARATOR = byteArrayOf(0)
+
+    // This wrapper only exists to add the @OptIn.
+    @OptIn(ExperimentalStdlibApi::class)
+    fun ByteArray.hexString() : String = this.toHexString()
+
+    fun fingerprintAuthorities(authorities: List<String>): String {
+      val digest = MessageDigest.getInstance("SHA-256")
+      authorities.forEach { authority ->
+        digest.update(authority.encodeToByteArray())
+        digest.update(DIGEST_SEPARATOR)
+      }
+      val fingerprint = digest.digest().hexString()
+      return fingerprint
+    }
+
   }
 }
