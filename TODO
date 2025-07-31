@@ -6,6 +6,10 @@
 
 * Execute fingerprint algorithms asynchronously (on background thread).
 
+* Try out nitro modules
+  - js string[] becomes List<String> in kotlin, not a ReadableArray
+  - nitrogen not run automatically though...
+
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
