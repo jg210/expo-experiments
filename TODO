@@ -2,6 +2,9 @@
   - ios implementation.
   - end to end tests
 
+* Rename expo native module and turbomodules
+  - FingerprintExpo and FingerprintTurbo
+
 * Execute fingerprint algorithms asynchronously (on background thread).
 
 * Try out nitro modules
