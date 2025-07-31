@@ -30,7 +30,7 @@ class FingerprintModule(reactContext: ReactApplicationContext) :
     fun ByteArray.hexString() : String = this.toHexString()
 
     fun fingerprintAuthorities(authorities: List<String>): String {
-      val digest = MessageDigest.getInstance("SHA-256")
+      val digest = MessageDigest.getInstance("SHA-512")
       authorities.forEach { authority ->
         digest.update(authority.encodeToByteArray())
         digest.update(DIGEST_SEPARATOR)

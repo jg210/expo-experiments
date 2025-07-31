@@ -24,21 +24,28 @@ jest.mock("../../turbo_modules/fingerprint/src/NativeFingerprint", () => ({
     default: { fingerprintAuthorities: jest.fn() },
 }));
 
-// Mock native ExpoExperimentsModule. Using a real fingerprint algorithm is simplest since don't need
-// to ensure that return appropriate values if test evolves to pass different values to the
-// function.
-async function SHA256(strings: string[]) {
+// js functions that should be same as the native implementations.
+async function SHA(algorithm: string, strings: string[]) {
     const combinedString = strings.join('\x00') + '\x00';    
     const bytes: Uint8Array = new TextEncoder().encode(combinedString);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+    const hashBuffer = await crypto.subtle.digest(algorithm, bytes);
     const hashByteArray = new Uint8Array(hashBuffer);
     const hashArray = Array.from(hashByteArray);
     const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');    
     return hashHex;
 }
+async function fingerprintExpo(strings: string[]) {
+    return SHA('SHA-256', strings);
+}
+async function fingerprintTurbo(strings: string[]) {
+    return SHA('SHA-512', strings);
+}
+
+// Mock native ExpoExperimentsModule. Using above real fingerprint algorithms is simplest since don't need
+// to ensure that return appropriate values if test evolves to pass different values to the
+// function.
 const fingerprintAuthoritiesExpo = ExpoExperimentsModule.fingerprintAuthorities;
 const fingerprintAuthoritiesExpoMock= fingerprintAuthoritiesExpo as jest.MockedFunction<typeof fingerprintAuthoritiesExpo>;
-
 const fingerprintAuthoritiesTurbo = NativeFingerprint.fingerprintAuthorities;
 const fingerprintAuthoritiesTurboMock= fingerprintAuthoritiesTurbo as jest.MockedFunction<typeof fingerprintAuthoritiesExpo>;
 
@@ -109,8 +116,8 @@ describe("Authorities", () => {
 
     beforeEach(() => {
         server.listen();
-        fingerprintAuthoritiesExpoMock.mockImplementation((localAuthorities => SHA256(localAuthorities)));
-        fingerprintAuthoritiesTurboMock.mockImplementation((localAuthorities => SHA256(localAuthorities)));
+        fingerprintAuthoritiesExpoMock.mockImplementation((localAuthorities => fingerprintExpo(localAuthorities)));
+        fingerprintAuthoritiesTurboMock.mockImplementation((localAuthorities => fingerprintTurbo(localAuthorities)));
     });
     afterEach(() => {
         server.resetHandlers()
@@ -126,14 +133,24 @@ describe("Authorities", () => {
         // Return different data before and after the later drag to refresh.
         const localAuthorities1 = localAuthorities.slice(0, 1);
         const localAuthorities2 = localAuthorities;
-        const fingerprint1 = "b6557162";
-        const fingerprint2 = "deb3b6d4";
+        const localAuthorityNames1 = localAuthorities1.map((localAuthority) => localAuthority.name);
+        const localAuthorityNames2 = localAuthorities2.map((localAuthority) => localAuthority.name);
+        const fingerprint1Expo = await fingerprintExpo(localAuthorityNames1);
+        const fingerprint2Expo = await fingerprintExpo(localAuthorityNames2);
+        const fingerprint1Turbo = await fingerprintTurbo(localAuthorityNames1);
+        const fingerprint2Turbo = await fingerprintTurbo(localAuthorityNames2);
+        expect(new Set([
+            fingerprint1Expo,
+            fingerprint1Turbo,
+            fingerprint2Expo,
+            fingerprint2Turbo
+        ]).size).toBe(4); // distinct fingerprints
         server.use(localAuthoritiesHandlerFor(localAuthorities1));
 
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
 
-        const authoritiesList = await assertUICorrect(fingerprint1, fingerprint1, localAuthorities1);
+        const authoritiesList = await assertUICorrect(fingerprint1Expo, fingerprint1Turbo, localAuthorities1);
 
         // Drag to refresh with different data.
         //
@@ -145,7 +162,7 @@ describe("Authorities", () => {
             authoritiesList.props.refreshControl.props.onRefresh();
         })
 
-        await assertUICorrect(fingerprint2, fingerprint2, localAuthorities2);
+        await assertUICorrect(fingerprint2Expo, fingerprint2Turbo, localAuthorities2);
     });
 
     it("shows loading state if network slow", () => {
@@ -163,22 +180,22 @@ describe("Authorities", () => {
         server.use(localAuthoritiesHandlerFor(localAuthorities));
         const localAuthorityNames = localAuthorities.map((localAuthority) => localAuthority.name);
         const fingerprintExpo = "...";
-        const fingerprintTurbo = await SHA256(localAuthorityNames);
+        const fingerprintTurboExpected = await fingerprintTurbo(localAuthorityNames);
         fingerprintAuthoritiesExpoMock.mockImplementation((_localAuthorities) => waitForever<string>());
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        await assertUICorrect(fingerprintExpo, fingerprintTurbo, localAuthorities);
+        await assertUICorrect(fingerprintExpo, fingerprintTurboExpected, localAuthorities);
     });
 
     it("shows loading state just for turbo module fingerprint", async () => {
         server.use(localAuthoritiesHandlerFor(localAuthorities));
         const localAuthorityNames = localAuthorities.map((localAuthority) => localAuthority.name);
-        const fingerprintExpo = await SHA256(localAuthorityNames);
+        const fingerprintExpoExpected = await fingerprintExpo(localAuthorityNames);
         const fingerprintTurbo = "...";
         fingerprintAuthoritiesTurboMock.mockImplementation((_localAuthorities) => waitForever<string>());
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        await assertUICorrect(fingerprintExpo, fingerprintTurbo, localAuthorities);
+        await assertUICorrect(fingerprintExpoExpected, fingerprintTurbo, localAuthorities);
     });
 
     it("shows loading state if both fingerprints slow", async () => {
@@ -195,12 +212,12 @@ describe("Authorities", () => {
     it("no local authorities", async () => {
         const localAuthorities: LocalAuthority[] = [];
         const localAuthorityNames = localAuthorities.map((localAuthority) => localAuthority.name);
-        const fingerprint = await SHA256(localAuthorityNames);
-        expect(fingerprint).toBe("6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d");
+        const fingerprintExpoExpected = await fingerprintExpo(localAuthorityNames);
+        const fingerprintTurboExpected = await fingerprintTurbo(localAuthorityNames);
         server.use(localAuthoritiesHandlerFor(localAuthorities));
         // The tested component.
         render(<AppQueryClientProvider><Authorities/></AppQueryClientProvider>);
-        await assertUICorrect(fingerprint, fingerprint, localAuthorities);
+        await assertUICorrect(fingerprintExpoExpected, fingerprintTurboExpected, localAuthorities);
     });
 
 });

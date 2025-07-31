@@ -1,6 +1,5 @@
 * Implement a turbo module
   - replace dummy android implementation
-  - use different hash algorithm for expo and turbo, so can't mix up in tests.
   - ios implementation.
   - end to end tests
 
