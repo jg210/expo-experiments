@@ -1,6 +1,6 @@
 * Implement a turbo module
-  - replace dummy android implementation
   - turbo_modules/fingerprint/example/ eslint failures
+  - replace dummy android implementation
   - update/remove turbo_modules/fingerprint/example/
   - if can't remove turbo_modules/fingerprint/example/, test it automatically
   - ios implementation.
