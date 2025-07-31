@@ -1,5 +1,8 @@
 * Implement a turbo module
+  - is turbo_modules/fingerprint/turbo.json required?
+  - native android unit test  
   - ios implementation.
+  - ios unit test
   - end to end tests
 
 * Rename expo native module and turbomodules
