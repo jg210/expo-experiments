@@ -12,10 +12,10 @@ jsEngine: graaljs
 # workaround for https://github.com/jg210/expo-experiments/pull/7#issuecomment-2732749198 which means can't do this on iOS:
 #
 # - assertVisible:
-#     id: "fingerprint"
+#     id: "fingerprintExpo"
 #     text: "[0-9a-f]{8}"
 - assertVisible:
-    id: "fingerprint"
+    id: "fingerprintExpo"
 - copyTextFrom:
-    id: "fingerprint"
+    id: "fingerprintExpo"
 - assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
