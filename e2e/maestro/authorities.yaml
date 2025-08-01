@@ -16,6 +16,11 @@ jsEngine: graaljs
 #     text: "[0-9a-f]{8}"
 - assertVisible:
     id: "fingerprintExpo"
+- assertVisible:
+    id: "fingerprintTurbo"
 - copyTextFrom:
     id: "fingerprintExpo"
+- assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
+- copyTextFrom:
+    id: "fingerprintTurbo"
 - assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
