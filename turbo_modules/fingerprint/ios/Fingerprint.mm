@@ -4,10 +4,9 @@
 @implementation Fingerprint
 RCT_EXPORT_MODULE()
 
-RCT_REMAP_METHOD(fingerprintAuthorities,
-                 fingerprintAuthorities:(NSArray<NSString *> *)authorities
-                 resolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
+- (void)fingerprintAuthorities:(NSArray<NSString *> *)authorities
+        resolver:(RCTPromiseResolveBlock)resolve
+        rejecter:(RCTPromiseRejectBlock)reject
 {
   if (![authorities isKindOfClass:[NSArray class]]) {
     reject(@"invalid_argument", @"Expected an array of strings", nil);
