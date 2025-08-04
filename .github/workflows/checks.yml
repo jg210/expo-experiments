@@ -204,15 +204,21 @@ jobs:
           path: |
             ~/.maestro/tests/
             ~/Library/Logs/maestro/
-          if-no-files-found: error
-
-      - name: simulator logs
-        uses: actions/upload-artifact@v4
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: simulator logs
-          path: |
             ios_simulator_logs.txt
             ~/Library/Logs/CoreSimulator/CoreSimulator.log
+            ~/Library/Logs/DiagnosticReports/
           if-no-files-found: error
-  
+
+      - name: extract crash backtrace from any DiagnosticReports
+        if: success() || failure()    # run this step even if previous step failed
+        run: |
+            shopt -s nullglob
+            for f in ~/Library/Logs/DiagnosticReports/expoexperiments-*.ips ; do
+              {
+                # TODO add a script that also escapes any ``` in content.
+                printf '```\n'
+                printf '\n%s:\n' "${f}"
+                tail -n +2 "${f}" | jq -r '.lastExceptionBacktrace[].symbol'
+                printf '```\n'
+              } | tee -a "${GITHUB_STEP_SUMMARY}"
+            done
