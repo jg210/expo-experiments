@@ -219,5 +219,5 @@ jobs:
                 printf '\n%s:\n' "${f}"
                 tail -n +2 "${f}" | jq -r '.lastExceptionBacktrace[].symbol'
                 printf '```\n'
-              } >> "${GITHUB_STEP_SUMMARY}"
+              } | tee -a "${GITHUB_STEP_SUMMARY}"
             done
