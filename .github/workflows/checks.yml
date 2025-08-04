@@ -215,6 +215,7 @@ jobs:
             shopt -s nullglob
             for f in ~/Library/Logs/DiagnosticReports/expoexperiments-*.ips ; do
               {
+                # TODO add a script that also escapes any ``` in content.
                 printf '```\n'
                 printf '\n%s:\n' "${f}"
                 tail -n +2 "${f}" | jq -r '.lastExceptionBacktrace[].symbol'
