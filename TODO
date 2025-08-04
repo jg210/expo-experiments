@@ -35,6 +35,8 @@
 
 * A with_environment script for use in checks.yaml.
 
+* When appending to GITHUB_STEP_SUMMARY, do it via a script that escapes contents of ``` blocks.
+
 * Store master-branch apks as GitHub Actions releases.
 
 * Add a turbomodule too, to compare with the expo native module.
