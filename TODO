@@ -36,6 +36,7 @@
 * A with_environment script for use in checks.yaml.
 
 * When appending to GITHUB_STEP_SUMMARY, do it via a script that escapes contents of ``` blocks.
+  - send unescaped output to logs and escaped to GITHUB_STEP_SUMMARY
 
 * Store master-branch apks as GitHub Actions releases.
 
