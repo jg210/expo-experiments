@@ -215,9 +215,9 @@ jobs:
             shopt -s nullglob
             for f in ~/Library/Logs/DiagnosticReports/expoexperiments-*.ips ; do
               {
-                printf "```\n"
-                printf "\n%s:\n" "${f}"
+                printf '```\n'
+                printf '\n%s:\n' "${f}"
                 tail -n +2 "${f}" | jq -r '.lastExceptionBacktrace[].symbol'
-                printf "```\n"
+                printf '```\n'
               } >> "${GITHUB_STEP_SUMMARY}"
             done
