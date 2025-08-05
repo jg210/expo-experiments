@@ -235,15 +235,14 @@ jobs:
       - name: extract crash backtrace from any DiagnosticReports
         if: success() || failure()    # run this step even if previous step failed
         run: |
+            . environment
             shopt -s nullglob
             for f in ~/Library/Logs/DiagnosticReports/expoexperiments-*.ips ; do
               {
-                # TODO add a script that also escapes any ``` in content.
-                printf '```\n'
                 printf '\n%s:\n' "${f}"
                 tail -n +2 "${f}" | jq -r '.lastExceptionBacktrace[].symbol'
-                printf '```\n'
-              } | tee -a "${GITHUB_STEP_SUMMARY}"
+              } | tee >(gh_md_fenced_code_block >> "${GITHUB_STEP_SUMMARY}")
+              printf '\n'
             done
 
       # git-status must be last step
