@@ -4,7 +4,7 @@
 @implementation Fingerprint
 RCT_EXPORT_MODULE()
 
-- (void)fingerprintAuthorities:(NSArray<NSString *> *)authorities
+- (void)fingerprintAuthoritiesTesting123:(NSArray<NSString *> *)authorities
         resolver:(RCTPromiseResolveBlock)resolve
         rejecter:(RCTPromiseRejectBlock)reject
 {
