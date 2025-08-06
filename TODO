@@ -22,6 +22,8 @@
   - can't use Podfile.lock to cache ios/Pods/ since prebuild creates it and runs pod install
   - only small part of job time c.f. build...
 
+* iOS objective C source code files should have three-letter prefix.
+
 * xcpretty
   - xcbeautify is maybe better than xcpretty?
     - https://docs.fastlane.tools/best-practices/xcodebuild-formatters/
