@@ -6,7 +6,12 @@
   "codegenConfig": {
     "name": "FingerprintSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src",
+    "ios": {
+      "modulesProvider": {
+        "Fingerprint": "Fingerprint"
+      }
+    }
   },
   "author": " <> ()",
   "license": "UNLICENSED",
