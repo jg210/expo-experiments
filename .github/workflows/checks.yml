@@ -197,9 +197,6 @@ jobs:
         name: expoexperiments.app
         path: ios/build/Build/Products/Release-iphonesimulator
         if-no-files-found: error
-    
-    - name: ls -lR
-      run : ls -lR .
 
     # git-status must be last step
     - uses: ./.github/actions/git-status
