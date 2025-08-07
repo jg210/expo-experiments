@@ -32,6 +32,9 @@
     - already have https://www.npmjs.com/package/@expo/xcpretty
       - use this?
 
+* Move CrashTests buttons into own UI tab
+  - configure sentry to record tab changes
+
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 
 * maestro --debug-output could be used to avoid date in log path
@@ -92,3 +95,6 @@
 
 * Remove workaround for assertVisible with text and id
   - https://github.com/mobile-dev-inc/Maestro/issues/1404
+
+* Try out spotlight from sentry?
+  - enable spotlight in App.tsx
