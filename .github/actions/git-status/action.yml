@@ -4,4 +4,5 @@ runs:
   using: "composite"
   steps:
     - name: "git status"
-    - run: test -z "$(git status --porcelain)"
+      shell: bash
+      run: test -z "$(git status --porcelain)"
