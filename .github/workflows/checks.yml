@@ -72,6 +72,9 @@ jobs:
           modules/expo-experiments/android/build/reports/tests
 
     - name: release apk build
+      env:
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       run: |
         . environment
         npm run android-release-apk
@@ -162,6 +165,9 @@ jobs:
         expo prebuild --platform ios
 
     - name: build
+      env:
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       run: |
         . environment
         cd ios
