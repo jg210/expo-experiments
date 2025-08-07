@@ -1,13 +1,3 @@
-* Sentry
-  X commit auto-generated boilerplate
-  X remove caret from package.json etc.
-  X inject DSN and SENTRY_AUTH_TOKEN (as env. var.) when building on github
-    X https://stackoverflow.com/a/72053066 for the DSN?
-      X convert app.json to app.config.ts
-  X increase replaysSessionSampleRate
-  X README
-  X crash test button
-
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
