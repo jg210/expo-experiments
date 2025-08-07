@@ -38,3 +38,5 @@ yarn-error.*
 
 # jest
 /coverage
+
+.env.local

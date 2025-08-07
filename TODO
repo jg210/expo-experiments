@@ -1,3 +1,13 @@
+* Sentry
+  X commit auto-generated boilerplate
+  - remove caret from package.json etc.
+  - inject DSN and key when building on github
+    - https://stackoverflow.com/a/72053066 for at least DSN?
+      - convert app.json to app.config.js
+    - ...or can getSentryExpoConfig do this some other way?
+  - increase replaysSessionSampleRate
+  - enable spotlight in App.tsx?
+
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
