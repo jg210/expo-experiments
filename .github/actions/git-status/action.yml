@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: "git status"
+      if: '!cancelled()'
       shell: bash
       run: |
         if [ -n "$(git status --porcelain)" ] ; then
