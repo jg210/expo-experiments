@@ -1,6 +1,6 @@
 * Sentry
   X commit auto-generated boilerplate
-  - remove caret from package.json etc.
+  X remove caret from package.json etc.
   - inject DSN and key when building on github
     - https://stackoverflow.com/a/72053066 for at least DSN?
       - convert app.json to app.config.js
