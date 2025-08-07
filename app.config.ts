@@ -1,5 +1,7 @@
 import { ExpoConfig } from 'expo/config';
 
+const SENTRY_DSN: string = process.env.SENTRY_DSN || "";
+
 const config : { expo: ExpoConfig } = {
   expo: {
     "name": "expo-experiments",
@@ -35,7 +37,8 @@ const config : { expo: ExpoConfig } = {
     "extra": {
       "eas": {
         "projectId": "9980ae3b-7d5d-4df7-9b14-31ef911db1b7"
-      }
+      },
+      SENTRY_DSN
     },
     "owner": "jgreen210",
     "plugins": [

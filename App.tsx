@@ -1,3 +1,5 @@
+import Constants from 'expo-constants';
+
 import { Button, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -6,7 +8,7 @@ import { AppQueryClientProvider } from "./src/AppQueryClientProvider";
 import * as Sentry from "@sentry/react-native";
 
 Sentry.init({
-  dsn: "__TODO_SENTRY_DSN__",
+  dsn: Constants.expoConfig?.extra?.SENTRY_DSN,
 
   // Adds more context data to events (IP address, cookies, user, etc.)
   // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
