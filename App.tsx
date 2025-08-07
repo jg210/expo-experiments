@@ -1,11 +1,12 @@
 import Constants from 'expo-constants';
 
-import { Button, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Authorities } from "./src/Authorities";
 import { AppQueryClientProvider } from "./src/AppQueryClientProvider";
 import * as Sentry from "@sentry/react-native";
+import { CrashTests } from './src/CrashTests';
 
 Sentry.init({
   dsn: Constants.expoConfig?.extra?.SENTRY_DSN,
@@ -27,9 +28,8 @@ export default Sentry.wrap(function App() {
   return (
     <SafeAreaView style={styles.container}>
       <AppQueryClientProvider>
-        <>
-          <Button title='Crash test' onPress={ () => { throw new Error('testing 123') }} />
-          <Button title='Record error' onPress={ () => { Sentry.captureException(new Error('testing 123')) }}/>
+        <>          
+          <CrashTests />
           <Authorities />
         </>
       </AppQueryClientProvider>
