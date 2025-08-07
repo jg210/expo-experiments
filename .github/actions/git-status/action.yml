@@ -5,4 +5,8 @@ runs:
   steps:
     - name: "git status"
       shell: bash
-      run: test -z "$(git status --porcelain)"
+      run: |
+        if [ -n "$(git status --porcelain)" ] ; then
+          git status
+          exit 1
+        fi
