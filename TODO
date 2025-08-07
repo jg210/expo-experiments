@@ -6,6 +6,8 @@
       - convert app.json to app.config.js
     - ...or can getSentryExpoConfig do this some other way?
   - increase replaysSessionSampleRate
+  - README
+  - crash test button
   - enable spotlight in App.tsx?
 
 * Wait for android emulator to become ready.
