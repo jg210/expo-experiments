@@ -38,3 +38,8 @@ yarn-error.*
 
 # jest
 /coverage
+
+# emacs
+*~
+
+.env.local

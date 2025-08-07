@@ -1,5 +1,9 @@
-{
-  "expo": {
+import { ExpoConfig } from 'expo/config';
+
+const SENTRY_DSN: string = process.env.SENTRY_DSN || "";
+
+const config : { expo: ExpoConfig } = {
+  expo: {
     "name": "expo-experiments",
     "slug": "expo-experiments",
     "version": "1.0.0",
@@ -11,9 +15,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
@@ -35,8 +37,21 @@
     "extra": {
       "eas": {
         "projectId": "9980ae3b-7d5d-4df7-9b14-31ef911db1b7"
-      }
+      },
+      SENTRY_DSN
     },
-    "owner": "jgreen210"
+    "owner": "jgreen210",
+    "plugins": [
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "expo-experiments",
+          "organization": "jeremy-green"
+        }
+      ]
+    ]
   }
-}
+};
+
+export default config;
