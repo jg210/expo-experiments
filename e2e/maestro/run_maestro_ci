@@ -26,7 +26,7 @@ ios() {
     xcrun simctl boot "${simulator}"
     log "installing app from: ${app}"
     xcrun simctl install booted "${app}"
-    exec with_ios_logs ios_simulator_logs.txt scripts/run_maestro
+    exec with_ios_logs "${RUNNER_TEMP}/ios_simulator_logs.txt" scripts/run_maestro
 }
 
 case "${platform}" in

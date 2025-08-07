@@ -232,7 +232,7 @@ jobs:
           path: |
             ~/.maestro/tests/
             ~/Library/Logs/maestro/
-            ios_simulator_logs.txt
+            ${{ runner.temp }}/ios_simulator_logs.txt
             ~/Library/Logs/CoreSimulator/CoreSimulator.log
             ~/Library/Logs/DiagnosticReports/
           if-no-files-found: error
