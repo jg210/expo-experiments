@@ -7,7 +7,6 @@
   X increase replaysSessionSampleRate
   X README
   X crash test button
-  - enable spotlight in App.tsx?
 
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
@@ -88,3 +87,6 @@
 
 * Remove workaround for assertVisible with text and id
   - https://github.com/mobile-dev-inc/Maestro/issues/1404
+
+* Try out spotlight from sentry?
+  - enable spotlight in App.tsx
