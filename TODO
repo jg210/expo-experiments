@@ -14,7 +14,7 @@
     - already have https://www.npmjs.com/package/@expo/xcpretty
       - use this?
 
-* Move "Crash test" button into own UI tab
+* Move CrashTests buttons into own UI tab
   - configure sentry to record tab changes
 
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
