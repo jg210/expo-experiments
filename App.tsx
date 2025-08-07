@@ -28,7 +28,8 @@ export default Sentry.wrap(function App() {
     <SafeAreaView style={styles.container}>
       <AppQueryClientProvider>
         <>
-          <Button title='Crash test' onPress={ () => { Sentry.captureException(new Error('testing 123')) }}/>
+          <Button title='Crash test' onPress={ () => { throw new Error('testing 123') }} />
+          <Button title='Record error' onPress={ () => { Sentry.captureException(new Error('testing 123')) }}/>
           <Authorities />
         </>
       </AppQueryClientProvider>
