@@ -1,10 +1,9 @@
 * Sentry
   X commit auto-generated boilerplate
   X remove caret from package.json etc.
-  - inject DSN and key when building on github
-    - https://stackoverflow.com/a/72053066 for at least DSN?
-      - convert app.json to app.config.js
-    - ...or can getSentryExpoConfig do this some other way?
+  - inject DSN and SENTRY_AUTH_TOKEN (as env. var.) when building on github
+    - https://stackoverflow.com/a/72053066 for the DSN?
+      - convert app.json to app.config.ts
   X increase replaysSessionSampleRate
   - README
   - crash test button
