@@ -111,6 +111,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app-release.apk
+          path: ${{ runner.temp }}
 
       - name: enable KVM group perms
         run: |
@@ -212,6 +213,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: expoexperiments.app
+          path: ${{ runner.temp }}
 
       - name: install maestro
         run: scripts/install_maestro
