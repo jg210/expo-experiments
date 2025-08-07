@@ -1,5 +1,7 @@
-{
-  "expo": {
+import { ExpoConfig } from 'expo/config';
+
+const config : { expo: ExpoConfig } = {
+  expo: {
     "name": "expo-experiments",
     "slug": "expo-experiments",
     "version": "1.0.0",
@@ -47,4 +49,6 @@
       ]
     ]
   }
-}
+};
+
+export default config;

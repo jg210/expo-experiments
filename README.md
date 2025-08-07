@@ -24,6 +24,13 @@ Install nodenv and node-build (or use any other way to put correct version of no
 * https://github.com/nodenv/nodenv#installation
 * https://github.com/nodenv/node-build#installation
 
+Create a `.env.local` containing:
+
+```
+SENTRY_AUTH_TOKEN=<real token downloaded from sentry.io>
+SENTRY_DSN=<sentry DSN>
+```
+
 To run the app on android:
 
 ```
@@ -50,3 +57,7 @@ npm run maestro
 ```
 
 Guidance on assigning testIDs: https://wix.github.io/Detox/docs/guide/test-id/
+
+## Github Actions
+
+* Configure SENTRY_AUTH_TOKEN and SENTRY DSN as repository secrets.
