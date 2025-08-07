@@ -5,7 +5,7 @@
     - https://stackoverflow.com/a/72053066 for at least DSN?
       - convert app.json to app.config.js
     - ...or can getSentryExpoConfig do this some other way?
-  - increase replaysSessionSampleRate
+  X increase replaysSessionSampleRate
   - README
   - crash test button
   - enable spotlight in App.tsx?
