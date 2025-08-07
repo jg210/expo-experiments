@@ -5,8 +5,6 @@
 * Rename expo native module and turbomodules
   - FingerprintExpo and FingerprintTurbo
 
-* Fail github actions if non-empty git diff at end of jobs.
-
 * Execute fingerprint algorithms asynchronously (on background thread).
 
 * Try out nitro modules
