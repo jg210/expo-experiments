@@ -5,6 +5,7 @@ A [react native](https://reactnative.dev/)/[Expo](https://expo.dev/) app for tes
 * Shows data from the [spring-experiments](https://github.com/jg210/spring-experiments) API.
 * Has a Kotlin/Swift [Expo module](https://docs.expo.dev/modules/overview/) [here](modules/expo-experiments).
 * Uses [TanStack Query](https://tanstack.com/query/latest) (AKA React Query) for network requests.
+* Uses [Sentry][https://sentry.io] for crash reporting.
 
 For testing:
 
