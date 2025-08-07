@@ -12,21 +12,21 @@ platform=$1
 shift
 
 android() {
-    apk=app-release.apk
+    apk="${RUNNER_TEMP}/app-release.apk"
     log "installing: ${apk}"
     adb install "${apk}"
     log "running maestro."
-    exec with_emulator_status with_logcat logcat.txt scripts/run_maestro
+    exec with_emulator_status with_logcat "${RUNNER_TEMP}/logcat.txt" scripts/run_maestro
 }
 
 ios() {
-    app=./expoexperiments.app
+    app="${RUNNER_TEMP}/expoexperiments.app"
     simulator="iPhone 16"
     log "starting simulator: ${simulator}"
     xcrun simctl boot "${simulator}"
     log "installing app from: ${app}"
     xcrun simctl install booted "${app}"
-    exec with_ios_logs ios_simulator_logs.txt scripts/run_maestro
+    exec with_ios_logs "${RUNNER_TEMP}/ios_simulator_logs.txt" scripts/run_maestro
 }
 
 case "${platform}" in

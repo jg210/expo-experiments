@@ -29,6 +29,9 @@ jobs:
         . environment
         npm test
 
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
   android:
     runs-on: ubuntu-24.04
     steps:
@@ -88,6 +91,9 @@ jobs:
         name: app-release.apk
         path: android/app/build/outputs/apk/release/app-release.apk
 
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
   android-test:
     runs-on: ubuntu-24.04
     needs: android # for the apk
@@ -104,6 +110,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app-release.apk
+          path: ${{ runner.temp }}
 
       - name: enable KVM group perms
         run: |
@@ -143,9 +150,12 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: logcat.txt - API ${{ matrix.api-level }}
-          path: logcat.txt
+          path: ${{ runner.temp }}/logcat.txt
           if-no-files-found: error
-  
+
+      # git-status must be last step
+      - uses: ./.github/actions/git-status
+
   ios:
     runs-on: macos-15
 
@@ -186,7 +196,10 @@ jobs:
         name: expoexperiments.app
         path: ios/build/Build/Products/Release-iphonesimulator
         if-no-files-found: error
-    
+
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
   ios-test:
     runs-on: macos-14
     needs: ios # for the app
@@ -198,6 +211,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: expoexperiments.app
+          path: ${{ runner.temp }}
 
       - name: install maestro
         run: scripts/install_maestro
@@ -213,7 +227,7 @@ jobs:
           path: |
             ~/.maestro/tests/
             ~/Library/Logs/maestro/
-            ios_simulator_logs.txt
+            ${{ runner.temp }}/ios_simulator_logs.txt
             ~/Library/Logs/CoreSimulator/CoreSimulator.log
             ~/Library/Logs/DiagnosticReports/
           if-no-files-found: error
@@ -230,3 +244,6 @@ jobs:
               } | tee >(gh_md_fenced_code_block >> "${GITHUB_STEP_SUMMARY}")
               printf '\n'
             done
+
+      # git-status must be last step
+      - uses: ./.github/actions/git-status

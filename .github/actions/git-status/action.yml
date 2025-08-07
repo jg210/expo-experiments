@@ -1,0 +1,12 @@
+name: "non-empty git status"
+description: "Fails if git status is non-empty."
+runs:
+  using: "composite"
+  steps:
+    - name: "git status"
+      shell: bash
+      run: |
+        if [ -n "$(git status --porcelain)" ] ; then
+          git status
+          exit 1
+        fi
