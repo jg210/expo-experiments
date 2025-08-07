@@ -6,7 +6,7 @@
       - convert app.json to app.config.ts
   X increase replaysSessionSampleRate
   X README
-  - crash test button
+  X crash test button
   - enable spotlight in App.tsx?
 
 * Wait for android emulator to become ready.
@@ -24,6 +24,9 @@
     - would a GemFile be required?
     - already have https://www.npmjs.com/package/@expo/xcpretty
       - use this?
+
+* Move "Crash test" button into own UI tab
+  - configure sentry to record tab changes
 
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Authorities } from "./src/Authorities";
@@ -25,7 +25,10 @@ export default Sentry.wrap(function App() {
   return (
     <SafeAreaView style={styles.container}>
       <AppQueryClientProvider>
-        <Authorities />
+        <>
+          <Button title='Crash test' onPress={ () => { Sentry.captureException(new Error('testing 123')) }}/>
+          <Authorities />
+        </>
       </AppQueryClientProvider>
     </SafeAreaView>
   );
