@@ -1,0 +1,7 @@
+name: "non-empty git status"
+description: "Fails if git status is non-empty."
+runs:
+  using: "composite"
+  steps:
+    - name: "git status"
+    - run: test -z "$(git status --porcelain)"

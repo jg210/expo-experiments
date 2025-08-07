@@ -29,6 +29,9 @@ jobs:
         . environment
         npm test
 
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
   android:
     runs-on: ubuntu-24.04
     steps:
@@ -88,6 +91,10 @@ jobs:
         name: app-release.apk
         path: android/app/build/outputs/apk/release/app-release.apk
 
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
+
   android-test:
     runs-on: ubuntu-24.04
     needs: android # for the apk
@@ -145,7 +152,10 @@ jobs:
           name: logcat.txt - API ${{ matrix.api-level }}
           path: logcat.txt
           if-no-files-found: error
-  
+
+      # git-status must be last step
+      - uses: ./.github/actions/git-status
+
   ios:
     runs-on: macos-15
 
@@ -187,6 +197,10 @@ jobs:
         path: ios/build/Build/Products/Release-iphonesimulator
         if-no-files-found: error
     
+    # git-status must be last step
+    - uses: ./.github/actions/git-status
+
+
   ios-test:
     runs-on: macos-14
     needs: ios # for the app
@@ -231,3 +245,6 @@ jobs:
                 printf '```\n'
               } | tee -a "${GITHUB_STEP_SUMMARY}"
             done
+
+      # git-status must be last step
+      - uses: ./.github/actions/git-status
