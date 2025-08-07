@@ -151,7 +151,7 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: logcat.txt - API ${{ matrix.api-level }}
-          path: logcat.txt
+          path: ${{ runner.temp }}/logcat.txt
           if-no-files-found: error
 
       # git-status must be last step
