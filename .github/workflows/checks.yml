@@ -94,7 +94,6 @@ jobs:
     # git-status must be last step
     - uses: ./.github/actions/git-status
 
-
   android-test:
     runs-on: ubuntu-24.04
     needs: android # for the apk
