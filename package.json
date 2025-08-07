@@ -21,6 +21,7 @@
     "expo": "53.0.9",
     "expo-dev-client": "5.1.8",
     "expo-status-bar": "2.2.3",
+    "promise": "8.3.0",
     "react": "19.0.0",
     "react-native": "0.79.2",
     "react-native-safe-area-context": "5.4.0"
