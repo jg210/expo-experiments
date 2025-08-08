@@ -24,7 +24,8 @@
     "promise": "8.3.0",
     "react": "19.0.0",
     "react-native": "0.79.2",
-    "react-native-safe-area-context": "5.4.0"
+    "react-native-safe-area-context": "5.4.0",
+    "fingerprint": "file:./turbo_modules/fingerprint"
   },
   "devDependencies": {
     "@babel/core": "7.27.3",

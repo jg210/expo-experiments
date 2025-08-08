@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+#
+# Wraps stdin in github markdown fence code block backticks.
+#
+# https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
+
+import sys
+import re
+
+# Make sure use more backticks than appear in stdin, and at least three.
+def backticks_required(text):
+    backtick_sequences = (len(m) for m in re.findall(r'`+', text))
+    longest_backtick_sequence = max(backtick_sequences, default=0)
+    return max(3, longest_backtick_sequence + 1)
+
+def fenced_code_block(text):
+    fence = '`' * backticks_required(text)
+    return f"{fence}\n{text}\n{fence}"
+
+def main():
+    print(fenced_code_block(sys.stdin.read()))
+
+if __name__ == "__main__":
+    main()

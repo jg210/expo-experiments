@@ -17,6 +17,13 @@ For testing:
 * ...run on android [emulators](https://github.com/marketplace/actions/android-emulator-runner).
 * ...run on iOS simulators on GitHub Actions macOS runners.
 
+## Notes on adding Turbo Native Module
+
+* Initially, just for android.
+* https://reactnative.dev/docs/turbo-native-modules-introduction.
+* The docs talk about adding specs file to the top-level of the app, which would work for a non-expo RN app, since can easily add code to the app. For an expo app with CNG, can't easily add the native code to the app. Instead, I tried putting the native code into an android library project, adding a dependency on this library using Expo's [patch-project](https://github.com/expo/expo/tree/main/packages/patch-project#readme) plugin to automatically apply checked-in patches after running `expo prebuild`. This was the wrong approach, since the auto-generated code isn't visible to the library.
+* The correct approach is to put all the specs and native code into a separate node module. https://reactnative.dev/docs/the-new-architecture/using-codegen#android suggests this indirectly, by explaining that codegen output goes into a node_modules/ sub-directory.
+
 ## Development Build Instructions
 
 Install nodenv and node-build (or use any other way to put correct version of node on PATH):
