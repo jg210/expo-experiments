@@ -4,7 +4,6 @@ runs:
   using: "composite"
   steps:
     - name: "git status"
-      if: success() || failure() # Always run (unless job cancelled).
       shell: bash
       run: |
         if [ -n "$(git status --porcelain)" ] ; then

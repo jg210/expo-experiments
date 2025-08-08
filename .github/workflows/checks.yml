@@ -31,6 +31,7 @@ jobs:
 
     # git-status must be last step
     - uses: ./.github/actions/git-status
+      if: success() || failure() # Always run (unless job cancelled).
 
   android:
     runs-on: ubuntu-24.04
@@ -93,6 +94,7 @@ jobs:
 
     # git-status must be last step
     - uses: ./.github/actions/git-status
+      if: success() || failure() # Always run (unless job cancelled).
 
   android-test:
     runs-on: ubuntu-24.04
@@ -155,6 +157,7 @@ jobs:
 
       # git-status must be last step
       - uses: ./.github/actions/git-status
+        if: success() || failure() # Always run (unless job cancelled).
 
   ios:
     runs-on: macos-15
@@ -199,6 +202,7 @@ jobs:
 
     # git-status must be last step
     - uses: ./.github/actions/git-status
+      if: success() || failure() # Always run (unless job cancelled).
 
   ios-test:
     runs-on: macos-14
@@ -247,3 +251,4 @@ jobs:
 
       # git-status must be last step
       - uses: ./.github/actions/git-status
+        if: success() || failure() # Always run (unless job cancelled).
