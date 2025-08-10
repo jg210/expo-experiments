@@ -1,6 +1,12 @@
 * Implement a turbo module
+  - why is iOS end-to-end test crashing?
+    - does it fail if comment out the js call to the native method?
+    - does an initialize method get called?
+    - find a working example of a turbomodule
+    - get logs on CI
   - is turbo_modules/fingerprint/turbo.json required?
-  - native android unit test  
+  - native android unit test
+  - native iOS unit test
 
 * Rename expo native module and turbomodules
   - FingerprintExpo and FingerprintTurbo
