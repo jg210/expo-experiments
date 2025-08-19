@@ -183,6 +183,11 @@ jobs:
         . environment
         expo prebuild --platform ios
 
+    - name: available simulator versions
+      run: |
+        . environment
+        xcrun simctl list
+
     - name: build
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
