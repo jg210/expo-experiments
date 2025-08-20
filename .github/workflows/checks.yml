@@ -2,6 +2,8 @@ name: checks
 on: push
 env:
   XCODE_VERSION: 16.4.0
+  IOS_SIMULATOR_NAME: iPhone 16
+  IOS_SIMULATOR_OS: 18.6
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
@@ -199,7 +201,7 @@ jobs:
           -scheme expoexperiments \
           -configuration Release \
           -derivedDataPath build \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.6'
+          -destination 'platform=iOS Simulator,name=${{ env.IOS_SIMULATOR_NAME }},OS=${{ env.IOS_SIMULATOR_OS }}'
 
     - name: upload release
       uses: actions/upload-artifact@v4

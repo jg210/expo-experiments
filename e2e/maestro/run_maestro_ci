@@ -21,9 +21,13 @@ android() {
 
 ios() {
     app="${RUNNER_TEMP}/expoexperiments.app"
-    simulator="iPhone 16"
-    log "starting simulator: ${simulator}"
-    xcrun simctl boot "${simulator}"
+    log "starting simulator: ${IOS_SIMULATOR_NAME} iOS ${IOS_SIMULATOR_OS}"
+    IOS_SIMULATOR_OS_WITH_DASHES=$(tr . - <<< "${IOS_SIMULATOR_OS}")
+    devicesJson=$(xcrun simctl list --json)
+    printf "%s\n" "${devicesJson}"
+    UDID=$(jq -r ".devices[\"com.apple.CoreSimulator.SimRuntime.iOS-${IOS_SIMULATOR_OS_WITH_DASHES}\"][] | select(.name == \"${IOS_SIMULATOR_NAME}\" and .isAvailable) | .udid" <<< "${devicesJson}")
+    log "UDID: ${UDID}"
+    xcrun simctl boot "${UDID}"
     log "installing app from: ${app}"
     xcrun simctl install booted "${app}"
     exec with_ios_logs "${RUNNER_TEMP}/ios_simulator_logs.txt" scripts/run_maestro
