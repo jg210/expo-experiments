@@ -212,7 +212,7 @@ jobs:
     - uses: ./.github/actions/git-status
 
   ios-test:
-    runs-on: macos-14
+    runs-on: macos-15
     needs: ios # for the app
 
     steps:
