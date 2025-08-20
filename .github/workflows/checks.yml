@@ -222,6 +222,11 @@ jobs:
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
+      - name: available simulator versions
+        run: |
+          . environment
+          xcrun simctl list
+
       - name: download app
         uses: actions/download-artifact@v4
         with:
