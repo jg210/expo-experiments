@@ -20,6 +20,15 @@ jobs:
       run: |
         . environment
         npm ci
+    - name: shellcheck
+      uses: ludeeus/action-shellcheck@2.0.0
+      env:
+        SHELLCHECK_OPTS: -x
+      with:
+        version: v0.11.0
+        additional_files: scripts/* e2e/maestro/run_maestro_ci
+        ignore_paths: >-
+          node_modules
     - name: npm run lint
       run: |
         . environment
