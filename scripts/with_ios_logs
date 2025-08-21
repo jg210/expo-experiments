@@ -11,7 +11,9 @@ set -o nounset
 set -o pipefail
 
 SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+# shellcheck source=.common.sh
 . "${SOURCE_DIR}/.common.sh"
+# shellcheck source=environment
 . "${SOURCE_DIR}/environment"
 
 stopProcess() {
@@ -29,7 +31,7 @@ shift
 log "recording logs to: ${outputFile}"
 xcrun simctl spawn booted log stream > "${outputFile}" &
 pid=$!
-trap "stopProcess ${pid}" EXIT
+trap 'stopProcess "${pid}"' EXIT
 log "PID: ${pid}"
 
 log "starting wrapped command..."

@@ -19,6 +19,7 @@ set -o nounset
 set -o pipefail
 
 SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+# shellcheck source=.common.sh
 . "${SOURCE_DIR}/.common.sh"
 
 VERSION_FILE="${SOURCE_DIR}/.maestro-version"
@@ -44,7 +45,7 @@ rm -fR "${CACHED_VERSION}"
 mkdir -p "${CACHED_VERSION}"
 log "downloading from: ${GITHUB_URL}"
 TEMP_ZIP="$(mktemp)"
-trap "rm -f ${TEMP_ZIP}" EXIT
+trap 'rm -f "${TEMP_ZIP}"' EXIT
 curl -L --silent --show-error "${GITHUB_URL}" > "${TEMP_ZIP}"
 log "unzipping into: ${CACHED_VERSION}"
 unzip "${TEMP_ZIP}" -d "${CACHED_VERSION}"

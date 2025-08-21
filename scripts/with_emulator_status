@@ -8,7 +8,9 @@ set -o nounset
 set -o pipefail
 
 SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+# shellcheck source=.common.sh
 . "${SOURCE_DIR}/.common.sh"
+# shellcheck source=environment
 . "${SOURCE_DIR}/environment"
 
 recordEmulatorStatus() {
@@ -24,5 +26,5 @@ EOF
     fi
 }
 
-trap "recordEmulatorStatus" EXIT
+trap 'recordEmulatorStatus' EXIT
 "$@" || exit $?
