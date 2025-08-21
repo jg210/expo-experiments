@@ -41,6 +41,8 @@
 * Move CrashTests buttons into own UI tab
   - configure sentry to record tab changes
 
+* Storybook screenshot tests
+
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 
 * maestro --debug-output could be used to avoid date in log path
