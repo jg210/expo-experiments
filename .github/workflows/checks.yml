@@ -23,8 +23,9 @@ jobs:
       with:
         version: v0.11.0
         additional_files: scripts/* e2e/maestro/run_maestro_ci
-        ignore_paths: .common.sh ./node_modules
-
+        ignore_paths: >-
+          .common.sh
+          node_modules
     - name: npm run lint
       run: |
         . environment
