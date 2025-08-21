@@ -13,7 +13,9 @@ set -o nounset
 set -o pipefail
 
 SOURCE_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")"/..)"
+# shellcheck source=.common.sh
 . "${SOURCE_DIR}/.common.sh"
+# shellcheck source=environment
 . "${SOURCE_DIR}/environment"
 
 stopLogcat() {
@@ -31,7 +33,7 @@ shift
 log "recording logcat to: ${logcatFile}"
 adb logcat -v threadtime > "${logcatFile}" &
 logcatPid=$!
-trap "stopLogcat ${logcatPid}" EXIT
+trap 'stopLogcat "${logcatPid}"' EXIT
 log "logcat PID: ${logcatPid}"
 
 log "starting wrapped command..."
