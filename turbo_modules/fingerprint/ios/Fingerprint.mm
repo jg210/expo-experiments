@@ -10,8 +10,8 @@ RCT_EXPORT_MODULE()
 }
 
 - (void)fingerprintAuthorities:(NSArray<NSString *> *)authorities
-        resolver:(RCTPromiseResolveBlock)resolve
-        rejecter:(RCTPromiseRejectBlock)reject
+        resolve:(RCTPromiseResolveBlock)resolve
+        reject:(RCTPromiseRejectBlock)reject
 {
   NSLog(@"xxx fingerprintAuthorities() native method called");
   if (![authorities isKindOfClass:[NSArray class]]) {
