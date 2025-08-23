@@ -1,8 +1,13 @@
 #import "Fingerprint.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <Foundation/Foundation.h>
 
 @implementation Fingerprint
 RCT_EXPORT_MODULE()
+
+- (void)initialize {
+  NSLog(@"initializing Fingerprint native module");
+}
 
 - (void)fingerprintAuthorities:(NSArray<NSString *> *)authorities
         resolver:(RCTPromiseResolveBlock)resolve
