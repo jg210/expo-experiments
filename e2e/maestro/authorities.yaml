@@ -21,6 +21,10 @@ jsEngine: graaljs
 - copyTextFrom:
     id: "fingerprintExpo"
 - assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
+- evalScript: ${output.fingerPrintExpo = maestro.copiedText}
 - copyTextFrom:
     id: "fingerprintTurbo"
 - assertTrue: ${maestro.copiedText.match(/[0-9a-f]{8}/)}
+- evalScript: ${output.fingerPrintTurbo = maestro.copiedText}
+# One fingerprint is SHA256, the other SHA512, so they can never be the same.
+- assertTrue: ${output.fingerPrintExpo != output.fingerPrintTurbo}
