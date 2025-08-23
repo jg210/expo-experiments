@@ -6,13 +6,14 @@
 RCT_EXPORT_MODULE()
 
 - (void)initialize {
-  NSLog(@"initializing Fingerprint native module");
+  NSLog(@"xxx initializing Fingerprint native module");
 }
 
 - (void)fingerprintAuthorities:(NSArray<NSString *> *)authorities
         resolver:(RCTPromiseResolveBlock)resolve
         rejecter:(RCTPromiseRejectBlock)reject
 {
+  NSLog(@"xxx fingerprintAuthorities() native method called");
   if (![authorities isKindOfClass:[NSArray class]]) {
     reject(@"invalid_argument", @"Expected an array of strings", nil);
     return;

@@ -44,7 +44,10 @@ const AuthoritiesImpl = () => {
     (fingerprint) => setFingerprintExpo(fingerprint.substring(0, 8))
   );
   useLastPromise(
-    () => NativeFingerprint.fingerprintAuthorities(localAuthorityNames),
+    () => {
+      console.log("xxx calling fingerprintAuthorities() from js");
+      return NativeFingerprint.fingerprintAuthorities(localAuthorityNames);
+    },
     [localAuthorityNames],
     (fingerprint) => setFingerprintTurbo(fingerprint.substring(0, 8))
   );  
