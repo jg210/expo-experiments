@@ -21,11 +21,12 @@
     "expo": "53.0.20",
     "expo-dev-client": "5.2.4",
     "expo-status-bar": "2.2.3",
+    "fingerprint": "file:./turbo_modules/fingerprint",
+    "patch-project": "0.3.1",
     "promise": "8.3.0",
     "react": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-safe-area-context": "5.4.0",
-    "fingerprint": "file:./turbo_modules/fingerprint"
+    "react-native-safe-area-context": "5.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.27.3",
