@@ -1,6 +1,5 @@
 * Implement a turbo module
   - does logging configuration patch do anything?
-  - is turbo_modules/fingerprint/turbo.json required?
   - native android unit test
   - native iOS unit test
 
