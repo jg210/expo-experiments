@@ -3,6 +3,9 @@
   - native android unit test
   - native iOS unit test
 
+* The android expo module has junit as an api dependency
+  - should be testImplementation
+
 * Rename expo native module and turbomodules
   - FingerprintExpo and FingerprintTurbo
 
