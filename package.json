@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "lint": "eslint --max-warnings=0 .",
     "test": "jest --collectCoverage --coverageReporters=text --coverageReporters=json --coverageReporters=json-summary --coverageReporters=lcov",
-    "android-test": "./android/gradlew -p android app:test expo-experiments:test",
+    "android-test": "./android/gradlew -p android app:test expo-experiments:test fingerprint:test",
     "android-release-apk": "./android/gradlew -p android app:assembleRelease",
     "android-release-apk-install": "adb install android/app/build/outputs/apk/release/app-release.apk",
     "maestro": "scripts/run_maestro",
