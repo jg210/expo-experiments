@@ -90,6 +90,7 @@ jobs:
         path: |
           android/app/build/reports/tests
           modules/expo-experiments/android/build/reports/tests
+          turbo_modules/fingerprint/android/build/reports/tests
 
     - name: release apk build
       env:
