@@ -1,0 +1,13 @@
+diff --git a/ios/expoexperiments/AppDelegate.swift b/ios/expoexperiments/AppDelegate.swift
+index a7887e1..1864828 100644
+--- a/ios/expoexperiments/AppDelegate.swift
++++ b/ios/expoexperiments/AppDelegate.swift
+@@ -20,7 +20,7 @@ public class AppDelegate: ExpoAppDelegate {
+     reactNativeDelegate = delegate
+     reactNativeFactory = factory
+     bindReactNativeFactory(factory)
+-
++    RCTSetLogThreshold(RCTLogLevelAll) // more logging, including in release builds
+ #if os(iOS) || os(tvOS)
+     window = UIWindow(frame: UIScreen.main.bounds)
+     factory.startReactNative(
