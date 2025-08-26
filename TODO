@@ -26,6 +26,8 @@
   - mock ReactApplicationContext
   - could test threading details
 
+* Unit tests for iOS native expo module
+
 * cache cocoapod files
   - ~/.cocoapods and ~/Library/Caches/CocoaPods/Pods
   - can't use Podfile.lock to cache ios/Pods/ since prebuild creates it and runs pod install
