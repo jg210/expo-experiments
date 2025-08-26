@@ -1,9 +1,6 @@
 * Implement a turbo module
   - does logging configuration patch do anything?
 
-* The android expo module has junit as an api dependency
-  - should be testImplementation
-
 * Rename expo native module and turbomodules
   - FingerprintExpo and FingerprintTurbo
 
