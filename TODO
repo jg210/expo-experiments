@@ -1,7 +1,5 @@
 * Implement a turbo module
   - does logging configuration patch do anything?
-  - native android unit test
-  - native iOS unit test
 
 * The android expo module has junit as an api dependency
   - should be testImplementation
@@ -25,8 +23,6 @@
   - currently, just test static helper method
   - mock ReactApplicationContext
   - could test threading details
-
-* Unit tests for iOS native expo module
 
 * cache cocoapod files
   - ~/.cocoapods and ~/Library/Caches/CocoaPods/Pods
@@ -98,6 +94,8 @@
 
 * cache maestro installation files on GitHub Actions?
   - little point, since downloaded from GitHub release, so as fast as caching files.
+
+* Unit tests for iOS native expo and turbo modules
 
 * reactivecircus/android-emulator-runner@v2 doesn't version emulator tool or AVD base image
   - it has an emulator-build parameter for versioning the tool
