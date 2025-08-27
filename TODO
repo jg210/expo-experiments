@@ -1,6 +1,3 @@
-* Implement a turbo module
-  - does logging configuration patch do anything?
-
 * Rename expo native module and turbomodules
   - FingerprintExpo and FingerprintTurbo
 
