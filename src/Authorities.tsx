@@ -31,9 +31,9 @@ const AuthoritiesImpl = () => {
   // The string initial loading state uses same string, although in this case
   // refreshing is false.
   const refreshingText = "...";
-  // The fingerprint of the local authority names, calculated using Expo native module.
+  // A fingerprint of the local authority names, calculated using Expo native module.
   const [fingerprintExpo, setFingerprintExpo] = useState(refreshingText);
-  // The fingerprint of the local authority names, calculated using RN turbo module.
+  // A fingerprint of the local authority names, calculated using RN turbo module.
   const [fingerprintTurbo, setFingerprintTurbo] = useState(refreshingText);
   const { refreshing, onRefresh } = useRefresh(refetch);
   const localAuthorityNames = data.map(localAuthority => localAuthority.name)
