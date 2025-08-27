@@ -17,7 +17,7 @@ For testing:
 * End-to-end tests use [Maestro](https://www.maestro.dev/).
 * ...run on android [emulators](https://github.com/marketplace/actions/android-emulator-runner).
 * ...run on iOS simulators on GitHub Actions macOS runners.
-* Shell scripts are checked using [shellcheck](https://www.shellcheck.net/)
+* Shell scripts are checked using [shellcheck](https://www.shellcheck.net/).
 
 ## Development Build Instructions
 
