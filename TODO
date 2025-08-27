@@ -10,16 +10,8 @@
   - js string[] becomes List<String> in kotlin, not a ReadableArray
   - nitrogen not run automatically though...
 
-* Crash reporting tool
-  - enabled on CI, so can get more usable iOS crash reports there more easily
-
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
-
-* Unit tests for native module Promise APIs
-  - currently, just test static helper method
-  - mock ReactApplicationContext
-  - could test threading details
 
 * cache cocoapod files
   - ~/.cocoapods and ~/Library/Caches/CocoaPods/Pods
@@ -40,6 +32,8 @@
   - configure sentry to record tab changes
 
 * Storybook screenshot tests
+
+* Restart app after crash on CI, so can upload details to sentry?
 
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 
