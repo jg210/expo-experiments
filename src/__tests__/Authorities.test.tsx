@@ -45,7 +45,7 @@ async function fingerprintTurbo(strings: string[]) {
 // to ensure that return appropriate values if test evolves to pass different values to the
 // function.
 const fingerprintAuthoritiesExpo = ExpoExperimentsModule.fingerprintAuthorities;
-const fingerprintAuthoritiesExpoMock= fingerprintAuthoritiesExpo as jest.MockedFunction<typeof fingerprintAuthoritiesExpo>;
+const fingerprintAuthoritiesExpoMock = fingerprintAuthoritiesExpo as jest.MockedFunction<typeof fingerprintAuthoritiesExpo>;
 const fingerprintAuthoritiesTurbo = NativeFingerprint.fingerprintAuthorities;
 const fingerprintAuthoritiesTurboMock= fingerprintAuthoritiesTurbo as jest.MockedFunction<typeof fingerprintAuthoritiesExpo>;
 
