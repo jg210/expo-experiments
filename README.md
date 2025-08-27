@@ -13,7 +13,7 @@ For testing:
 * Builds and tests are run with [GitHub Actions](https://github.com/jg210/expo-experiments/actions).
 * On demand builds are configured with [Expo EAS Build](https://docs.expo.dev/build/introduction/). The free tier quota and long queue times mean need to rely on GitHub actions, not EAS.
 * JavaScript unit tests use [React Native Testing Library](https://github.com/callstack/react-native-testing-library) and [Mock Service Worker](https://mswjs.io/).
-* Kotlin native test mocking uses [mockk](https://mockk.io/).
+* Kotlin native test mocking is done with [mockk](https://mockk.io/).
 * End-to-end tests use [Maestro](https://www.maestro.dev/).
 * ...run on android [emulators](https://github.com/marketplace/actions/android-emulator-runner).
 * ...run on iOS simulators on GitHub Actions macOS runners.
