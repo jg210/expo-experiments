@@ -72,7 +72,7 @@ jobs:
     - name: prebuild
       run: |
         . environment
-        expo prebuild --platform android
+        expo prebuild --platform android --no-install
 
     - name: npm run android-test
       env:
@@ -90,6 +90,7 @@ jobs:
         path: |
           android/app/build/reports/tests
           modules/expo-experiments/android/build/reports/tests
+          turbo_modules/fingerprint/android/build/reports/tests
 
     - name: release apk build
       env:

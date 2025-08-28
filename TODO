@@ -1,3 +1,12 @@
+* Rename expo native module and turbomodules
+  - FingerprintExpo and FingerprintTurbo
+
+* Execute fingerprint algorithms asynchronously (on background thread).
+
+* Try out nitro modules
+  - js string[] becomes List<String> in kotlin, not a ReadableArray
+  - nitrogen not run automatically though...
+
 * Wait for android emulator to become ready.
   - https://github.com/jg210/expo-experiments/pull/11#issuecomment-2749418366
 
@@ -5,6 +14,8 @@
   - ~/.cocoapods and ~/Library/Caches/CocoaPods/Pods
   - can't use Podfile.lock to cache ios/Pods/ since prebuild creates it and runs pod install
   - only small part of job time c.f. build...
+
+* iOS objective C source code files should have three-letter prefix.
 
 * xcpretty
   - xcbeautify is maybe better than xcpretty?
@@ -17,17 +28,17 @@
 * Move CrashTests buttons into own UI tab
   - configure sentry to record tab changes
 
+* Storybook screenshot tests
+
+* Restart app after crash on CI, so can upload details to sentry?
+
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 
 * maestro --debug-output could be used to avoid date in log path
-  => can save maestro logs on CI without zipping them?
-    - excluding from or duplicating in a zip with all the files
 
 * A with_environment script for use in checks.yaml.
 
 * Store master-branch apks as GitHub Actions releases.
-
-* Add a turbomodule too, to compare with the expo native module.
 
 * Use full width of device screen.
 
@@ -59,14 +70,14 @@
 
 * Run expo-doctor on CI?
 
-* iOS implementation for fingerprintAuthorities.
-
 * Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?
 
 * Is it possible to test that react-hooks/exhaustive-deps checks useLastPromise?
 
 * cache maestro installation files on GitHub Actions?
   - little point, since downloaded from GitHub release, so as fast as caching files.
+
+* Unit tests for iOS native expo and turbo modules
 
 * reactivecircus/android-emulator-runner@v2 doesn't version emulator tool or AVD base image
   - it has an emulator-build parameter for versioning the tool
