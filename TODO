@@ -35,14 +35,10 @@
 * iOS screen layout extends into top of screen despite use of SafeAreaView.
 
 * maestro --debug-output could be used to avoid date in log path
-  => can save maestro logs on CI without zipping them?
-    - excluding from or duplicating in a zip with all the files
 
 * A with_environment script for use in checks.yaml.
 
 * Store master-branch apks as GitHub Actions releases.
-
-* Add a turbomodule too, to compare with the expo native module.
 
 * Use full width of device screen.
 
@@ -73,8 +69,6 @@
 * Try out https://docs.expo.dev/guides/react-compiler/
 
 * Run expo-doctor on CI?
-
-* iOS implementation for fingerprintAuthorities.
 
 * Contribute something to eas build that lets it parse .node-version so don't need to specify in eas.json?
 
